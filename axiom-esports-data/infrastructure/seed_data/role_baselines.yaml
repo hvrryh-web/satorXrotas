@@ -1,0 +1,64 @@
+# Role Replacement Level Baselines
+# Used by analytics/src/rar/replacement_levels.py
+# Values represent the expected RAR multiplier at replacement level (median T2 player)
+
+role_baselines:
+  Entry:
+    replacement_level: 1.15
+    rationale: "Entry fraggers take high-variance risks; replacement level elevated"
+    peak_age_range: [20, 24]
+    sample_min_maps: 50
+
+  IGL:
+    replacement_level: 0.95
+    rationale: "IGLs sacrifice individual stats for tactical leadership"
+    peak_age_range: [24, 30]
+    sample_min_maps: 50
+
+  Controller:
+    replacement_level: 1.00
+    rationale: "Neutral baseline; smoke/wall utility complicates pure stat eval"
+    peak_age_range: [22, 28]
+    sample_min_maps: 50
+
+  Initiator:
+    replacement_level: 1.05
+    rationale: "Initiators generate kills through info; slight positive bias"
+    peak_age_range: [21, 27]
+    sample_min_maps: 50
+
+  Sentinel:
+    replacement_level: 0.98
+    rationale: "Defensive anchoring underrepresented in raw ACS"
+    peak_age_range: [23, 29]
+    sample_min_maps: 50
+
+# Age curve decay parameters (Mono no aware weighting)
+temporal_decay:
+  half_life_days: 365  # Stats older than 1 year weighted at 0.5x
+  floor_weight: 0.1    # Minimum weight for very old records (>3 years)
+  current_season_boost: 1.0  # No boost for current season (baseline)
+
+# Confidence tier thresholds
+confidence_tiers:
+  tier_100:
+    min_confidence: 100
+    description: "Direct extraction, cross-verified against 2 sources"
+    training_weight: 1.0
+  tier_75:
+    min_confidence: 75
+    description: "Single verified source extraction"
+    training_weight: 0.75
+  tier_50:
+    min_confidence: 50
+    description: "Partially reconstructed with high-confidence inference"
+    training_weight: 0.5
+  tier_25:
+    min_confidence: 25
+    description: "Primarily reconstructed, unverified"
+    training_weight: 0.25
+  tier_0:
+    min_confidence: 0
+    description: "Unknown provenance, excluded from training"
+    training_weight: 0.0
+    exclude_from_training: true

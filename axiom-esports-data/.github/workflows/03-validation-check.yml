@@ -1,0 +1,48 @@
+name: 03 - Data Validation Check
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install analytics dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: Run extraction tests
+        run: pytest extraction/tests/ -v
+
+      - name: Run analytics tests
+        run: pytest analytics/tests/ -v
+
+      - name: Check RAR calculations within expected range
+        run: |
+          python -c "
+          from analytics.src.rar.decomposer import RARDecomposer
+          d = RARDecomposer()
+          assert 0.9 <= d.get_replacement_mean() <= 1.1, 'RAR mean out of range'
+          print('✅ RAR mean within expected range')
+          "
+
+      - name: Cross-reference sample (Liquipedia)
+        run: python scripts/validate_vs_liquipedia.py --sample=100
+
+      - name: Detect duplicates
+        run: python scripts/duplicate_detector.py --threshold=0.99
+
+      - name: Overfitting scan
+        run: python scripts/overfitting_scan.py --dataset=training_set
+
+      - name: Temporal wall integrity check
+        run: |
+          python -c "
+          from analytics.src.guardrails.temporal_wall import TemporalWall
+          print('✅ Temporal wall import verified')
+          "

@@ -1,0 +1,55 @@
+name: 01 - Structure Check
+on: [push, pull_request]
+
+jobs:
+  structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify required directories
+        run: |
+          for dir in infrastructure extraction analytics visualization api scripts config docs; do
+            [ -d "$dir" ] && echo "✅ $dir/" || (echo "❌ Missing: $dir/" && exit 1)
+          done
+
+      - name: Verify required root files
+        run: |
+          for f in README.md AXIOM.md .env.example .gitignore LICENSE; do
+            [ -f "$f" ] && echo "✅ $f" || (echo "❌ Missing: $f" && exit 1)
+          done
+
+      - name: Verify migration files exist
+        run: |
+          for f in infrastructure/migrations/001_initial_schema.sql \
+                   infrastructure/migrations/002_sator_layers.sql \
+                   infrastructure/migrations/003_dual_storage.sql \
+                   infrastructure/migrations/004_extraction_log.sql; do
+            [ -f "$f" ] && echo "✅ $f" || (echo "❌ Missing: $f" && exit 1)
+          done
+
+      - name: Verify config files
+        run: |
+          for f in config/role_matrix.json config/overfitting_guardrails.json config/tier_definitions.yaml; do
+            [ -f "$f" ] && echo "✅ $f" || (echo "❌ Missing: $f" && exit 1)
+          done
+
+      - name: Validate JSON config files
+        run: |
+          python3 -c "import json; json.load(open('config/role_matrix.json'))" && echo "✅ role_matrix.json valid"
+          python3 -c "import json; json.load(open('config/overfitting_guardrails.json'))" && echo "✅ overfitting_guardrails.json valid"
+
+      - name: Verify documentation
+        run: |
+          for f in docs/DATA_DICTIONARY.md docs/CONFIDENCE_TIERS.md \
+                   docs/SATOR_ARCHITECTURE.md docs/API_REFERENCE.md \
+                   docs/TRAIN_TEST_PROTOCOL.md docs/EXTRACTION_EPOCHS.md; do
+            [ -f "$f" ] && echo "✅ $f" || (echo "❌ Missing: $f" && exit 1)
+          done
+
+      - name: Check data/ is gitignored
+        run: |
+          git check-ignore data/ && echo "✅ data/ is gitignored" || echo "⚠️  data/ is NOT gitignored — check .gitignore"
+
+      - name: Summary
+        run: echo "✅ All structure checks passed"

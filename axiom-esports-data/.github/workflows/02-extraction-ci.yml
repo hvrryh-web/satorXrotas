@@ -1,0 +1,35 @@
+name: 02 - Daily VLR Extraction
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 06:00 UTC daily
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: Run epoch delta extraction
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VLR_RATE_LIMIT: ${{ secrets.VLR_RATE_LIMIT }}
+        run: |
+          python extraction/src/scrapers/epoch_harvester.py --mode=delta
+
+      - name: Verify SHA-256 checksums
+        run: |
+          python extraction/src/storage/integrity_checker.py --verify-all
+
+      - name: Report extraction stats
+        run: |
+          python scripts/export_csv.py --stats-only
