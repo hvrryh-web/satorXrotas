@@ -1,0 +1,37 @@
+{
+  "_comment": "Agent-to-role mapping for Valorant (as of patch 10.x / 2026)",
+  "version": "2026-02",
+  "roles": {
+    "Entry": {
+      "description": "Duelist role — high-risk first contact, aggressive positioning",
+      "replacement_baseline": 1.15,
+      "peak_age_range": [20, 24],
+      "agents": ["Jett", "Reyna", "Phoenix", "Raze", "Neon", "Iso", "Waylay"]
+    },
+    "Controller": {
+      "description": "Smoke and map control — enables team rotations",
+      "replacement_baseline": 1.00,
+      "peak_age_range": [22, 28],
+      "agents": ["Brimstone", "Viper", "Omen", "Astra", "Harbor", "Clove"]
+    },
+    "Initiator": {
+      "description": "Information and flash utility — enables entry",
+      "replacement_baseline": 1.05,
+      "peak_age_range": [21, 27],
+      "agents": ["Sova", "Breach", "Skye", "KAY/O", "Fade", "Gekko", "Vyse"]
+    },
+    "Sentinel": {
+      "description": "Defensive anchor — holds flanks and sites",
+      "replacement_baseline": 0.98,
+      "peak_age_range": [23, 29],
+      "agents": ["Sage", "Cypher", "Killjoy", "Chamber", "Deadlock"]
+    },
+    "IGL": {
+      "description": "In-Game Leader — assigned via external registry, not agent pick",
+      "replacement_baseline": 0.95,
+      "peak_age_range": [26, 32],
+      "agents": [],
+      "note": "IGL classification requires external team captain data. Never infer from agent pick alone."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+name: 04 - Release CSV Export
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: Export anonymized CSV
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python scripts/export_csv.py --tag=${{ github.ref_name }} --anonymize
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: data/exports/csv_delivery/*.csv
+          generate_release_notes: true

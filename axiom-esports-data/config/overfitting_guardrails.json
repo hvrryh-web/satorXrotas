@@ -1,0 +1,60 @@
+{
+  "_comment": "Overfitting prevention configuration for analytics training pipeline",
+  "sample_constraints": {
+    "min_maps_for_training": 50,
+    "max_maps_ceiling": 200,
+    "stratified_sampling": true,
+    "stratify_by": ["role", "region"]
+  },
+  "confidence_penalties": {
+    "n_lt_30": {
+      "threshold": 30,
+      "weight": 0.4,
+      "description": "Exclude players with fewer than 30 maps — too noisy"
+    },
+    "n_30_to_50": {
+      "min": 30,
+      "max": 50,
+      "weight": 0.75,
+      "description": "Low confidence — weighted down in training"
+    },
+    "n_gt_200": {
+      "threshold": 200,
+      "weight": "use_temporal_decay_only",
+      "description": "Elite players: downsample via temporal decay weighting"
+    }
+  },
+  "temporal_wall": {
+    "train_cutoff_date": "2024-01-01",
+    "test_start_date": "2024-01-01",
+    "allow_shuffle_split": false,
+    "description": "Strict temporal split — no shuffle, no future data in training"
+  },
+  "adversarial_validation": {
+    "classifier": "RandomForestClassifier",
+    "n_estimators": 100,
+    "leakage_threshold": 0.55,
+    "cv_folds": 5,
+    "description": "AUC > 0.55 = distribution shift = leakage detected"
+  },
+  "acs_bias_correction": {
+    "use_raw_acs_in_simrating": false,
+    "use_adjusted_kill_value": true,
+    "description": "ACS inherently favors Duelists. Always use adjusted_kill_value."
+  },
+  "test_assertions": {
+    "policy": "range_based_only",
+    "forbidden_patterns": [
+      "hardcoded player names",
+      "specific match IDs",
+      "exact ACS values",
+      ".pkl model files",
+      ".joblib model files"
+    ],
+    "allowed_patterns": [
+      "assert 100 < acs < 500",
+      "assert -5 < sim_rating < 5",
+      "assert 0 <= confidence_tier <= 100"
+    ]
+  }
+}
