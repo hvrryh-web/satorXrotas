@@ -2,12 +2,13 @@
 Raw Repository — Immutable parquet storage for VLR.gg extractions.
 Records are never modified after first write.
 """
-import hashlib
 import logging
 import os
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
+
+from extraction.src.storage.integrity_checker import compute_checksum
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +27,7 @@ class RawRepository:
         self.storage_path.mkdir(parents=True, exist_ok=True)
 
     def _checksum(self, content: str) -> str:
-        return hashlib.sha256(content.encode()).hexdigest()
+        return compute_checksum(content.encode())
 
     def already_stored(self, checksum: str) -> bool:
         """Check if a record with this checksum already exists."""

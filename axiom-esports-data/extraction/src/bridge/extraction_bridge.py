@@ -4,6 +4,7 @@ Mirrors the AgentBridge pattern from RadiantX: decouples scrape schema from anal
 """
 import logging
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any, Optional
 from uuid import UUID, uuid4
 
@@ -153,3 +154,36 @@ class ExtractionBridge:
             return float(str(value).strip("%")) if value is not None else None
         except (ValueError, TypeError):
             return None
+
+    def transform(self, raw: "RawMatchData") -> "list[KCRITRRecord]":
+        """Convert a RawMatchData (from MatchParser) into a list of KCRITRRecords.
+
+        Sets ``separation_flag=0`` (raw), ``data_source='vlr_gg'``, and
+        ``extraction_timestamp`` to the current UTC time.  Checksums are
+        computed per-player row via ``integrity_checker.compute_checksum``.
+        """
+        from extraction.src.storage.integrity_checker import compute_checksum
+
+        records: list[KCRITRRecord] = []
+        ts = datetime.now(tz=timezone.utc).isoformat()
+
+        for player_row in raw.players:
+            row_bytes = str(player_row).encode()
+            checksum = compute_checksum(row_bytes)
+            record = self.translate(
+                vlr_data={
+                    **player_row,
+                    "map": raw.map_name,
+                    "tournament": raw.tournament,
+                    "patch": raw.patch_version,
+                    "match_date": raw.match_date,
+                },
+                match_id=raw.vlr_match_id,
+                checksum=checksum,
+                confidence_tier=75.0,
+                separation_flag=0,
+            )
+            record.extraction_timestamp = ts
+            records.append(record)
+
+        return records

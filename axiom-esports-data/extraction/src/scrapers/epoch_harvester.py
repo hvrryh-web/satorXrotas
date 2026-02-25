@@ -8,6 +8,7 @@ Epoch III: 2026-01-01 → present      (current, incremental updates)
 import argparse
 import asyncio
 import logging
+import os
 from datetime import date, datetime
 from typing import Optional
 
@@ -85,10 +86,72 @@ class EpochHarvester:
         return records_processed
 
     async def _get_target_match_ids(self, epoch_num: int, config: dict) -> list[str]:
-        """Return list of match IDs for this epoch (delta or full)."""
-        # Stub: in production, queries extraction_log for unprocessed IDs
-        # or fetches from VLR match list pages within date range
-        return []
+        """Return list of match IDs for this epoch (delta or full).
+
+        Delta mode queries ``extraction_log`` for match-type rows whose
+        ``first_extracted_at`` falls within the epoch date range and have
+        not yet been fully processed (``is_complete = FALSE``).
+
+        Full mode is a superset: it returns all IDs in the date range,
+        regardless of completion status, allowing a complete re-scrape.
+
+        When no database is available (e.g. during unit tests) both modes
+        return an empty list — callers should handle this gracefully.
+        """
+        start: date = config["start"]
+        end: date = config["end"]
+
+        db_url = os.environ.get("DATABASE_URL")
+        if not db_url:
+            logger.warning(
+                "DATABASE_URL not set — _get_target_match_ids returns [] for epoch %d",
+                epoch_num,
+            )
+            return []
+
+        try:
+            import asyncpg  # type: ignore
+
+            conn = await asyncpg.connect(db_url)
+            try:
+                if self.mode == "delta":
+                    rows = await conn.fetch(
+                        """
+                        SELECT entity_id
+                        FROM extraction_log
+                        WHERE source = 'vlr_gg'
+                          AND entity_type = 'match'
+                          AND is_complete = FALSE
+                          AND first_extracted_at >= $1
+                          AND first_extracted_at <  $2
+                        ORDER BY first_extracted_at ASC
+                        """,
+                        datetime.combine(start, datetime.min.time()),
+                        datetime.combine(end,   datetime.max.time()),
+                    )
+                else:
+                    rows = await conn.fetch(
+                        """
+                        SELECT entity_id
+                        FROM extraction_log
+                        WHERE source = 'vlr_gg'
+                          AND entity_type = 'match'
+                          AND first_extracted_at >= $1
+                          AND first_extracted_at <  $2
+                        ORDER BY first_extracted_at ASC
+                        """,
+                        datetime.combine(start, datetime.min.time()),
+                        datetime.combine(end,   datetime.max.time()),
+                    )
+                return [row["entity_id"] for row in rows]
+            finally:
+                await conn.close()
+
+        except Exception as exc:  # noqa: BLE001
+            logger.error(
+                "Failed to fetch match IDs for epoch %d from DB: %s", epoch_num, exc
+            )
+            return []
 
     async def run(self) -> dict[int, int]:
         """Run harvest across all target epochs concurrently."""

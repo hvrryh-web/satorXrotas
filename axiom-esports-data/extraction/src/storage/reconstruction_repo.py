@@ -7,6 +7,8 @@ from dataclasses import dataclass
 from typing import Optional
 from uuid import UUID, uuid4
 
+from extraction.src.bridge.extraction_bridge import KCRITRRecord
+
 logger = logging.getLogger(__name__)
 
 
@@ -56,3 +58,38 @@ class ReconstructionRepo:
 
     def get_by_player(self, player_id: UUID) -> list[ReconstructedRecord]:
         return [r for r in self._records if r.player_id == player_id]
+
+
+class KCRITRRepository:
+    """
+    Stores KCRITRRecord instances keyed by (player_id, match_id).
+    Enforces separation_flag=1 for all reconstructed records.
+    """
+
+    def __init__(self) -> None:
+        self._records: list[KCRITRRecord] = []
+
+    def store_reconstruction(self, record: KCRITRRecord) -> None:
+        """Store a reconstructed KCRITR record (separation_flag must be 1)."""
+        if record.separation_flag != 1:
+            raise ValueError(
+                "separation_flag must be 1 for reconstructed records. "
+                f"Got {record.separation_flag} for match {record.match_id}."
+            )
+        if not record.partner_datapoint_ref:
+            raise ValueError(
+                "Reconstructed KCRITRRecords must set partner_datapoint_ref. "
+                f"match_id={record.match_id} is missing it."
+            )
+        self._records.append(record)
+        logger.debug(
+            "Stored KCRITR reconstruction for player %s, match %s",
+            record.player_id, record.match_id,
+        )
+
+    def get_reconstruction(self, player_id: UUID, match_id: str) -> Optional[KCRITRRecord]:
+        """Retrieve a single reconstructed record by player_id and match_id."""
+        for r in self._records:
+            if r.player_id == player_id and r.match_id == match_id:
+                return r
+        return None
