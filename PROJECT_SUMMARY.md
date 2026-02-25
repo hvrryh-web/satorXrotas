@@ -2,13 +2,15 @@
 
 ## What is SATOR?
 
-**SATOR** is a two-part esports simulation platform:
+**SATOR** is a three-part esports simulation and analytics platform:
 
 1. **RadiantX** — An offline, deterministic tactical FPS simulation game built with
    Godot 4 and GDScript
-2. **SATOR Web** — An online public statistics platform (in development)
+2. **Axiom Esports Data** — A tactical FPS analytics pipeline with the SATOR Square
+   5-layer visualization (Python + React/D3/WebGL)
+3. **SATOR Web** — An online public statistics platform (in development)
 
-A **data partition firewall** separates these two components, ensuring game-internal
+A **data partition firewall** separates these components, ensuring game-internal
 simulation data never reaches the public web platform.
 
 ## RadiantX Game Features
@@ -85,17 +87,32 @@ RadiantX/ (SATOR monorepo root)
 │   ├── EventLog.gd       # Event recording
 │   ├── Viewer2D.gd       # Top-down visualization
 │   ├── PlaybackController.gd  # Playback controls
-│   └── Main.gd           # Main game controller
+│   ├── Main.gd           # Main game controller
+│   ├── Data/             # Data types and loading
+│   └── Sim/              # Combat resolution subsystem
 ├── scenes/
 │   └── Main.tscn         # Main scene
 ├── maps/
 │   └── training_ground.json  # Sample map
+├── Defs/                 # Game definition files (JSON)
+│   ├── agents/           # Agent traits and loadouts
+│   ├── weapons/          # Weapon stats
+│   ├── utilities/        # Grenades and abilities
+│   └── rulesets/         # Game rules
 ├── tests/
 │   ├── test_determinism.gd   # Determinism tests
 │   └── test_determinism.tscn
+├── axiom-esports-data/   # Analytics pipeline
+│   ├── analytics/        # SimRating, RAR, guardrails
+│   ├── extraction/       # VLR scraping + parsing
+│   ├── infrastructure/   # Docker, DB migrations
+│   ├── visualization/    # SATOR Square 5-layer viz
+│   ├── api/              # FastAPI routes
+│   └── docs/             # Data dictionary, architecture
 ├── packages/
 │   ├── stats-schema/     # Public type definitions
-│   └── data-partition-lib/  # Firewall library
+│   ├── data-partition-lib/  # Firewall library
+│   └── api-client/       # HTTP client
 ├── apps/
 │   ├── radiantx-game/    # Game integration modules
 │   └── sator-web/        # Web platform (Phase 3)
@@ -120,10 +137,13 @@ See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the full layout.
 
 ## Key Technologies
 
-- **Engine**: Godot 4.x
-- **Language**: GDScript
-- **Platform**: Windows (primary), cross-platform compatible
-- **Format**: JSON for maps and replays
+- **Game Engine**: Godot 4.x / GDScript
+- **Analytics**: Python 3.11+ (extraction, SimRating, RAR, guardrails)
+- **Visualization**: React / TypeScript / D3.js / WebGL (SATOR Square)
+- **Database**: PostgreSQL 15 + TimescaleDB (planned)
+- **Packages**: TypeScript (stats-schema, data-partition-lib)
+- **Platform**: Windows (primary game target), cross-platform compatible
+- **Format**: JSON for maps, definitions, and replays
 - **CI/CD**: GitHub Actions
 
 ## Design Principles
@@ -160,9 +180,9 @@ See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the full layout.
 
 ## Development Status
 
-✅ **Complete and Ready**
+### RadiantX Game: ✅ Functional MVP
 
-All features from the problem statement have been implemented:
+All core features from the problem statement have been implemented:
 - Deterministic 20 TPS engine ✓
 - Seeded RNG ✓
 - Partial observability ✓
@@ -180,9 +200,49 @@ All features from the problem statement have been implemented:
 - Determinism test ✓
 - CI workflow ✓
 
+### Axiom Esports Data: 🟡 Scaffolded
+
+Directory structure, documentation, and module stubs are in place:
+- Analytics modules (SimRating, RAR, guardrails) — scaffolded ✓
+- Extraction pipeline (scrapers, parsers, bridge) — scaffolded ✓
+- Infrastructure (Docker, migrations) — scaffolded ✓
+- SATOR Square visualization (5 layers) — Layer 1 implemented, 4 scaffolded ✓
+- API routes — scaffolded ✓
+
+### SATOR Web: ⏳ Phase 3 Placeholder
+
+- TypeScript packages (stats-schema, data-partition-lib) — implemented ✓
+- Web application — placeholder only
+
+## Axiom Esports Data
+
+The `axiom-esports-data/` directory contains the analytics pipeline:
+
+### Analytics Engine
+- **SimRating**: 5-component equal-weight performance metric
+- **RAR (Replacement-Adjusted Rating)**: Role-specific replacement levels
+- **Investment Grading**: A+ through D player classification
+- **Overfitting Guardrails**: Temporal wall, adversarial validation, confidence weighting
+
+### SATOR Square Visualization
+A 5-layer palindromic match visualization system:
+- **S — Sator Layer**: Hotstreak momentum, pulse animations (D3.js)
+- **A — Arepo Layer**: Death stains, clutch crowns
+- **T — Tenet Layer**: Area control grading, zone colors
+- **O — Opera Layer**: Fog of war (WebGL shader)
+- **R — Rotas Layer**: Rotation trails (WebGL vertex shader)
+
+### Extraction Pipeline
+- VLR.gg scraping with circuit breaker and rate limiting
+- Epoch-based harvesting (historical + incremental)
+- Dual-storage protocol (raw immutable + reconstructed calculated)
+- SHA-256 integrity checking
+
+See [axiom-esports-data/AXIOM.md](axiom-esports-data/AXIOM.md) for the full specification.
+
 ## Future Enhancements
 
-Potential additions (not in scope):
+Potential additions:
 - More agent AI behaviors
 - Additional tactical utilities
 - Map editor
