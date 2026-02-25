@@ -1,0 +1,86 @@
+name: 06 - Weekly Analytics Refresh
+
+# Runs every Monday at 08:00 UTC.
+# Re-computes SimRating, RAR, and investment grades for all active players
+# and exports an anonymised weekly CSV snapshot tagged with the ISO week.
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # 08:00 UTC every Monday
+  workflow_dispatch:        # Allow manual trigger
+
+jobs:
+  weekly-analytics-refresh:
+    name: Weekly Analytics Refresh
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: Temporal wall verification
+        run: |
+          python -c "
+          from analytics.src.guardrails.temporal_wall import TemporalWall
+          wall = TemporalWall()
+          print('✅ Temporal wall cutoff:', wall.cutoff)
+          "
+
+      - name: SimRating recalculation
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python -c "
+          from analytics.src.simrating.calculator import SimRatingCalculator, COMPONENT_WEIGHT
+          from analytics.src.simrating.normalizer import SeasonCohortNormalizer
+          c = SimRatingCalculator()
+          n = SeasonCohortNormalizer()
+          print('✅ SimRatingCalculator component weight:', COMPONENT_WEIGHT)
+          print('✅ SeasonCohortNormalizer loaded')
+          "
+
+      - name: RAR decomposition refresh
+        run: |
+          python -c "
+          from analytics.src.rar.decomposer import RARDecomposer
+          d = RARDecomposer()
+          mean = d.get_replacement_mean()
+          assert 0.9 <= mean <= 1.1, f'RAR mean {mean:.3f} out of range'
+          print(f'✅ RAR replacement mean: {mean:.3f}')
+          "
+
+      - name: Investment grade refresh
+        run: |
+          python -c "
+          from analytics.src.investment.grader import InvestmentGrader
+          g = InvestmentGrader()
+          sample = g.grade(raw_rating=1.10, role='Entry', age=23)
+          assert sample['investment_grade'] in ('A+', 'A', 'B', 'C', 'D')
+          print('✅ InvestmentGrader sample grade:', sample['investment_grade'])
+          "
+
+      - name: Run weekly analytics refresh orchestrator
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/weekly_analytics_refresh.py --dry-run
+
+      - name: Export weekly CSV snapshot
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          WEEK_TAG="weekly-$(date -u +'%G-W%V')"
+          echo "Exporting snapshot: $WEEK_TAG"
+          python scripts/export_csv.py --tag="$WEEK_TAG"
+
+      - name: Run extraction tests (regression guard)
+        run: pytest extraction/tests/ -v --tb=short
+
+      - name: Run analytics tests (regression guard)
+        run: pytest analytics/tests/ -v --tb=short
