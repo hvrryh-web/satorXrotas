@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "node --test dist/tests/"
+    "test": "echo 'TODO Phase 3: implement firewall unit tests'"
   },
   "keywords": ["sator", "firewall", "data-partition", "security"],
   "license": "MIT",

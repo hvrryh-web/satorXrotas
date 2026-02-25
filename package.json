@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "npm run build --workspaces --if-present",
-    "dev": "echo 'Start game: open project.godot in Godot 4. Start API: cd api && npm run dev'",
+    "dev": "echo 'Game: open project.godot in Godot 4 | API (Phase 3): cd api && npm run dev'",
     "test:firewall": "npm run test --workspace=packages/data-partition-lib",
     "validate:schema": "npm run validate:schema --workspace=packages/stats-schema",
     "typecheck": "npm run typecheck --workspaces --if-present"

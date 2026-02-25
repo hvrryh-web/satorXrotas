@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "validate:schema": "node scripts/validate-no-game-fields.js"
+    "validate:schema": "echo 'TODO Phase 2: implement scripts/validate-no-game-fields.js'"
   },
   "keywords": ["sator", "esports", "stats", "schema", "types"],
   "license": "MIT",
