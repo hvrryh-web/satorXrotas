@@ -1,0 +1,219 @@
+{
+  "_comment": "Datapoint Naming Convention — canonical naming schema shared by all pipeline services. Every entity type has one canonical form; all source-specific aliases map to it. This file is the authoritative translation key used by CanonicalIDResolver and FieldTranslator.",
+
+  "schema_version": "1.0.0",
+
+  "naming_rules": {
+    "_comment": "Rules every field name and entity identifier MUST satisfy before entering the KCRITR schema.",
+    "case":             "snake_case for all field names (e.g. kast_pct, NOT KASTpct, NOT KAST%)",
+    "separators":       "underscore only — no hyphens, dots, or spaces in field names",
+    "percent_suffix":   "Fields representing percentages end in _pct (e.g. kast_pct, headshot_pct)",
+    "count_suffix":     "Integer count fields use the bare noun or _count (e.g. kills, first_blood, clutch_wins)",
+    "id_suffix":        "UUID identity fields end in _id (e.g. player_id)",
+    "source_prefix":    "Source-specific raw fields MUST be prefixed before translation (e.g. vlr_gg.acs, liquipedia.kill_count)",
+    "canonical_prefix": "Resolved canonical URIs use the cid: scheme (e.g. cid:player:tenz, cid:match:vlr/123456)",
+    "no_special_chars": "Canonical entity names must be ASCII alphanumeric + underscore + hyphen only",
+    "max_alias_depth":  1,
+    "_max_alias_depth_note": "An alias points to a canonical form — aliases cannot chain to other aliases"
+  },
+
+  "entity_types": {
+    "player": {
+      "_comment": "A human player. Canonical form is the most widely-used competitive handle in lowercase.",
+      "canonical_key_format": "cid:player:{handle_lowercase}",
+      "example":  "cid:player:tenz",
+      "fields_that_form_id": ["name", "team"],
+      "fallback_id_method": "sha256(name.lower() + ':' + team.lower())"
+    },
+    "match": {
+      "_comment": "A single competitive match. Canonical ID uses the primary source URL slug.",
+      "canonical_key_format": "cid:match:{source_slug}/{source_match_id}",
+      "example":  "cid:match:vlr_gg/123456",
+      "fields_that_form_id": ["data_source", "match_id"]
+    },
+    "map": {
+      "_comment": "A playable map. Canonical names are Riot's official lowercase map names.",
+      "canonical_key_format": "cid:map:{official_name_lowercase}",
+      "example":  "cid:map:bind",
+      "aliases_example": {
+        "Bind":    "cid:map:bind",
+        "BIND":    "cid:map:bind",
+        "bind":    "cid:map:bind",
+        "Ascent":  "cid:map:ascent",
+        "Haven":   "cid:map:haven",
+        "Split":   "cid:map:split",
+        "Fracture":"cid:map:fracture",
+        "Pearl":   "cid:map:pearl",
+        "Lotus":   "cid:map:lotus",
+        "Sunset":  "cid:map:sunset",
+        "Abyss":   "cid:map:abyss",
+        "Icebox":  "cid:map:icebox",
+        "Breeze":  "cid:map:breeze",
+        "Drift":   "cid:map:drift"
+      }
+    },
+    "team": {
+      "_comment": "A competitive team. Canonical form is the team's official tag in uppercase.",
+      "canonical_key_format": "cid:team:{official_tag_uppercase}",
+      "example":  "cid:team:sentinels",
+      "aliases_example": {
+        "Sentinels":  "cid:team:sentinels",
+        "SEN":        "cid:team:sentinels",
+        "sen":        "cid:team:sentinels",
+        "NRG":        "cid:team:nrg",
+        "nrg esports":"cid:team:nrg",
+        "Cloud9":     "cid:team:c9",
+        "C9":         "cid:team:c9",
+        "c9":         "cid:team:c9"
+      }
+    },
+    "tournament": {
+      "_comment": "A competition event. Canonical form is the official Riot designation.",
+      "canonical_key_format": "cid:tournament:{organiser}_{year}_{stage}",
+      "example":  "cid:tournament:vct_2024_masters_madrid",
+      "aliases_example": {
+        "VCT Masters Madrid 2024":   "cid:tournament:vct_2024_masters_madrid",
+        "Masters Madrid":            "cid:tournament:vct_2024_masters_madrid",
+        "VCT 2024 - Masters Madrid": "cid:tournament:vct_2024_masters_madrid"
+      }
+    },
+    "agent": {
+      "_comment": "A Valorant playable character. Canonical form is Riot's official name (Title Case).",
+      "canonical_key_format": "cid:agent:{official_name_titlecase}",
+      "example":  "cid:agent:jett",
+      "aliases_example": {
+        "Jett":      "cid:agent:jett",
+        "jett":      "cid:agent:jett",
+        "JETT":      "cid:agent:jett",
+        "KAY/O":     "cid:agent:kayo",
+        "kayo":      "cid:agent:kayo",
+        "kay/o":     "cid:agent:kayo",
+        "Sage":      "cid:agent:sage",
+        "sage":      "cid:agent:sage"
+      }
+    }
+  },
+
+  "field_translation_table": {
+    "_comment": "Maps every source-specific field name to the KCRITR canonical field name. Used by FieldTranslator. Add new source columns here — never edit the KCRITR canonical names.",
+
+    "canonical_fields": {
+      "name":               {"type": "str",   "group": "identity",     "description": "Player handle/alias (display name)"},
+      "team":               {"type": "str",   "group": "identity",     "description": "Team tag or full name"},
+      "region":             {"type": "str",   "group": "identity",     "description": "Geographic region code (NA, EMEA, APAC, BR, LATAM)"},
+      "role":               {"type": "str",   "group": "identity",     "description": "Combat role (Entry, IGL, Controller, Initiator, Sentinel)"},
+      "kills":              {"type": "int",   "group": "performance",  "description": "Total kills in the map"},
+      "deaths":             {"type": "int",   "group": "performance",  "description": "Total deaths in the map"},
+      "acs":                {"type": "float", "group": "performance",  "description": "Average Combat Score per round"},
+      "adr":                {"type": "float", "group": "performance",  "description": "Average Damage per Round"},
+      "kast_pct":           {"type": "float", "group": "performance",  "description": "% rounds with Kill, Assist, Survive, or Trade"},
+      "headshot_pct":       {"type": "float", "group": "extended",     "description": "Headshot kill percentage"},
+      "first_blood":        {"type": "int",   "group": "extended",     "description": "First-blood kills"},
+      "clutch_wins":        {"type": "int",   "group": "extended",     "description": "Clutch rounds won"},
+      "agent":              {"type": "str",   "group": "extended",     "description": "Valorant agent played (Riot official name)"},
+      "match_id":           {"type": "str",   "group": "context",      "description": "Source-specific match identifier"},
+      "map_name":           {"type": "str",   "group": "context",      "description": "Canonical map name (cid:map:*)"},
+      "tournament":         {"type": "str",   "group": "context",      "description": "Tournament name (canonical preferred)"},
+      "patch_version":      {"type": "str",   "group": "context",      "description": "Game patch version at time of match"},
+      "realworld_time":     {"type": "str",   "group": "context",      "description": "ISO-8601 UTC timestamp of match"},
+      "data_source":        {"type": "str",   "group": "provenance",   "description": "One of: vlr_gg, liquipedia, hltv, grid"},
+      "confidence_tier":    {"type": "float", "group": "provenance",   "description": "Data confidence 0-100 (epoch floor applied)"},
+      "separation_flag":    {"type": "int",   "group": "provenance",   "description": "0=raw, 1=reconstructed"},
+      "checksum_sha256":    {"type": "str",   "group": "provenance",   "description": "SHA-256 hex digest of source HTML"},
+      "extraction_timestamp":{"type":"str",   "group": "provenance",   "description": "ISO-8601 UTC timestamp of extraction"}
+    },
+
+    "source_mappings": {
+      "vlr_gg": {
+        "_comment": "VLR.gg HTML scrape field names → canonical KCRITR names",
+        "player":      "name",
+        "rating":      "role_adjusted_value",
+        "acs":         "acs",
+        "kills":       "kills",
+        "deaths":      "deaths",
+        "assists":     null,
+        "kast":        "kast_pct",
+        "adr":         "adr",
+        "hs_pct":      "headshot_pct",
+        "first_blood": "first_blood",
+        "clutch_win":  "clutch_wins",
+        "agent":       "agent",
+        "map":         "map_name",
+        "tournament":  "tournament",
+        "patch":       "patch_version",
+        "match_date":  "realworld_time",
+        "team":        "team"
+      },
+      "liquipedia": {
+        "_comment": "Liquipedia API response field names → canonical KCRITR names",
+        "player_name":     "name",
+        "team_name":       "team",
+        "kill_count":      "kills",
+        "death_count":     "deaths",
+        "average_combat_score": "acs",
+        "average_damage_round": "adr",
+        "kast_percentage": "kast_pct",
+        "headshot_percentage": "headshot_pct",
+        "first_blood_count": "first_blood",
+        "clutch_count":    "clutch_wins",
+        "agent_name":      "agent",
+        "map_played":      "map_name",
+        "event_name":      "tournament",
+        "match_timestamp": "realworld_time"
+      },
+      "hltv": {
+        "_comment": "HLTV API/scrape field names → canonical KCRITR names (CS2 pipeline)",
+        "nickname":        "name",
+        "org":             "team",
+        "total_kills":     "kills",
+        "total_deaths":    "deaths",
+        "rating_2":        "role_adjusted_value",
+        "kast":            "kast_pct",
+        "dmg_per_round":   "adr",
+        "hs_percent":      "headshot_pct",
+        "opening_kills":   "first_blood",
+        "map_name":        "map_name",
+        "event_name":      "tournament",
+        "match_date":      "realworld_time"
+      },
+      "grid": {
+        "_comment": "GRID partnership API field names → canonical KCRITR names",
+        "playerHandle":    "name",
+        "teamName":        "team",
+        "seriesKills":     "kills",
+        "seriesDeaths":    "deaths",
+        "combatScore":     "acs",
+        "damagePerRound":  "adr",
+        "kastPercent":     "kast_pct",
+        "headshotPercent": "headshot_pct",
+        "firstBloods":     "first_blood",
+        "clutchesWon":     "clutch_wins",
+        "agentName":       "agent",
+        "mapName":         "map_name",
+        "tournamentName":  "tournament",
+        "matchStartTime":  "realworld_time"
+      }
+    },
+
+    "conflict_resolution": {
+      "_comment": "When two sources provide different values for the same canonical field on the same entity, apply these rules.",
+      "numeric_fields": "prefer_higher_confidence_source",
+      "string_fields":  "prefer_canonical_form_if_known_else_primary_source",
+      "identity_fields":["name", "team", "agent", "map_name"],
+      "primary_source_priority": ["vlr_gg", "grid", "liquipedia", "hltv"],
+      "_priority_note": "vlr_gg is primary for Valorant; hltv is primary for CS2",
+      "log_conflict":   true,
+      "store_both_on_conflict": false,
+      "_store_both_note": "On conflict, store the higher-priority value and log the discrepancy"
+    }
+  },
+
+  "deduplication_key": {
+    "_comment": "The canonical dedup key is the stable UUID derived from the canonical IDs of player + match + map. This key is SOURCE-AGNOSTIC — the same player record from VLR and Liquipedia resolves to the same key.",
+    "components": ["canonical_player_id", "canonical_match_id", "canonical_map_id"],
+    "derivation": "uuid5(NAMESPACE_URL, 'cid:player:{handle}|cid:match:{source}/{id}|cid:map:{name}')",
+    "example": "uuid5(NAMESPACE_URL, 'cid:player:tenz|cid:match:vlr_gg/123456|cid:map:bind')",
+    "collision_policy": "reject_and_log",
+    "_collision_policy_note": "Two records with the same dedup key from different sources are treated as duplicates; the higher-priority source wins"
+  }
+}
