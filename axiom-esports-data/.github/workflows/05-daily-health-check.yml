@@ -1,0 +1,49 @@
+name: 05 - Daily Health Check
+
+# Runs every day at 07:00 UTC (one hour after the nightly delta extraction at 06:00 UTC)
+# so that integrity and quality checks always operate on the freshest data.
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 07:00 UTC daily
+  workflow_dispatch:        # Allow manual trigger for ad-hoc checks
+
+jobs:
+  daily-health-check:
+    name: Daily Data Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: SHA-256 integrity verification
+        env:
+          RAW_STORAGE_PATH: ${{ secrets.RAW_STORAGE_PATH || 'data/raw_extractions' }}
+        run: python extraction/src/storage/integrity_checker.py --verify-all
+
+      - name: Duplicate detection
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/duplicate_detector.py --threshold=0.99
+
+      - name: Temporal wall + overfitting scan
+        run: python scripts/overfitting_scan.py --dataset=training_set
+
+      - name: Extraction stats report
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/export_csv.py --stats-only
+
+      - name: Run daily health check orchestrator
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAW_STORAGE_PATH: ${{ secrets.RAW_STORAGE_PATH || 'data/raw_extractions' }}
+        run: python scripts/daily_health_check.py --skip-integrity

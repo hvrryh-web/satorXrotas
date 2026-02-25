@@ -1,0 +1,78 @@
+{
+  "_note": "COMMITTED EXAMPLE FIXTURE — DO NOT MODIFY without bumping fixture_version and recording a reason. This file is the security-check baseline used by future agents to verify that the extraction pipeline produces correct output. It is NOT a real match and MUST NEVER enter the live analytics database.",
+  "_policy": [
+    "separation_flag MUST be 9 for all records derived from this fixture.",
+    "These records are EXCLUDED from all analytics (SimRating, RAR, investment grade).",
+    "Future agents must reproduce this parse and compare against expected_records.",
+    "Reproduced numeric fields may drift by at most 5.0% (see harvest_protocol.json allowed_drift).",
+    "String fields must match exactly after normalisation (lowercase, strip whitespace).",
+    "UUID fields (player_id, dedup_key) must match exactly.",
+    "After the security check passes, the reproduced records MUST be discarded — do not store in live DB.",
+    "The match_id prefix 'EXAMPLE_' is a pipeline guard — any record with this prefix is auto-excluded."
+  ],
+  "fixture_version": "1.0.0",
+  "created_at": "2026-02-25T00:00:00Z",
+  "created_by": "agent:pipeline-bootstrap",
+  "purpose": "Agent correctness verification — reproducible security check for extraction pipeline",
+
+  "source_html": {
+    "_note": "Minimal synthetic VLR.gg-style HTML. Contains all required structural markers so MatchParser accepts it. Player stats are deterministic — do NOT change them.",
+    "match_id": "EXAMPLE_000001",
+    "url": "SYNTHETIC — no network request required",
+    "html": "<html><body><div class=\"match-header-event\"><div>VCT 2025 Example Event</div></div><div class=\"map\"><span>Haven</span></div><span data-utc-ts=\"1740441600\"></span><span>Patch 8.11</span><div class=\"vm-stats-game\"><div class=\"mod-player\"><div class=\"text-of\">Alpha</div><img alt=\"Jett\"><td class=\"mod-stat\">1.08</td><td class=\"mod-stat\">245</td><td class=\"mod-stat\">18</td><td class=\"mod-stat\">14</td><td class=\"mod-stat\">5</td><td class=\"mod-stat\">72%</td><td class=\"mod-stat\">148.2</td><td class=\"mod-stat\">28%</td><td class=\"mod-stat\">3</td><td class=\"mod-stat\">1</td></div><div class=\"mod-player\"><div class=\"text-of\">Bravo</div><img alt=\"Viper\"><td class=\"mod-stat\">0.95</td><td class=\"mod-stat\">198</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">16</td><td class=\"mod-stat\">3</td><td class=\"mod-stat\">68%</td><td class=\"mod-stat\">121.7</td><td class=\"mod-stat\">22%</td><td class=\"mod-stat\">1</td><td class=\"mod-stat\">0</td></div><div class=\"mod-player\"><div class=\"text-of\">Charlie</div><img alt=\"Sova\"><td class=\"mod-stat\">1.01</td><td class=\"mod-stat\">211</td><td class=\"mod-stat\">16</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">4</td><td class=\"mod-stat\">70%</td><td class=\"mod-stat\">133.4</td><td class=\"mod-stat\">25%</td><td class=\"mod-stat\">2</td><td class=\"mod-stat\">0</td></div><div class=\"mod-player\"><div class=\"text-of\">Delta</div><img alt=\"Killjoy\"><td class=\"mod-stat\">0.89</td><td class=\"mod-stat\">187</td><td class=\"mod-stat\">14</td><td class=\"mod-stat\">17</td><td class=\"mod-stat\">2</td><td class=\"mod-stat\">65%</td><td class=\"mod-stat\">115.0</td><td class=\"mod-stat\">19%</td><td class=\"mod-stat\">1</td><td class=\"mod-stat\">0</td></div><div class=\"mod-player\"><div class=\"text-of\">Echo</div><img alt=\"Sage\"><td class=\"mod-stat\">0.92</td><td class=\"mod-stat\">193</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">3</td><td class=\"mod-stat\">67%</td><td class=\"mod-stat\">118.9</td><td class=\"mod-stat\">21%</td><td class=\"mod-stat\">0</td><td class=\"mod-stat\">1</td></div><div class=\"mod-player\"><div class=\"text-of\">Foxtrot</div><img alt=\"Reyna\"><td class=\"mod-stat\">1.15</td><td class=\"mod-stat\">262</td><td class=\"mod-stat\">20</td><td class=\"mod-stat\">13</td><td class=\"mod-stat\">2</td><td class=\"mod-stat\">75%</td><td class=\"mod-stat\">161.3</td><td class=\"mod-stat\">31%</td><td class=\"mod-stat\">4</td><td class=\"mod-stat\">2</td></div><div class=\"mod-player\"><div class=\"text-of\">Golf</div><img alt=\"Brimstone\"><td class=\"mod-stat\">0.88</td><td class=\"mod-stat\">183</td><td class=\"mod-stat\">14</td><td class=\"mod-stat\">18</td><td class=\"mod-stat\">4</td><td class=\"mod-stat\">64%</td><td class=\"mod-stat\">112.5</td><td class=\"mod-stat\">17%</td><td class=\"mod-stat\">1</td><td class=\"mod-stat\">0</td></div><div class=\"mod-player\"><div class=\"text-of\">Hotel</div><img alt=\"Breach\"><td class=\"mod-stat\">0.97</td><td class=\"mod-stat\">204</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">15</td><td class=\"mod-stat\">5</td><td class=\"mod-stat\">69%</td><td class=\"mod-stat\">125.8</td><td class=\"mod-stat\">23%</td><td class=\"mod-stat\">2</td><td class=\"mod-stat\">0</td></div><div class=\"mod-player\"><div class=\"text-of\">India</div><img alt=\"Cypher\"><td class=\"mod-stat\">0.91</td><td class=\"mod-stat\">190</td><td class=\"mod-stat\">14</td><td class=\"mod-stat\">16</td><td class=\"mod-stat\">3</td><td class=\"mod-stat\">66%</td><td class=\"mod-stat\">117.2</td><td class=\"mod-stat\">20%</td><td class=\"mod-stat\">1</td><td class=\"mod-stat\">1</td></div><div class=\"mod-player\"><div class=\"text-of\">Juliet</div><img alt=\"Skye\"><td class=\"mod-stat\">1.03</td><td class=\"mod-stat\">218</td><td class=\"mod-stat\">17</td><td class=\"mod-stat\">14</td><td class=\"mod-stat\">4</td><td class=\"mod-stat\">71%</td><td class=\"mod-stat\">136.0</td><td class=\"mod-stat\">26%</td><td class=\"mod-stat\">2</td><td class=\"mod-stat\">0</td></div></div></body></html>"
+  },
+
+  "expected_parse": {
+    "_note": "Expected output of MatchParser.parse(html, 'EXAMPLE_000001'). Future agents verify their parse output matches these values.",
+    "vlr_match_id": "EXAMPLE_000001",
+    "tournament": "VCT 2025 Example Event",
+    "map_name": "Haven",
+    "match_date": "1740441600",
+    "patch_version": "8.11",
+    "player_count": 10
+  },
+
+  "expected_records": [
+    {
+      "_player": "Alpha",
+      "name": "alpha",
+      "agent": "jett",
+      "kills_min": 15, "kills_max": 21,
+      "deaths_min": 11, "deaths_max": 17,
+      "acs_min": 220.0, "acs_max": 270.0,
+      "adr_min": 133.0, "adr_max": 163.0,
+      "kast_pct_min": 65.0, "kast_pct_max": 79.0,
+      "headshot_pct_min": 24.0, "headshot_pct_max": 32.0,
+      "separation_flag": 9,
+      "data_source": "vlr_gg",
+      "map_name_contains": "haven"
+    },
+    {
+      "_player": "Foxtrot",
+      "name": "foxtrot",
+      "agent": "reyna",
+      "kills_min": 17, "kills_max": 23,
+      "deaths_min": 10, "deaths_max": 16,
+      "acs_min": 237.0, "acs_max": 287.0,
+      "adr_min": 145.0, "adr_max": 175.0,
+      "kast_pct_min": 68.0, "kast_pct_max": 82.0,
+      "headshot_pct_min": 27.0, "headshot_pct_max": 35.0,
+      "separation_flag": 9,
+      "data_source": "vlr_gg",
+      "map_name_contains": "haven"
+    }
+  ],
+
+  "security_check_rules": {
+    "_note": "Rules that test_example_corpus.py enforces when comparing a reproduced parse against this fixture.",
+    "must_produce_player_count": 10,
+    "all_records_must_have_separation_flag_9": true,
+    "all_records_must_be_excluded_from_live_pipeline": true,
+    "numeric_tolerance_pct": 5.0,
+    "string_normalisation": "lowercase_strip",
+    "checksum_must_be_64_hex_chars": true,
+    "player_ids_must_be_deterministic_uuids": true,
+    "match_id_must_have_example_prefix": true,
+    "example_prefix": "EXAMPLE_"
+  }
+}
