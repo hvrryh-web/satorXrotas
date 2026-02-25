@@ -1,16 +1,20 @@
 # SATOR — Esports Simulation Platform
 
-**SATOR** is a two-part esports simulation platform:
+**SATOR** is a three-part esports simulation and analytics platform:
 
 1. **RadiantX** — An offline, deterministic tactical FPS simulation game built with Godot 4 and GDScript
-2. **SATOR Web** — An online public statistics platform (in development)
+2. **Axiom Esports Data** — A tactical FPS analytics pipeline with the SATOR Square 5-layer visualization
+3. **SATOR Web** — An online public statistics platform (in development)
 
 A data partition **firewall** ensures game-internal simulation data never reaches the public web platform.
 
-## RadiantX Game Features
+## Components
+
+### RadiantX Game (Offline)
 
 - **Deterministic 20 TPS Match Engine**: Seeded RNG for reproducible matches
 - **5v5 Tactical Gameplay**: Full team simulation with AI agents
+- **Dual Combat Engines**: Raycast (high fidelity) + TTK (Monte Carlo) LOD system
 - **Partial Observability**: Belief systems and communication delay simulation
 - **Map System**: JSON-based maps with zones and occluders
 - **Tactical Mechanics**: Smoke grenades, flashbangs, vision occlusion
@@ -19,38 +23,68 @@ A data partition **firewall** ensures game-internal simulation data never reache
 - **Playback Controls**: Play/pause, speed control, timeline scrubbing
 - **Determinism Verification**: Built-in tests to ensure consistency
 
+### Axiom Esports Data (Analytics)
+
+- **37-field KCRITR Schema**: Comprehensive player performance database
+- **SATOR Square Visualization**: 5-layer palindromic match analysis (D3.js + WebGL)
+- **SimRating & RAR Metrics**: Role-adjusted performance analytics
+- **Investment Grading**: A+ through D player classification
+- **Overfitting Guardrails**: Temporal wall, adversarial validation, confidence weighting
+- **Extraction Pipeline**: VLR.gg scraping with dual-storage protocol
+
+### SATOR Web (Public Stats)
+
+- Phase 3+ — displays only firewall-sanitized public statistics
+
 ## Requirements
 
-- Godot 4.0 or higher (game)
-- Node.js 20+ (TypeScript packages, Phase 3+)
-- Windows (primary game target platform)
+- Godot 4.0+ (game)
+- Docker + Docker Compose (Axiom database)
+- Python 3.11+ (analytics pipeline)
+- Node.js 20+ (TypeScript packages, web platform)
 
 ## Quick Start
 
-### Playing RadiantX (Offline Game)
+### Playing RadiantX
 
-1. Install Godot 4.x from [godotengine.org](https://godotengine.org/)
-2. Clone this repository
-3. Open `project.godot` in Godot
-4. Press F5 to run
+```bash
+# Install Godot 4.x from godotengine.org
+git clone https://github.com/hvrryh-web/RadiantX.git
+cd RadiantX
+# Open project.godot in Godot, press F5
+```
 
 See the [Quick Start Guide](docs/quick_start.md) for detailed instructions.
+
+### Running Axiom Analytics
+
+```bash
+cd axiom-esports-data
+docker-compose -f infrastructure/docker-compose.yml up -d
+cd extraction && pip install -r requirements.txt
+python src/scrapers/epoch_harvester.py --mode=delta
+```
 
 ### Running TypeScript Packages
 
 ```bash
-npm install        # Install dependencies
-npm run build      # Build all packages
-npm run validate:schema  # Validate public stats schema
-npm run test:firewall    # Run firewall enforcement tests
+npm install
+npm run build
+npm run validate:schema
+npm run test:firewall
 ```
 
 ## Architecture
 
-SATOR uses a two-layer architecture with a strict data partition firewall:
+SATOR uses a three-layer architecture with a strict data partition firewall:
 
 ```
 Game Simulation (Godot / GDScript)
+        │
+        ├──→ EventLog → Extraction Bridge → Axiom Analytics (Python)
+        │                                        │
+        │                                        ▼
+        │                                  SATOR Square Viz (React/D3/WebGL)
         │
         ▼
 FantasyDataFilter.sanitizeForWeb()   ◄── Firewall
@@ -59,23 +93,24 @@ FantasyDataFilter.sanitizeForWeb()   ◄── Firewall
 API Layer → SATOR Web Platform
 ```
 
-See [docs/ARCHITECTURE.md](docs/architecture.md) for the full architecture overview and
-[docs/FIREWALL_POLICY.md](docs/FIREWALL_POLICY.md) for the data partition rules.
+See [docs/architecture.md](docs/architecture.md) for the game system design.
+See [axiom-esports-data/AXIOM.md](axiom-esports-data/AXIOM.md) for the analytics pipeline.
+See [docs/FIREWALL_POLICY.md](docs/FIREWALL_POLICY.md) for data partition rules.
 
 ## Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [docs/architecture.md](docs/architecture.md) | System architecture overview |
-| [docs/FIREWALL_POLICY.md](docs/FIREWALL_POLICY.md) | ★ Data partition firewall policy |
-| [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) | Repository structure guide |
-| [docs/BRANCH_STRATEGY.md](docs/BRANCH_STRATEGY.md) | Git branch strategy |
-| [docs/map_format.md](docs/map_format.md) | Map JSON specification |
-| [docs/agents.md](docs/agents.md) | Agent AI behavior |
-| [docs/replay.md](docs/replay.md) | Replay system guide |
-| [docs/quick_start.md](docs/quick_start.md) | Getting started guide |
-| [docs/custom-agents.md](docs/custom-agents.md) | AI agent configuration |
-| [.github/SATOR-COPILOT-PROMPTS.md](.github/SATOR-COPILOT-PROMPTS.md) | AI-assisted development guide |
+| [Quick Start](docs/quick_start.md) | Getting started guide |
+| [Architecture](docs/architecture.md) | System design overview |
+| [Agent Behavior](docs/agents.md) | AI agent documentation |
+| [Map Format](docs/map_format.md) | JSON map specification |
+| [Replay System](docs/replay.md) | Match replay guide |
+| [Firewall Policy](docs/FIREWALL_POLICY.md) | Data partition rules |
+| [SATOR Architecture](axiom-esports-data/docs/SATOR_ARCHITECTURE.md) | 5-layer visualization spec |
+| [Data Dictionary](axiom-esports-data/docs/DATA_DICTIONARY.md) | 37-field KCRITR schema |
+| [Custom Agents](docs/custom-agents.md) | AI agent setup for development |
+| [Contributing](CONTRIBUTING.md) | Contribution guidelines |
 
 ## Map Format
 
@@ -102,4 +137,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, including the firewall po
 
 ## License
 
-MIT License — See LICENSE file for details.
+- **RadiantX Game**: [MIT License](LICENSE)
+- **Axiom Esports Data**: [CC BY-NC 4.0](axiom-esports-data/LICENSE)

@@ -2,14 +2,21 @@
 
 ## Project Overview
 
-RadiantX is a **deterministic tactical FPS simulation manager** built with **Godot 4** and **GDScript**. It simulates 5v5 tactical matches with a tick-based engine, partial observability, and full replay capability. It is designed for offline Windows play, prioritizing tactical depth and simulation fidelity over graphics.
+**SATOR** is a three-part esports simulation and analytics platform. The repository is a monorepo containing:
+
+1. **RadiantX** — A deterministic tactical FPS simulation manager built with **Godot 4** and **GDScript**. It simulates 5v5 tactical matches with a tick-based engine, partial observability, and full replay capability.
+2. **Axiom Esports Data** — A tactical FPS analytics pipeline with the SATOR Square 5-layer visualization, built with **Python** (analytics) and **React/TypeScript/D3/WebGL** (visualization).
+3. **SATOR Web** — An online public statistics platform (in development), with **TypeScript** packages for data partitioning and schema validation.
 
 **Key characteristics:**
 - 20 TPS deterministic match engine with seeded RNG
 - Top-down 2D visualization with smooth 60 FPS interpolation
 - Data-driven combat system with JSON definitions
 - Full match recording and replay with playback controls
-- MIT licensed
+- 37-field KCRITR analytics schema with SimRating and RAR metrics
+- SATOR Square 5-layer palindromic match visualization
+- Data partition firewall between game internals and public web
+- MIT licensed (game), CC BY-NC 4.0 (analytics)
 
 ## Repository Structure
 
@@ -52,6 +59,37 @@ RadiantX/
 ├── tests/
 │   ├── test_determinism.gd     # Determinism verification tests
 │   └── test_determinism.tscn   # Test scene
+├── axiom-esports-data/         # Analytics pipeline (Python + React/TS)
+│   ├── AXIOM.md                # AI agent operational guide
+│   ├── analytics/              # SimRating, RAR, guardrails, investment grading
+│   │   ├── simrating/          # 5-component performance metric
+│   │   ├── rar/                # Role-adjusted replacement rating
+│   │   ├── investment/         # A+ through D grading
+│   │   ├── guardrails/         # Temporal wall, overfitting guard
+│   │   └── temporal/           # Age curves, decay weights
+│   ├── extraction/             # VLR scraping and data parsing
+│   │   ├── scrapers/           # vlr_resilient_client, epoch_harvester
+│   │   ├── parsers/            # match_parser, role_classifier, economy_inference
+│   │   ├── bridge/             # extraction_bridge (EventLog → spatial_events)
+│   │   └── storage/            # raw_repository, reconstruction_repo, integrity_checker
+│   ├── infrastructure/         # Docker, database migrations
+│   │   ├── docker-compose.yml  # Postgres 15 + TimescaleDB + Redis
+│   │   ├── migrations/         # 4 SQL migration files
+│   │   └── seed_data/          # Role baselines, ground truth
+│   ├── visualization/          # SATOR Square 5-layer viz (React/D3/WebGL)
+│   │   ├── sator-square/       # SatorLayer, ArepoLayer, TenetLayer, OperaLayer, RotasLayer
+│   │   ├── hooks/              # useSpatialData.ts
+│   │   └── shaders/            # fog.frag, dust.vert
+│   ├── api/                    # FastAPI routes
+│   └── docs/                   # Data dictionary, architecture, epochs
+├── packages/                   # TypeScript shared packages
+│   ├── stats-schema/           # Public field type definitions
+│   ├── data-partition-lib/     # FantasyDataFilter firewall enforcement
+│   └── api-client/             # HTTP client (planned)
+├── apps/
+│   ├── radiantx-game/          # Game integration modules
+│   └── sator-web/              # Web platform (Phase 3)
+├── api/                        # Backend API (Phase 3)
 ├── docs/                       # Documentation (10+ files)
 │   ├── architecture.md         # System design overview
 │   ├── agents.md               # Agent behavior documentation
@@ -59,9 +97,12 @@ RadiantX/
 │   ├── replay.md               # Replay system guide
 │   ├── quick_start.md          # Getting started guide
 │   ├── custom-agents.md        # Custom AI agent setup
+│   ├── FIREWALL_POLICY.md      # Data partition rules
+│   ├── combat_system_review.md # Combat mechanics deep-dive
 │   └── ...                     # Reviews and assessments
 ├── tactical-fps-sim-core-updated/  # Reference C# implementation (not used at runtime)
 ├── project.godot               # Godot 4 project config
+├── package.json                # npm workspace root
 ├── README.md
 ├── PROJECT_SUMMARY.md
 ├── CONTRIBUTING.md
@@ -72,13 +113,17 @@ RadiantX/
 
 | Layer | Technology |
 |-------|-----------|
-| Engine | Godot 4.0+ |
-| Language | GDScript |
+| Game Engine | Godot 4.0+ / GDScript |
+| Analytics | Python 3.11+ |
+| Visualization | React / TypeScript / D3.js / WebGL |
+| Database | PostgreSQL 15 + TimescaleDB (planned) |
+| Packages | TypeScript (stats-schema, data-partition-lib) |
 | Data format | JSON (maps, definitions, replays) |
 | CI | GitHub Actions (structural validation) |
 | Platform target | Windows primary, cross-platform capable |
 
-**No external dependencies.** Everything uses Godot built-in classes.
+**Game dependencies:** None — uses Godot built-in classes only.
+**Analytics dependencies:** See `axiom-esports-data/extraction/requirements.txt`.
 
 ## Architecture
 
@@ -245,9 +290,15 @@ Saved to user data directory as `replay_TIMESTAMP.json`. Contains tick-timestamp
 | `docs/replay.md` | Replay save/load and verification |
 | `docs/quick_start.md` | Getting started guide |
 | `docs/custom-agents.md` | Custom AI agent setup |
+| `docs/FIREWALL_POLICY.md` | Data partition firewall rules |
 | `docs/combat_system_review.md` | Combat mechanics deep-dive |
 | `docs/backend_architecture_review.md` | Backend architecture analysis |
 | `docs/UI_UX_ACCESSIBILITY_ASSESSMENT.md` | Accessibility audit |
+| `axiom-esports-data/AXIOM.md` | Analytics pipeline operational guide |
+| `axiom-esports-data/docs/SATOR_ARCHITECTURE.md` | 5-layer visualization spec |
+| `axiom-esports-data/docs/DATA_DICTIONARY.md` | 37-field KCRITR schema |
+| `axiom-esports-data/docs/CONFIDENCE_TIERS.md` | Data confidence classification |
+| `axiom-esports-data/docs/EXTRACTION_EPOCHS.md` | Extraction epoch definitions |
 
 ## Common Tasks for AI Assistants
 
@@ -284,3 +335,112 @@ Saved to user data directory as `replay_TIMESTAMP.json`. Contains tick-timestamp
 2. `CombatResolver.gd` is the entry point from `MatchEngine`
 3. `DuelResolver.gd` dispatches to `RaycastDuelEngine` or `TTKDuelEngine`
 4. All combat data flows through `DuelContext` and returns `DuelResult`
+
+## Working with Axiom Esports Data
+
+### Directory: `axiom-esports-data/`
+
+This is the analytics pipeline. It has its own `AXIOM.md` for detailed operational guidance.
+
+### Analytics Modules (`analytics/`)
+
+- `simrating/calculator.py` — 5-component equal-weight SimRating metric
+- `simrating/normalizer.py` — Z-score normalization by season
+- `rar/decomposer.py` + `replacement_levels.py` — Role-Adjusted Rating
+- `investment/grader.py` — A+/A/B/C/D investment classification
+- `temporal/age_curves.py` + `decay_weights.py` — Time-based adjustments
+- `guardrails/temporal_wall.py` — Train/test temporal split (prevents data leakage)
+- `guardrails/overfitting_guard.py` — Adversarial validation checks
+- `guardrails/confidence_sampler.py` — Confidence-weighted sampling
+
+### Extraction Pipeline (`extraction/`)
+
+- `scrapers/vlr_resilient_client.py` — VLR.gg scraper with circuit breaker
+- `scrapers/epoch_harvester.py` — Epoch I/II/III data extraction
+- `parsers/match_parser.py` — Match data parsing
+- `parsers/role_classifier.py` — Agent role classification
+- `parsers/economy_inference.py` — Economy inference from ACS differentials
+- `bridge/extraction_bridge.py` — Converts `EventLog.gd` replay data to `spatial_events` schema
+- `storage/integrity_checker.py` — SHA-256 checksum verification
+- `storage/raw_repository.py` — Immutable raw data storage
+- `storage/reconstruction_repo.py` — Calculated/reconstructed data storage
+
+### Database Migrations (`infrastructure/migrations/`)
+
+Migrations follow a numbered sequence:
+1. `001_initial_schema.sql` — 37-field KCRITR player performance schema
+2. `002_sator_layers.sql` — spatial_events, sator_events tables
+3. `003_dual_storage.sql` — Raw + reconstruction storage tables
+4. `004_extraction_log.sql` — Audit and lineage tracking
+
+### SATOR Square Visualization (`visualization/`)
+
+5-layer palindromic visualization (each layer is a React/D3/WebGL component):
+- `SatorLayer.tsx` — Hotstreak momentum, pulse animations
+- `ArepoLayer.tsx` — Death stains, clutch crowns
+- `TenetLayer.tsx` — Area control grading, zone colors
+- `OperaLayer.tsx` — Fog of war (WebGL `fog.frag` shader)
+- `RotasLayer.tsx` — Rotation trails (WebGL `dust.vert` shader)
+- `hooks/useSpatialData.ts` — Data fetching + caching hook
+
+### Adding a new analytics metric
+
+1. Create a new module under `axiom-esports-data/analytics/`
+2. Follow the pattern of existing calculators (e.g., `simrating/calculator.py`)
+3. Implement `guardrails/temporal_wall.py` constraints — never use future data
+4. Add unit tests in the module's `tests/` directory
+5. Document the metric in `axiom-esports-data/docs/DATA_DICTIONARY.md`
+
+### Adding a new SATOR visualization layer
+
+1. Create a React component in `axiom-esports-data/visualization/sator-square/`
+2. Use D3.js for SVG elements (<200 elements for 60 FPS)
+3. Use WebGL for high-element-count renders (>1000 elements)
+4. Follow protanopia-safe color palette guidelines
+5. Add shader files to `visualization/shaders/` if needed
+6. Test with `useSpatialData.ts` hook for data binding
+
+### Running the analytics pipeline
+
+```bash
+cd axiom-esports-data
+# Start database
+docker-compose -f infrastructure/docker-compose.yml up -d
+# Run extraction
+cd extraction && pip install -r requirements.txt
+python src/scrapers/epoch_harvester.py --mode=delta
+# Run analytics
+cd ../analytics
+python -m pytest tests/
+```
+
+## Coding Conventions by Stack
+
+### GDScript (Game — `scripts/`)
+
+See the Coding Conventions section above. Key rules:
+- Determinism is **critical** — seeded RNG only, fixed timestep, consistent ordering
+- Tabs for indentation
+- `snake_case` functions/variables, `PascalCase` classes
+
+### Python (Analytics — `axiom-esports-data/`)
+
+- Follow PEP 8 style
+- Use type hints for function signatures
+- Overfitting guardrails are **critical** — temporal wall must prevent future data leakage
+- Use `confidence_sampler.py` for any statistical calculations
+- All data must pass through `integrity_checker.py` before analytics
+
+### TypeScript/React (Visualization — `axiom-esports-data/visualization/`)
+
+- Strict TypeScript (`strict: true`)
+- React functional components with hooks
+- Accessibility: protanopia-safe colors, ARIA labels, keyboard navigation
+- Performance: SVG <200 elements, WebGL for dense renders
+- Use `useSpatialData.ts` for data fetching
+
+### TypeScript (Packages — `packages/`)
+
+- Strict TypeScript
+- Firewall enforcement: all web-facing data must pass through `FantasyDataFilter.sanitizeForWeb()`
+- Public types defined in `packages/stats-schema/src/types/`
