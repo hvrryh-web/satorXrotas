@@ -1,10 +1,17 @@
-# RadiantX Project Summary
+# SATOR Project Summary
 
-## What is RadiantX?
+## What is SATOR?
 
-RadiantX is a **deterministic, simulation-heavy tactical FPS manager** built with Godot 4 and GDScript. It's designed for offline Windows play and focuses on tactical depth over graphics.
+**SATOR** is a two-part esports simulation platform:
 
-## Core Features
+1. **RadiantX** — An offline, deterministic tactical FPS simulation game built with
+   Godot 4 and GDScript
+2. **SATOR Web** — An online public statistics platform (in development)
+
+A **data partition firewall** separates these two components, ensuring game-internal
+simulation data never reaches the public web platform.
+
+## RadiantX Game Features
 
 ### ✅ Deterministic Simulation
 - **20 TPS (Ticks Per Second)** fixed timestep engine
@@ -51,11 +58,15 @@ RadiantX is a **deterministic, simulation-heavy tactical FPS manager** built wit
 
 ### ✅ Documentation
 - Architecture overview
+- Firewall policy
+- Project structure guide
+- Branch strategy
 - Map format specification
 - Agent behavior documentation
 - Replay system guide
 - Quick start guide
 - Contributing guidelines
+- AI prompting guide
 
 ### ✅ Testing & CI
 - Determinism tests
@@ -66,8 +77,8 @@ RadiantX is a **deterministic, simulation-heavy tactical FPS manager** built wit
 ## Project Structure
 
 ```
-RadiantX/
-├── scripts/              # Core game logic
+RadiantX/ (SATOR monorepo root)
+├── scripts/              # Core game logic (GDScript)
 │   ├── MatchEngine.gd    # 20 TPS simulation engine
 │   ├── Agent.gd          # Agent with beliefs
 │   ├── MapData.gd        # Map loading and LOS
@@ -82,20 +93,30 @@ RadiantX/
 ├── tests/
 │   ├── test_determinism.gd   # Determinism tests
 │   └── test_determinism.tscn
+├── packages/
+│   ├── stats-schema/     # Public type definitions
+│   └── data-partition-lib/  # Firewall library
+├── apps/
+│   ├── radiantx-game/    # Game integration modules
+│   └── sator-web/        # Web platform (Phase 3)
+├── api/                  # Backend API (Phase 3)
 ├── docs/
+│   ├── FIREWALL_POLICY.md
+│   ├── PROJECT_STRUCTURE.md
 │   ├── architecture.md
-│   ├── map_format.md
-│   ├── agents.md
-│   ├── replay.md
-│   └── quick_start.md
+│   └── ...
 ├── .github/
+│   ├── SATOR-COPILOT-PROMPTS.md
 │   └── workflows/
 │       └── ci.yml        # GitHub Actions CI
 ├── project.godot         # Godot project file
+├── package.json          # npm workspace root
 ├── README.md
 ├── LICENSE (MIT)
 └── CONTRIBUTING.md
 ```
+
+See [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md) for the full layout.
 
 ## Key Technologies
 
@@ -176,14 +197,16 @@ MIT License - See LICENSE file
 
 ## Contributing
 
-See CONTRIBUTING.md for guidelines
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines, including the firewall policy and branch strategy.
 
 ## Support
 
 - Documentation: `/docs`
+- Firewall policy: `docs/FIREWALL_POLICY.md`
+- AI prompting guide: `.github/SATOR-COPILOT-PROMPTS.md`
 - Issues: GitHub Issues
 - Questions: GitHub Discussions
 
 ---
 
-**RadiantX** - Tactical depth meets deterministic simulation.
+**SATOR** — Tactical depth meets deterministic simulation.

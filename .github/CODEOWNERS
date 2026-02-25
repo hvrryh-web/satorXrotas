@@ -1,0 +1,21 @@
+# CODEOWNERS
+# Each line maps a file pattern to one or more owners.
+# Owners are automatically requested for review on any PR that modifies the file.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global default: hvrryh-web reviews everything
+*                                       @hvrryh-web
+
+# Firewall library — requires careful review
+packages/data-partition-lib/            @hvrryh-web
+docs/FIREWALL_POLICY.md                 @hvrryh-web
+
+# Stats schema — public API contract
+packages/stats-schema/                  @hvrryh-web
+
+# CI/CD workflows
+.github/workflows/                      @hvrryh-web
+
+# Game source code
+scripts/                                @hvrryh-web
+apps/radiantx-game/                     @hvrryh-web

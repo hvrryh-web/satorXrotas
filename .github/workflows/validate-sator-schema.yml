@@ -1,0 +1,98 @@
+name: Validate SATOR Schema
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'packages/stats-schema/**'
+      - 'packages/data-partition-lib/**'
+      - '.github/workflows/validate-sator-schema.yml'
+
+jobs:
+  validate-schema:
+    name: Validate Stats Schema
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --workspaces --if-present
+          else
+            echo "No package-lock.json found — skipping npm ci (Phase 1 stub)"
+          fi
+
+      - name: Check schema package syntax
+        run: |
+          echo "Checking stats-schema package structure..."
+          test -f packages/stats-schema/package.json \
+            || (echo "ERROR: packages/stats-schema/package.json not found" && exit 1)
+          test -f packages/stats-schema/tsconfig.json \
+            || (echo "ERROR: packages/stats-schema/tsconfig.json not found" && exit 1)
+          test -f packages/stats-schema/src/types/index.ts \
+            || (echo "ERROR: packages/stats-schema/src/types/index.ts not found" && exit 1)
+          echo "✓ Schema package structure valid"
+
+      - name: Validate no GAME_ONLY_FIELDS in schema
+        run: |
+          echo "Checking that schema files contain no GAME_ONLY_FIELDS as properties..."
+          GAME_ONLY_FIELDS=(
+            "internalAgentState"
+            "radarData"
+            "detailedReplayFrameData"
+            "simulationTick"
+            "seedValue"
+            "visionConeData"
+            "smokeTickData"
+            "recoilPattern"
+          )
+          FOUND_VIOLATION=0
+          for field in "${GAME_ONLY_FIELDS[@]}"; do
+            # Check for the field used as a TypeScript property (not in comments)
+            # Property patterns: "fieldName:", "fieldName?:", "fieldName :" at start of line (after whitespace)
+            if grep -rE "^\s*['\"]?${field}['\"]?\s*\??\s*:" \
+                packages/stats-schema/src/ --include="*.ts" -l 2>/dev/null | grep -q .; then
+              echo "ERROR: GAME_ONLY_FIELD '$field' found as a property in stats-schema!"
+              grep -rE "^\s*['\"]?${field}['\"]?\s*\??\s*:" \
+                packages/stats-schema/src/ --include="*.ts" -n
+              FOUND_VIOLATION=1
+            fi
+          done
+          if [ "$FOUND_VIOLATION" -eq 1 ]; then
+            echo ""
+            echo "FIREWALL VIOLATION: Game-internal fields detected as properties in public schema."
+            echo "See docs/FIREWALL_POLICY.md for the list of blocked fields."
+            exit 1
+          fi
+          echo "✓ No GAME_ONLY_FIELDS found as properties in schema — firewall intact"
+
+      - name: Validate FantasyDataFilter covers all blocked fields
+        run: |
+          echo "Checking FantasyDataFilter.GAME_ONLY_FIELDS is populated..."
+          test -f packages/data-partition-lib/src/FantasyDataFilter.ts \
+            || (echo "ERROR: FantasyDataFilter.ts not found" && exit 1)
+          grep -q "GAME_ONLY_FIELDS" packages/data-partition-lib/src/FantasyDataFilter.ts \
+            || (echo "ERROR: GAME_ONLY_FIELDS not defined in FantasyDataFilter.ts" && exit 1)
+          echo "✓ FantasyDataFilter.GAME_ONLY_FIELDS present"
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "========================================="
+          echo "  Schema Validation Complete"
+          echo "========================================="
+          echo "✓ Stats schema structure valid"
+          echo "✓ No game-internal fields in public schema"
+          echo "✓ FantasyDataFilter configured"
+          echo "========================================="

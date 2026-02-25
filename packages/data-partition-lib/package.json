@@ -1,0 +1,17 @@
+{
+  "name": "@sator/data-partition-lib",
+  "version": "0.1.0",
+  "description": "Firewall library: enforce data partition between SATOR game and web platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test dist/tests/"
+  },
+  "keywords": ["sator", "firewall", "data-partition", "security"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

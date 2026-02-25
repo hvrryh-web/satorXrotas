@@ -1,6 +1,43 @@
 # Architecture Overview
 
-## System Design
+## SATOR Two-Part Architecture
+
+SATOR is composed of two components with a strict data partition boundary:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│              RadiantX (Offline Game)                         │
+│  Godot 4 / GDScript — 20 TPS deterministic simulation        │
+│  MatchEngine · Agent · DuelResolver · EventLog               │
+└─────────────────────────┬────────────────────────────────────┘
+                          │  Raw match data (may include internals)
+                          ▼
+          ┌───────────────────────────┐
+          │    FantasyDataFilter      │  ← packages/data-partition-lib
+          │    .sanitizeForWeb()      │    FIREWALL ENFORCEMENT POINT
+          └───────────────┬───────────┘
+                          │  Only PUBLIC fields (kills, deaths, assists…)
+                          ▼
+┌──────────────────────────────────────────────────────────────┐
+│                  API Layer                                   │
+│  TypeScript — validates against @sator/stats-schema types    │
+└─────────────────────────┬────────────────────────────────────┘
+                          │
+                          ▼
+┌──────────────────────────────────────────────────────────────┐
+│               SATOR Web Platform                             │
+│  Displays only public statistics — no game internals         │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Key invariant**: The game never imports web code; the web never imports game code.
+All communication flows through the API with the firewall in between.
+
+See [docs/FIREWALL_POLICY.md](FIREWALL_POLICY.md) for the complete data classification rules.
+
+---
+
+## Game System Design
 
 RadiantX is built on a deterministic, tick-based simulation architecture designed for reproducible tactical FPS matches.
 

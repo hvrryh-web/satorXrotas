@@ -1,0 +1,118 @@
+name: Test Firewall
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'packages/data-partition-lib/**'
+      - 'packages/stats-schema/**'
+      - 'api/**'
+      - 'tests/**'
+      - '.github/workflows/test-firewall.yml'
+
+jobs:
+  test-firewall:
+    name: Firewall Validation Tests
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --workspaces --if-present
+          else
+            echo "No package-lock.json found — skipping npm ci (Phase 1 stub)"
+          fi
+
+      - name: Verify FantasyDataFilter exists and has required members
+        run: |
+          echo "Verifying firewall library structure..."
+          FILTER=packages/data-partition-lib/src/FantasyDataFilter.ts
+
+          test -f "$FILTER" \
+            || (echo "ERROR: FantasyDataFilter.ts not found" && exit 1)
+
+          grep -q "GAME_ONLY_FIELDS" "$FILTER" \
+            || (echo "ERROR: GAME_ONLY_FIELDS missing from FantasyDataFilter" && exit 1)
+
+          grep -q "sanitizeForWeb" "$FILTER" \
+            || (echo "ERROR: sanitizeForWeb() missing from FantasyDataFilter" && exit 1)
+
+          grep -q "validateWebInput" "$FILTER" \
+            || (echo "ERROR: validateWebInput() missing from FantasyDataFilter" && exit 1)
+
+          echo "✓ FantasyDataFilter structure valid"
+
+      - name: Verify all GAME_ONLY_FIELDS are covered
+        run: |
+          echo "Verifying all required GAME_ONLY_FIELDS are listed..."
+          FILTER=packages/data-partition-lib/src/FantasyDataFilter.ts
+          REQUIRED_FIELDS=(
+            "internalAgentState"
+            "radarData"
+            "detailedReplayFrameData"
+            "simulationTick"
+            "seedValue"
+            "visionConeData"
+            "smokeTickData"
+            "recoilPattern"
+          )
+          MISSING=0
+          for field in "${REQUIRED_FIELDS[@]}"; do
+            if ! grep -q "'$field'" "$FILTER"; then
+              echo "ERROR: Required GAME_ONLY_FIELD '$field' missing from FantasyDataFilter"
+              MISSING=1
+            fi
+          done
+          if [ "$MISSING" -eq 1 ]; then
+            echo ""
+            echo "Firewall is incomplete — add missing fields to GAME_ONLY_FIELDS."
+            echo "See docs/FIREWALL_POLICY.md for the full list."
+            exit 1
+          fi
+          echo "✓ All required GAME_ONLY_FIELDS present in FantasyDataFilter"
+
+      - name: Run firewall unit tests (Phase 3+)
+        run: |
+          echo "Checking for firewall test suite..."
+          if [ -f package-lock.json ] && [ -d packages/data-partition-lib/dist ]; then
+            npm run test:firewall
+          else
+            echo "Phase 1: test suite not yet implemented."
+            echo "Structural validation passed. Unit tests will run from Phase 3."
+          fi
+
+      - name: Verify API middleware sanitization stub (Phase 3+)
+        run: |
+          echo "Checking API middleware..."
+          if [ -f api/src/middleware/firewallMiddleware.ts ]; then
+            grep -q "sanitizeForWeb" api/src/middleware/firewallMiddleware.ts \
+              || (echo "ERROR: API middleware does not call sanitizeForWeb()" && exit 1)
+            echo "✓ API firewall middleware references sanitizeForWeb()"
+          else
+            echo "Phase 1: API middleware not yet implemented — skipping."
+          fi
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "========================================="
+          echo "  Firewall Tests Complete"
+          echo "========================================="
+          echo "✓ FantasyDataFilter structure valid"
+          echo "✓ All GAME_ONLY_FIELDS present"
+          echo "✓ Firewall policy intact"
+          echo "========================================="
+          echo ""
+          echo "Note: Full unit tests enabled from Phase 3."

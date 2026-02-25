@@ -1,0 +1,20 @@
+{
+  "name": "sator",
+  "version": "0.1.0",
+  "description": "SATOR esports simulation platform — monorepo root",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "echo 'Start game: open project.godot in Godot 4. Start API: cd api && npm run dev'",
+    "test:firewall": "npm run test --workspace=packages/data-partition-lib",
+    "validate:schema": "npm run validate:schema --workspace=packages/stats-schema",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "api"
+  ],
+  "keywords": ["sator", "esports", "tactical-fps", "simulation"],
+  "license": "MIT"
+}
