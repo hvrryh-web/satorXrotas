@@ -76,7 +76,10 @@ class TestExtractionBridgeTransform:
         bridge = ExtractionBridge()
         raw = _make_raw_match(1)
         record = bridge.transform(raw)[0]
-        assert record.map_name == "Haven"
+        # map_name is now stored as a canonical URI (cid:map:*) or the raw string
+        # when the map is unknown to the alias table. Haven is in the alias table.
+        assert record.map_name is not None
+        assert "haven" in record.map_name.lower()
 
     def test_transform_checksum_is_64_chars(self):
         bridge = ExtractionBridge()
