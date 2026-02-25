@@ -70,12 +70,15 @@ def _refresh_rar(dry_run: bool) -> bool:
     logger.info("[3/5] RAR decomposition refresh (dry_run=%s)", dry_run)
     try:
         from analytics.src.rar.decomposer import RARDecomposer
-        from analytics.src.rar.replacement_levels import ReplacementLevels
+        from analytics.src.rar.replacement_levels import get_replacement_level
 
         decomposer = RARDecomposer()
         mean = decomposer.get_replacement_mean()
         assert 0.9 <= mean <= 1.1, f"RAR replacement mean {mean:.3f} out of expected range"
         logger.info("RAR replacement mean: %.3f (within 0.9–1.1)", mean)
+        # Spot-check a single role to confirm replacement level lookup works
+        sample_level = get_replacement_level("Entry")
+        assert sample_level > 0, "Entry replacement level must be positive"
         if dry_run:
             logger.info("DRY RUN: RAR write skipped")
         else:

@@ -1,0 +1,161 @@
+{
+  "_comment": "Harvest Protocol — shared operating contract between KnownRecordRegistry (verifier) and EpochHarvester (scraper). Both services MUST read this file before any data collection. Changing values here changes behaviour system-wide.",
+
+  "protocol_version": "1.0.0",
+
+  "schema": {
+    "kcritr_version": "v2",
+    "field_count": 37,
+    "primary_key": ["player_id", "match_id", "map_name"],
+    "separation_flags": {
+      "0": "RAW — immutable, sourced directly from VLR.gg HTML",
+      "1": "RECONSTRUCTED — derived from raw via analytics pipeline"
+    },
+    "data_sources": ["vlr_gg", "liquipedia", "hltv", "grid"],
+    "epochs": {
+      "1": {"start": "2020-12-03", "end": "2022-12-31", "confidence_floor": 50.0, "label": "Historic"},
+      "2": {"start": "2023-01-01", "end": "2025-12-31", "confidence_floor": 75.0, "label": "Mature"},
+      "3": {"start": "2026-01-01", "end": null,         "confidence_floor": 100.0,"label": "Current"}
+    }
+  },
+
+  "completeness_definition": {
+    "_comment": "A match_id is COMPLETE when all conditions below are satisfied. Incomplete records are re-eligible for harvest.",
+    "required_player_count_min": 10,
+    "required_fields_non_null": ["kills", "deaths", "acs", "adr", "kast_pct"],
+    "required_separation_flag": 0,
+    "required_http_status": 200,
+    "required_checksum_present": true,
+    "required_confidence_tier_min": 50.0
+  },
+
+  "skip_policy": {
+    "_comment": "Controls when a known record is SKIPPED (not re-scraped). Both services enforce this policy identically.",
+    "skip_if_complete": true,
+    "skip_if_excluded": true,
+    "skip_if_checksum_unchanged": true,
+    "rescrape_if_schema_version_mismatch": true,
+    "rescrape_if_confidence_below_floor": true,
+    "rescrape_on_full_mode": false,
+    "_rescrape_on_full_mode_note": "Full-mode re-scrape still honours exclusion_list and checksum dedup"
+  },
+
+  "exclusion_reasons": {
+    "_comment": "Canonical exclusion reasons. Any exclusion MUST use one of these codes.",
+    "COMPLETE":        "Record is fully populated and verified — no action required",
+    "MANUAL_EXCLUDE":  "Manually excluded by data team (e.g., exhibition match, corrupted source)",
+    "DUPLICATE":       "Duplicate of another verified record (same match, different URL)",
+    "SCHEMA_CONFLICT": "HTML schema changed; record cannot be reliably parsed until parser is updated",
+    "CONTENT_DRIFT":   "Same URL returned materially different HTML on re-check (>5% diff); flagged for review",
+    "LOW_CONFIDENCE":  "Confidence tier below epoch floor after validation; excluded from analytics use",
+    "RATE_LIMIT_BAN":  "Source IP/UA banned; match excluded until client rotation resolves it"
+  },
+
+  "conflict_resolution": {
+    "_comment": "Rules applied when registry and scraper detect conflicting state for the same match_id.",
+    "checksum_conflict": {
+      "_comment": "Same match_id, different checksum on re-check",
+      "action": "flag_content_drift",
+      "store_new_version": true,
+      "exclude_old_version": false,
+      "alert_level": "WARNING"
+    },
+    "partial_write_detected": {
+      "_comment": "File exists but integrity check fails (truncated write)",
+      "action": "delete_and_retry",
+      "max_retries": 3,
+      "alert_level": "ERROR"
+    },
+    "concurrent_scrape_conflict": {
+      "_comment": "Two workers claim the same match_id simultaneously",
+      "action": "first_writer_wins",
+      "dedup_via_checksum": true,
+      "alert_level": "INFO"
+    },
+    "epoch_boundary_conflict": {
+      "_comment": "Match date falls within 24h of an epoch boundary",
+      "action": "assign_to_lower_epoch",
+      "alert_level": "INFO"
+    },
+    "schema_drift_detected": {
+      "_comment": "Parser signals unknown HTML structure",
+      "action": "exclude_SCHEMA_CONFLICT_and_cache_raw",
+      "alert_level": "CRITICAL",
+      "block_analytics_pipeline": true
+    }
+  },
+
+  "safety_thresholds": {
+    "_comment": "Hard limits that MUST NOT be exceeded. Violation stops the pipeline.",
+    "max_consecutive_http_errors": 10,
+    "max_error_rate_pct": 20.0,
+    "min_batch_success_rate_pct": 80.0,
+    "max_new_exclusions_per_run_pct": 5.0,
+    "circuit_breaker_failure_threshold": 5,
+    "circuit_breaker_recovery_seconds": 300,
+    "rate_limit_seconds": 2.0,
+    "max_concurrent_requests": 3,
+    "request_timeout_seconds": 30,
+    "max_content_drift_pct": 5.0,
+    "_max_content_drift_note": "More than 5% HTML diff triggers CONTENT_DRIFT exclusion"
+  },
+
+  "registry_api": {
+    "_comment": "Contract that KnownRecordRegistry exposes to EpochHarvester. Both must honour all methods.",
+    "methods": {
+      "is_known":          "bool — True if match_id has any record (complete or not)",
+      "is_complete":       "bool — True if match_id satisfies completeness_definition",
+      "is_excluded":       "bool — True if match_id is on the exclusion list",
+      "should_skip":       "bool — is_complete OR is_excluded; primary guard in harvester loop",
+      "mark_complete":     "void — called by bridge after successful KCRITR record write",
+      "mark_excluded":     "void(match_id, reason_code, notes) — adds to exclusion list",
+      "list_pending":      "list[str] — match IDs known but not yet complete (delta mode targets)",
+      "list_excluded":     "list[ExclusionEntry] — full exclusion list with reasons and timestamps",
+      "get_stats":         "dict — counts of complete/pending/excluded per epoch"
+    }
+  },
+
+  "metrics_collected_per_match": {
+    "_comment": "All metrics the pipeline collects and verifies. Downstream analytics jobs MUST declare which subset they consume.",
+    "identity": ["player_id", "name", "team", "region", "role"],
+    "raw_performance": ["kills", "deaths", "acs", "adr", "kast_pct"],
+    "extended_performance": ["headshot_pct", "first_blood", "clutch_wins", "agent", "economy_rating", "adjusted_kill_value"],
+    "rar_metrics": ["role_adjusted_value", "replacement_level", "rar_score", "investment_grade"],
+    "temporal": ["age", "peak_age_estimate", "career_stage", "realworld_time"],
+    "sim_rating": ["sim_rating"],
+    "match_context": ["match_id", "map_name", "tournament", "patch_version"],
+    "provenance": ["data_source", "extraction_timestamp", "checksum_sha256", "confidence_tier", "separation_flag", "partner_datapoint_ref", "reconstruction_notes", "record_id"]
+  },
+
+  "scheduled_jobs": {
+    "_comment": "Master schedule. All jobs consult this file to determine their operating parameters.",
+    "daily": {
+      "schedule_utc": "0 6 * * *",
+      "description": "Delta extraction (Epoch III only) + integrity + duplicate checks",
+      "harvest_mode": "delta",
+      "target_epochs": [3],
+      "skip_policy_ref": "skip_policy",
+      "safety_thresholds_ref": "safety_thresholds",
+      "workflow": "02-extraction-ci.yml + 05-daily-health-check.yml"
+    },
+    "weekly": {
+      "schedule_utc": "0 8 * * 1",
+      "description": "SimRating/RAR/investment recalculation + regression tests + CSV snapshot",
+      "harvest_mode": "delta",
+      "target_epochs": [2, 3],
+      "skip_policy_ref": "skip_policy",
+      "safety_thresholds_ref": "safety_thresholds",
+      "workflow": "06-weekly-analytics-refresh.yml"
+    },
+    "monthly": {
+      "schedule_utc": "0 3 1 * *",
+      "description": "Full re-scrape all epochs + Liquipedia cross-ref + full validation suite",
+      "harvest_mode": "full",
+      "target_epochs": [1, 2, 3],
+      "skip_policy_ref": "skip_policy",
+      "_note": "full mode still honours skip_if_excluded and checksum dedup",
+      "safety_thresholds_ref": "safety_thresholds",
+      "workflow": "07-monthly-full-harvest.yml"
+    }
+  }
+}

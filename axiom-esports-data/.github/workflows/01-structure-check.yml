@@ -30,7 +30,7 @@ jobs:
 
       - name: Verify config files
         run: |
-          for f in config/role_matrix.json config/overfitting_guardrails.json config/tier_definitions.yaml; do
+          for f in config/role_matrix.json config/overfitting_guardrails.json config/tier_definitions.yaml config/harvest_protocol.json; do
             [ -f "$f" ] && echo "✅ $f" || (echo "❌ Missing: $f" && exit 1)
           done
 
@@ -38,6 +38,7 @@ jobs:
         run: |
           python3 -c "import json; json.load(open('config/role_matrix.json'))" && echo "✅ role_matrix.json valid"
           python3 -c "import json; json.load(open('config/overfitting_guardrails.json'))" && echo "✅ overfitting_guardrails.json valid"
+          python3 -c "import json; json.load(open('config/harvest_protocol.json'))" && echo "✅ harvest_protocol.json valid"
 
       - name: Verify documentation
         run: |
