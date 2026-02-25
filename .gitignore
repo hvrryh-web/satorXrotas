@@ -33,3 +33,14 @@ obj/
 *.user
 *.suo
 *.csproj.user
+
+# Node.js / TypeScript
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Environment
+.env
+
+# Build artifacts
+apps/radiantx-game/build/

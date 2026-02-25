@@ -1,65 +1,93 @@
-# Contributing to RadiantX
+# Contributing to SATOR / RadiantX
 
-Thank you for your interest in contributing to RadiantX!
+Thank you for your interest in contributing to SATOR!
 
 ## Project Philosophy
 
-RadiantX is designed as an **offline, Windows-focused, deterministic tactical FPS simulation tool**. All contributions should align with these core principles:
+SATOR is a **two-part esports simulation platform**:
+1. **RadiantX** — An offline, deterministic tactical FPS simulation game (Godot 4 / GDScript)
+2. **SATOR Web** — An online public statistics platform (TypeScript, in development)
+
+All contributions must respect:
 
 1. **Determinism First**: All simulation logic must be deterministic
-2. **Offline Capable**: No required internet connectivity
-3. **Windows Primary**: Optimize for Windows, though cross-platform is welcome
-4. **Simulation Heavy**: Focus on tactical depth, not graphics
+2. **Firewall Enforced**: Game-internal data must never reach the web platform
+3. **Offline Capable**: Game requires no internet connectivity
+4. **Windows Primary**: Optimize for Windows, though cross-platform is welcome
+5. **Simulation Heavy**: Focus on tactical depth, not graphics
+
+## Firewall Policy
+
+Before contributing any code that involves data flow between the game and web platform,
+read **[docs/FIREWALL_POLICY.md](docs/FIREWALL_POLICY.md)**.
+
+The firewall prevents these game-internal fields from ever reaching the web:
+`internalAgentState`, `radarData`, `detailedReplayFrameData`, `simulationTick`,
+`seedValue`, `visionConeData`, `smokeTickData`, `recoilPattern`
+
+Enforcement is in `packages/data-partition-lib/src/FantasyDataFilter.ts`.
+Public type definitions are in `packages/stats-schema/src/types/`.
+
+## Branch Strategy
+
+See **[docs/BRANCH_STRATEGY.md](docs/BRANCH_STRATEGY.md)** for the full branching model.
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Production — all tests pass, firewall enforced |
+| `develop` | Integration — features merged here before main |
+| `feature/*` | Feature development |
+
+- **Always branch from `develop`** for new features
+- **Open PRs to `develop`**, not `main`
+- PRs to `main` require `@hvrryh-web` approval
 
 ## How to Contribute
 
 ### Reporting Issues
 
 - Use GitHub Issues
-- Include Godot version
+- Include Godot version (for game bugs)
 - Describe expected vs actual behavior
 - Include steps to reproduce
 - Attach replay files if relevant
 
 ### Suggesting Features
 
-Features should enhance tactical simulation:
+Features should enhance tactical simulation or the stats platform:
 - New tactical utilities (grenades, equipment)
 - Improved agent AI
 - Analysis tools
 - Map editor
 - Performance improvements
+- Public stats (must comply with firewall policy)
 
 ### Code Contributions
 
 1. **Fork the repository**
-2. **Create a feature branch**
+2. **Create a feature branch from `develop`**
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b feature/your-feature-name develop
    ```
 
-3. **Follow coding standards**
-   - Use GDScript for all game logic
-   - Follow Godot naming conventions
-   - Add comments for complex logic
-   - Keep functions small and focused
+3. **Follow coding standards** (see below)
 
-4. **Maintain determinism**
-   - Use seeded RNG only
-   - Avoid floating point accumulation
-   - Test with same seed multiple times
+4. **Maintain the firewall** — if your feature produces new data, classify it:
+   - Game-internal → add to `FantasyDataFilter.GAME_ONLY_FIELDS`
+   - Public stat → add to `packages/stats-schema/src/types/Statistics.ts`
 
 5. **Update documentation**
    - Add docs for new features
    - Update existing docs if behavior changes
-   - Include code examples
+   - Update `docs/FIREWALL_POLICY.md` if data classification changes
 
 6. **Test your changes**
-   - Run determinism tests
-   - Test with different seeds
-   - Verify replays work correctly
+   - Run determinism tests (GDScript)
+   - Run `npm run test:firewall` (TypeScript)
+   - Run `npm run validate:schema` (schema)
+   - Verify CI passes
 
-7. **Submit a pull request**
+7. **Submit a pull request to `develop`**
    - Describe what changed and why
    - Reference any related issues
    - Include before/after behavior
@@ -86,26 +114,46 @@ func start_match(seed: int):
 	pass
 ```
 
+### TypeScript Style
+
+```typescript
+// Use strict mode
+import type { Statistics } from '@sator/stats-schema';
+
+// Always sanitize game data before sending to API
+import { FantasyDataFilter } from '@sator/data-partition-lib';
+const safe = FantasyDataFilter.sanitizeForWeb(rawData);
+```
+
 ### File Organization
 
 ```
-scripts/        # Core game logic
+scripts/        # Core game logic (GDScript)
 scenes/         # Godot scene files
 maps/           # Map JSON files
 docs/           # Documentation
-tests/          # Test scripts
-assets/         # Images, sounds (future)
+tests/          # Godot test scripts
+packages/       # TypeScript shared packages
+apps/           # Deployable applications
+api/            # Backend API
 ```
 
 ## Testing
 
-### Determinism Tests
+### Determinism Tests (GDScript)
 
-Always run determinism tests before submitting:
+Always run determinism tests before submitting game changes:
 
 ```bash
 # In Godot, run tests/test_determinism.tscn
 # All tests should pass
+```
+
+### TypeScript Tests
+
+```bash
+npm run test:firewall    # Firewall enforcement tests
+npm run validate:schema  # Schema validation
 ```
 
 ### Manual Testing
@@ -119,22 +167,28 @@ Always run determinism tests before submitting:
 ## Documentation
 
 Update relevant docs:
-- `docs/architecture.md` - System design changes
-- `docs/map_format.md` - Map format changes
-- `docs/agents.md` - Agent behavior changes
-- `docs/replay.md` - Replay system changes
-- `docs/custom-agents.md` - Custom AI agent updates
-- `README.md` - User-facing changes
+- `docs/architecture.md` — System design changes
+- `docs/FIREWALL_POLICY.md` — Data classification changes
+- `docs/map_format.md` — Map format changes
+- `docs/agents.md` — Agent behavior changes
+- `docs/replay.md` — Replay system changes
+- `README.md` — User-facing changes
 
-## Custom AI Agents
+## AI-Assisted Development
 
-RadiantX includes three specialized custom agents for AI-assisted development:
+SATOR includes a comprehensive prompting guide for AI-assisted development.
+See **[.github/SATOR-COPILOT-PROMPTS.md](.github/SATOR-COPILOT-PROMPTS.md)** for:
+- Context-setting prompts for each component
+- Task-specific templates
+- Validation and review prompts
+- Emergency / debugging prompts
 
-- **Agent 006** - Backend Architecture & Infrastructure
-- **Agent 007** - Game Development & GDScript
-- **Agent 47** - Frontend UI/UX & Accessibility
+RadiantX also includes three specialized custom agents:
+- **Agent 006** — Backend Architecture & Infrastructure
+- **Agent 007** — Game Development & GDScript
+- **Agent 47** — Frontend UI/UX & Accessibility
 
-These agents are automatically available during AI agent sessions (like GitHub Copilot coding agent). See [Custom AI Agents](docs/custom-agents.md) for details.
+See [docs/custom-agents.md](docs/custom-agents.md) for details.
 
 ## License
 
@@ -148,4 +202,4 @@ Open a GitHub Issue with the "question" label.
 
 Contributors will be acknowledged in release notes and the README.
 
-Thank you for helping make RadiantX better!
+Thank you for helping make SATOR better!

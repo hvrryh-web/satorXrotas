@@ -1,0 +1,17 @@
+{
+  "name": "@sator/stats-schema",
+  "version": "0.1.0",
+  "description": "Single source of truth for SATOR public statistics types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "validate:schema": "echo 'TODO Phase 2: implement scripts/validate-no-game-fields.js'"
+  },
+  "keywords": ["sator", "esports", "stats", "schema", "types"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
