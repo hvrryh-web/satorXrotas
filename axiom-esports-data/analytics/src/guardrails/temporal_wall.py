@@ -23,7 +23,7 @@ class TemporalWall:
     """
 
     def __init__(self, cutoff_date: str = DEFAULT_CUTOFF) -> None:
-        self.cutoff = pd.Timestamp(cutoff_date)
+        self.cutoff = pd.Timestamp(cutoff_date, tz="UTC")
         logger.info("TemporalWall initialized with cutoff: %s", cutoff_date)
 
     def split(self, df: pd.DataFrame, time_col: str = "realworld_time") -> tuple[pd.DataFrame, pd.DataFrame]:
