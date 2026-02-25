@@ -215,11 +215,19 @@ class ExtractionBridge:
     def transform(self, raw: "RawMatchData") -> "list[KCRITRRecord]":
         """Convert a RawMatchData (from MatchParser) into a list of KCRITRRecords.
 
-        Sets ``separation_flag=0`` (raw), ``data_source='vlr_gg'``, and
-        ``extraction_timestamp`` to the current UTC time.  Checksums are
-        computed per-player row via ``integrity_checker.compute_checksum``.
+        Sets ``separation_flag=0`` (raw) for live records and ``separation_flag=9``
+        for example-corpus records (match_id starting with "EXAMPLE_").
+        Sets ``data_source='vlr_gg'`` and ``extraction_timestamp`` to UTC now.
+        Checksums are computed per-player row via ``integrity_checker.compute_checksum``.
+
+        Example records are NEVER stored in the live DB — callers must pass them
+        to ``ExampleCorpus.security_check()`` and then discard them.
         """
         from extraction.src.storage.integrity_checker import compute_checksum
+        from extraction.src.storage.example_corpus import ExampleCorpus, EXAMPLE_SEPARATION_FLAG
+
+        is_example = ExampleCorpus.is_example(raw.vlr_match_id)
+        sep_flag = EXAMPLE_SEPARATION_FLAG if is_example else 0
 
         records: list[KCRITRRecord] = []
         ts = datetime.now(tz=timezone.utc).isoformat()
@@ -238,7 +246,7 @@ class ExtractionBridge:
                 match_id=raw.vlr_match_id,
                 checksum=checksum,
                 confidence_tier=75.0,
-                separation_flag=0,
+                separation_flag=sep_flag,
             )
             record.extraction_timestamp = ts
             records.append(record)

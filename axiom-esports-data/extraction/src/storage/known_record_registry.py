@@ -153,9 +153,15 @@ class KnownRecordRegistry:
         Primary guard for EpochHarvester.  Returns True when no fetch is needed.
 
         Skip when:
+          - match_id has the EXAMPLE_ prefix (corpus guard — always skip)
           - skip_if_complete  (harvest_protocol.json default: true)
           - skip_if_excluded  (harvest_protocol.json default: true)
         """
+        # Example corpus guard — never scrape or re-process example records
+        from extraction.src.storage.example_corpus import ExampleCorpus
+        if ExampleCorpus.is_example(match_id):
+            logger.debug("SKIP %s — example corpus (separation_flag=9)", match_id)
+            return True
         if _SKIP_POLICY.get("skip_if_complete", True) and self.is_complete(match_id):
             logger.debug("SKIP %s — already complete", match_id)
             return True

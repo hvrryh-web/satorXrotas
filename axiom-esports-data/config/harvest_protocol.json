@@ -48,7 +48,30 @@
     "SCHEMA_CONFLICT": "HTML schema changed; record cannot be reliably parsed until parser is updated",
     "CONTENT_DRIFT":   "Same URL returned materially different HTML on re-check (>5% diff); flagged for review",
     "LOW_CONFIDENCE":  "Confidence tier below epoch floor after validation; excluded from analytics use",
-    "RATE_LIMIT_BAN":  "Source IP/UA banned; match excluded until client rotation resolves it"
+    "RATE_LIMIT_BAN":  "Source IP/UA banned; match excluded until client rotation resolves it",
+    "EXAMPLE_DATA":    "Synthetic example record used as agent security-check baseline. MUST NEVER enter the live analytics pipeline. separation_flag=9. Future agents must reproduce this record to verify pipeline correctness, then discard."
+  },
+
+  "example_corpus": {
+    "_comment": "Rules governing the committed example fixture set. These records exist solely as a reproducible correctness check for pipeline agents.",
+    "separation_flag_value": 9,
+    "prefix": "EXAMPLE_",
+    "fixture_path": "extraction/fixtures/example_match.json",
+    "policy": [
+      "Example records are EXCLUDED from all analytics aggregations (SimRating, RAR, investment grade).",
+      "Example records are EXCLUDED from KnownRecordRegistry live sets (complete/pending).",
+      "Example records ARE included in ExampleCorpus which is checked separately.",
+      "Future agents MUST reproduce the example scrape and compare against the fixture to verify pipeline correctness.",
+      "Reproduced records must match the fixture within ALLOWED_DRIFT tolerances (see below).",
+      "After security check passes, reproduced records must be discarded — do NOT store in live DB.",
+      "If the fixture needs updating, bump fixture_version and record the reason in the fixture file."
+    ],
+    "allowed_drift": {
+      "numeric_fields_tolerance_pct": 5.0,
+      "string_fields": "exact_match_after_normalisation",
+      "uuid_fields": "must_match_exactly"
+    },
+    "fixture_version": "1.0.0"
   },
 
   "conflict_resolution": {
