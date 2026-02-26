@@ -1,0 +1,124 @@
+{
+  "staging_system": {
+    "version": "1.0.0",
+    "description": "SATOR data staging safety and protocol configuration",
+    "last_updated": "2026-02-25"
+  },
+
+  "data_integrity": {
+    "checksum_algorithm": "sha256",
+    "checksum_required": true,
+    "duplicate_detection": true,
+    "duplicate_action": "skip_and_log",
+    "immutable_raw_records": true,
+    "immutable_enforcement": "database_trigger"
+  },
+
+  "firewall": {
+    "enabled": true,
+    "enforcement_level": "strict",
+    "game_only_fields": [
+      "internalAgentState",
+      "radarData",
+      "detailedReplayFrameData",
+      "simulationTick",
+      "seedValue",
+      "visionConeData",
+      "smokeTickData",
+      "recoilPattern"
+    ],
+    "web_export_requires_verification": true,
+    "verification_method": "recursive_field_scan",
+    "violation_action": "block_and_alert",
+    "log_stripped_fields": true
+  },
+
+  "ingest_protocols": {
+    "max_queue_size": 10000,
+    "queue_warning_threshold": 8000,
+    "payload_max_size_bytes": 10485760,
+    "allowed_source_systems": ["game", "analytics", "scraper", "manual"],
+    "allowed_payload_types": ["match_event", "player_stat", "game_definition", "replay_log"],
+    "required_fields_by_type": {
+      "match_event": ["match_id", "event_type", "tick"],
+      "player_stat": ["player_id", "match_id"],
+      "game_definition": ["id", "data_domain"],
+      "replay_log": ["match_id", "events"]
+    },
+    "reject_on_validation_failure": true
+  },
+
+  "export_protocols": {
+    "game": {
+      "target_table": "game_data_store",
+      "requires_firewall": false,
+      "full_payload_access": true,
+      "output_format": "json",
+      "log_all_exports": true,
+      "auto_export_on_ingest": false,
+      "export_on_ping": true
+    },
+    "web": {
+      "target_table": "web_data_store",
+      "requires_firewall": true,
+      "full_payload_access": false,
+      "output_format": "json",
+      "log_all_exports": true,
+      "auto_export_on_ingest": false,
+      "export_on_ping": true,
+      "firewall_fields": [
+        "internalAgentState", "radarData", "detailedReplayFrameData",
+        "simulationTick", "seedValue", "visionConeData",
+        "smokeTickData", "recoilPattern"
+      ]
+    }
+  },
+
+  "data_retention": {
+    "staging_queue_retention_days": 90,
+    "export_log_retention_days": 365,
+    "health_check_retention_days": 30,
+    "static_base_versions_to_keep": 5,
+    "raw_extractions_policy": "immutable_forever"
+  },
+
+  "health_checks": {
+    "enabled": true,
+    "check_interval_minutes": 60,
+    "checks": [
+      {
+        "type": "freshness",
+        "target": "staging_ingest_queue",
+        "warning_threshold_hours": 24,
+        "critical_threshold_hours": 72
+      },
+      {
+        "type": "integrity",
+        "target": "all_stores",
+        "verify_checksums": true,
+        "check_duplicates": true
+      },
+      {
+        "type": "firewall",
+        "target": "web_data_store",
+        "scan_for_violations": true,
+        "alert_on_violation": true
+      },
+      {
+        "type": "capacity",
+        "target": "staging_ingest_queue",
+        "warning_threshold_records": 8000,
+        "critical_threshold_records": 10000
+      }
+    ]
+  },
+
+  "audit": {
+    "log_all_ingests": true,
+    "log_all_exports": true,
+    "log_all_rejections": true,
+    "log_firewall_strips": true,
+    "log_health_checks": true,
+    "retention_policy": "365_days"
+  }
+}
