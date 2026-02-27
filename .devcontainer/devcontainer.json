@@ -1,0 +1,37 @@
+{
+  "name": "SATOR / RadiantX — Kimi Code",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "geequlim.godot-tools",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/bin/python3"
+      }
+    }
+  },
+  "secrets": {
+    "KIMI_API_KEY": {
+      "description": "Moonshot AI API key for the Kimi Code CLI agent. Obtain from https://platform.moonshot.cn/console/api-keys"
+    }
+  },
+  "forwardPorts": [3001, 8000],
+  "portsAttributes": {
+    "3001": { "label": "SATOR API",   "onAutoForward": "notify" },
+    "8000": { "label": "Kimi Web UI", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "echo '✅ Kimi Code ready. Run: kimi --help'",
+  "remoteUser": "vscode"
+}

@@ -44,3 +44,8 @@ dist/
 
 # Build artifacts
 apps/radiantx-game/build/
+
+# Kimi Code CLI — runtime session data and auth tokens (never commit these)
+.kimi/sessions/
+.kimi/.sessions/
+.kimi/auth/
