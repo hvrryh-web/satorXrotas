@@ -5,7 +5,7 @@ Mirrors the AgentBridge pattern from RadiantX: decouples scrape schema from anal
 import logging
 from dataclasses import dataclass
 from typing import Any, Optional
-from uuid import UUID, uuid4
+from uuid import UUID, uuid4, uuid5, NAMESPACE_DNS
 
 logger = logging.getLogger(__name__)
 
@@ -71,6 +71,7 @@ class ExtractionBridge:
 
     VLR_TO_KCRITR_MAP = {
         "player":       "name",
+        "team":         "team",
         "rating":       "role_adjusted_value",
         "acs":          "acs",
         "kills":        "kills",
@@ -101,7 +102,9 @@ class ExtractionBridge:
             logger.warning("Unmapped VLR fields (potential schema drift): %s", unmapped)
 
         return KCRITRRecord(
-            player_id=uuid4(),  # Assigned at bridge; stable across same name+team
+            player_id=self._stable_player_id(
+                vlr_data.get("player", ""), vlr_data.get("team", "")
+            ),
             name=vlr_data.get("player", ""),
             team=vlr_data.get("team"),
             region=vlr_data.get("region"),
@@ -139,6 +142,16 @@ class ExtractionBridge:
             reconstruction_notes=None,
             record_id=None,
         )
+
+    @staticmethod
+    def _stable_player_id(name: str, team: str) -> UUID:
+        """
+        Derive a deterministic UUID (v5) from player name + team.
+        Ensures the same player always receives the same UUID across parse calls.
+        Uses uuid5 (SHA-1 namespace-based) per RFC 4122.
+        """
+        key = f"{name.strip().lower()}:{team.strip().lower()}"
+        return uuid5(NAMESPACE_DNS, key)
 
     @staticmethod
     def _safe_int(value: Any) -> Optional[int]:

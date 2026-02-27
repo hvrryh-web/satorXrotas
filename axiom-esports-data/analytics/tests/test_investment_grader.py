@@ -13,9 +13,10 @@ class TestInvestmentGrader:
 
     # ── 1. Age factor is 1.0 in peak range, 0.85 outside ────────────────────
     def test_age_factor_is_one_when_in_peak(self):
-        """Players within peak_age_range should receive age_factor == 1.0."""
-        for age in range(21, 27):  # 21..26 inclusive
-            result = self.grader.grade(raw_rating=1.0, role="Controller", age=age)
+        """Players within a role's peak age range should receive age_factor == 1.0."""
+        # Initiator peak range is (21, 27) — covers ages 21..26 inclusive
+        for age in range(21, 27):
+            result = self.grader.grade(raw_rating=1.0, role="Initiator", age=age)
             assert result["age_factor"] == 1.0, (
                 f"Expected age_factor=1.0 for age={age}, got {result['age_factor']}"
             )
@@ -34,19 +35,19 @@ class TestInvestmentGrader:
         assert 0.8 <= result["age_factor"] <= 0.9
 
     def test_age_factor_at_exact_boundaries(self):
-        """Boundary ages 21 and 26 are in-peak."""
-        for boundary_age in (21, 26):
+        """Boundary ages for Entry (peak 20-24) are in-peak."""
+        for boundary_age in (20, 24):  # Entry peak range is (20, 24)
             result = self.grader.grade(raw_rating=1.0, role="Entry", age=boundary_age)
             assert result["age_factor"] == 1.0, (
-                f"Boundary age {boundary_age} should be in-peak"
+                f"Boundary age {boundary_age} should be in-peak for Entry"
             )
 
     def test_age_factor_just_outside_boundaries(self):
-        """Ages 20 and 27 are outside the default peak range."""
-        for outside_age in (20, 27):
+        """Ages just outside Entry peak range (20-24): 19 and 25 are not in-peak."""
+        for outside_age in (19, 25):  # Entry peak is (20, 24)
             result = self.grader.grade(raw_rating=1.0, role="Entry", age=outside_age)
             assert result["age_factor"] < 1.0, (
-                f"Age {outside_age} should be outside-peak"
+                f"Age {outside_age} should be outside-peak for Entry"
             )
 
     # ── 2. Investment grade is always a valid letter ─────────────────────────
@@ -91,7 +92,8 @@ class TestInvestmentGrader:
             assert result["in_peak_age"] is True, f"age={age} should be in-peak"
 
     def test_in_peak_age_false_outside_peak(self):
-        for age in [18, 19, 20, 27, 28, 35]:
+        # Initiator peak range is (21, 27); ages outside it:
+        for age in [18, 19, 20, 28, 35]:
             result = self.grader.grade(raw_rating=1.0, role="Initiator", age=age)
             assert result["in_peak_age"] is False, f"age={age} should not be in-peak"
 
@@ -126,6 +128,9 @@ class TestInvestmentGrader:
 
     # ── 6. Result dict completeness ──────────────────────────────────────────
     def test_result_contains_all_required_keys(self):
-        required = {"rar_score", "age_factor", "adjusted_rar", "investment_grade", "in_peak_age"}
+        required = {
+            "rar_score", "age_factor", "adjusted_rar", "investment_grade",
+            "in_peak_age", "career_stage", "peak_proximity", "decay_factor",
+        }
         result = self.grader.grade(raw_rating=1.0, role="Controller", age=23)
         assert required.issubset(result.keys())

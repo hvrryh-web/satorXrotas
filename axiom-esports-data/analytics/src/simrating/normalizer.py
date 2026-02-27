@@ -40,7 +40,7 @@ class SeasonCohortNormalizer:
             z_col = f"{col}_z"
             if group_keys:
                 result[z_col] = result.groupby(group_keys)[col].transform(
-                    lambda x: (x - x.mean()) / (x.std() + 1e-8)
+                    lambda x: (x - x.mean()) / (x.std(ddof=0) + 1e-8)
                 )
             else:
                 mu, sigma = df[col].mean(), df[col].std()
