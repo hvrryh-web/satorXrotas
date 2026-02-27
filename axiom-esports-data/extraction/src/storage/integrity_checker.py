@@ -8,6 +8,16 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 
+def compute_checksum(data: bytes) -> str:
+    """Compute SHA-256 hex digest of raw bytes."""
+    return hashlib.sha256(data).hexdigest()
+
+
+def verify_checksum(data: bytes, expected: str) -> bool:
+    """Return True iff SHA-256 of data matches expected hex digest."""
+    return compute_checksum(data) == expected
+
+
 class IntegrityChecker:
     """
     Verifies SHA-256 checksums of all stored raw extractions.

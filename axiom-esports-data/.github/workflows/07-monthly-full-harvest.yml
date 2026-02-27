@@ -1,0 +1,93 @@
+name: 07 - Monthly Full Harvest
+
+# Runs on the 1st of every month at 03:00 UTC (low-traffic window).
+# Performs a complete re-scrape of all three epochs and a full validation suite.
+on:
+  schedule:
+    - cron: '0 3 1 * *'   # 03:00 UTC on the 1st of every month
+  workflow_dispatch:
+    inputs:
+      epochs:
+        description: 'Space-separated epoch numbers to harvest (default: 1 2 3)'
+        required: false
+        default: '1 2 3'
+      sample_size:
+        description: 'Liquipedia cross-reference sample size'
+        required: false
+        default: '200'
+
+jobs:
+  monthly-full-harvest:
+    name: Monthly Full Harvest
+    runs-on: ubuntu-latest
+    timeout-minutes: 360    # Full re-scrape can take up to 6 hours
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r extraction/requirements.txt
+
+      - name: Full harvest — Epoch I (historic 2020-12-03 → 2022-12-31)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VLR_RATE_LIMIT: ${{ secrets.VLR_RATE_LIMIT || '2.0' }}
+        run: python extraction/src/scrapers/epoch_harvester.py --mode=full --epochs 1
+
+      - name: Full harvest — Epoch II (mature 2023-01-01 → 2025-12-31)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VLR_RATE_LIMIT: ${{ secrets.VLR_RATE_LIMIT || '2.0' }}
+        run: python extraction/src/scrapers/epoch_harvester.py --mode=full --epochs 2
+
+      - name: Full harvest — Epoch III (current 2026-01-01 → today)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          VLR_RATE_LIMIT: ${{ secrets.VLR_RATE_LIMIT || '2.0' }}
+        run: python extraction/src/scrapers/epoch_harvester.py --mode=full --epochs 3
+
+      - name: Post-harvest SHA-256 integrity check
+        run: python extraction/src/storage/integrity_checker.py --verify-all
+
+      - name: Liquipedia cross-reference validation
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          SAMPLE=${{ github.event.inputs.sample_size || '200' }}
+          python scripts/validate_vs_liquipedia.py --sample="$SAMPLE"
+
+      - name: Overfitting + temporal wall guardrails
+        run: python scripts/overfitting_scan.py --dataset=training_set
+
+      - name: Duplicate detection
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scripts/duplicate_detector.py --threshold=0.99 --fail-on-dupes
+
+      - name: Run monthly full harvest orchestrator
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAW_STORAGE_PATH: ${{ secrets.RAW_STORAGE_PATH || 'data/raw_extractions' }}
+        run: |
+          python scripts/monthly_full_harvest.py \
+            --epochs ${{ github.event.inputs.epochs || '1 2 3' }} \
+            --sample ${{ github.event.inputs.sample_size || '200' }} \
+            --dry-run
+
+      - name: Full test suite (regression guard)
+        run: |
+          pytest extraction/tests/ analytics/tests/ -v --tb=short
+
+      - name: Export monthly anonymised CSV
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          MONTH_TAG="monthly-$(date -u +'%Y-%m')"
+          echo "Exporting snapshot: $MONTH_TAG"
+          python scripts/export_csv.py --tag="$MONTH_TAG" --anonymize

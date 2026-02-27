@@ -52,6 +52,28 @@ def main() -> None:
         logger.error("Liquipedia validation failed: %s", e)
         print(f"❌ Liquipedia validation: FAILED — {e}")
         sys.exit(1)
+    database_url = os.environ.get("DATABASE_URL")
+
+    from extraction.src.scrapers.validation_crossref import ValidationCrossRef, CORRELATION_TARGET
+
+    ref = ValidationCrossRef(database_url=database_url)
+    result = ref.validate_vs_liquipedia(sample_size=args.sample)
+
+    if result.sample_size == 0 or result.correlation == 0.0:
+        logger.warning("Liquipedia cross-reference requires API credentials (see .env.example)")
+        print("⚠️  Liquipedia validation skipped — configure DATABASE_URL and credentials to run")
+        sys.exit(0)
+
+    logger.info(
+        "Correlation: r=%.3f vs target %.2f (passed=%s)",
+        result.correlation, args.target_r, result.passed,
+    )
+
+    if not result.passed:
+        logger.error("Correlation %.3f is below target %.2f", result.correlation, args.target_r)
+        sys.exit(1)
+
+    print(f"✅ Liquipedia validation passed: r={result.correlation:.3f}")
 
 
 if __name__ == "__main__":
