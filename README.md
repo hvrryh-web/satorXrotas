@@ -1,73 +1,33 @@
-# SATOR eXe / RadiantX Platform
+# RadiantX — Esports Analytics Platform
 
-A game-agnostic esports analytics platform with a tactical intelligence interface.
+A unified platform for esports analytics, news, and simulation.
 
-## Overview
+## Repository Structure
 
-**SATOR eXe** is the parent platform providing:
-- Landing page with animated SATOR sphere
-- eXе Launch Pad — constellation-style service hub
-- Game profile system for multiple esports titles
-
-**RadiantX** is the Valorant-specific implementation featuring:
-- Quaternary grid layout (2×2 dashboard)
-- Real-time match analytics
-- Player performance tracking
+```
+/
+├── website/          # Static site (deployable) — News, Stats, Analytics, Tournaments
+├── simulation-game/  # Godot/C# simulation game (future) — Connected to website data
+├── shared/           # Data pipelines, APIs, schemas used by both
+└── README.md         # This file
+```
 
 ## Quick Start
 
+### Website
 ```bash
-cd radiantx-static
-# Open landing.html in browser
-# Or serve with:
-npx vite preview
+cd website
+npm install
+npm run dev
 ```
 
-## File Structure
-
-```
-radiantx-static/
-├── landing.html              # Entry point
-├── launchpad.html            # Service hub
-├── index.html                # Main dashboard
-├── system/
-│   ├── core.css             # Design tokens
-│   └── js/hub.js            # Navigation
-├── profiles/
-│   └── radiantx/
-│       ├── index.html       # Valorant dashboard
-│       └── theme.css        # Game overrides
-└── PRESENTATION.md          # 25-slide spec
-```
+### Simulation Game
+Open `simulation-game/project.godot` in Godot 4.x
 
 ## Architecture
 
-```
-SATOR eXe (Parent)
-├── Landing → Launch Pad → Game Profile
-│
-└── Game Profiles
-    ├── RadiantX (Valorant) ✅
-    ├── CounterX (CS) 🚧
-    └── ApexX (Apex) 🚧
-```
+- **Website**: Static HTML/CSS/JS with Tailwind, deployable anywhere
+- **Simulation**: Godot engine with C# core for tactical FPS simulation
+- **Shared**: Python data extraction pipeline (axiom-esports-data)
 
-## Design System
-
-**Colors:**
-- Deep Navy: #0a1628 (background)
-- Electric Cyan: #00f0ff (accents)
-- Porcelain White: #f8f9fa (text)
-- Valorant Red: #ff4655 (game accent)
-
-**Typography:**
-- Inter: UI and headers
-- JetBrains Mono: Data and stats
-
-## Deployment
-
-GitHub Pages ready. Push to `main` branch.
-
-## License
-
-MIT
+The simulation game will consume data from the shared pipeline, creating a bridge between real esports stats and simulated gameplay.

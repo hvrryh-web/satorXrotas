@@ -1,0 +1,14 @@
+player_id_anon,name_anon,assigned_role,assignment_source,assignment_date,confidence
+P001,Player_Alpha,Entry,Manual Review,2024-01-15,HIGH
+P002,Player_Beta,IGL,Manual Review,2024-01-15,HIGH
+P003,Player_Gamma,Controller,Manual Review,2024-01-15,HIGH
+P004,Player_Delta,Initiator,Manual Review,2024-01-15,HIGH
+P005,Player_Epsilon,Sentinel,Manual Review,2024-01-15,HIGH
+P006,Player_Zeta,Entry,Manual Review,2024-01-15,HIGH
+P007,Player_Eta,Controller,Manual Review,2024-01-15,MEDIUM
+P008,Player_Theta,Initiator,Manual Review,2024-01-15,HIGH
+P009,Player_Iota,Sentinel,Manual Review,2024-01-15,MEDIUM
+P010,Player_Kappa,IGL,Manual Review,2024-01-15,HIGH
+# Note: This file contains anonymized ground truth for holdout validation.
+# Used by analytics/src/guardrails/overfitting_guard.py
+# Never use this file for training data — holdout only.

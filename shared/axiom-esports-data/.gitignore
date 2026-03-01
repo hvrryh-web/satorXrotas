@@ -1,0 +1,60 @@
+# Data files — never commit large data files
+data/
+*.parquet
+*.pkl
+*.joblib
+
+# Credentials
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Node / TypeScript
+node_modules/
+.next/
+dist/
+build/
+*.js.map
+*.d.ts.map
+
+# PostgreSQL
+*.dump
+*.sql.gz
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Model artifacts (never commit trained models)
+models/
+*.h5
+*.bin
+*.onnx
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,48 @@
+# Tier Definitions — Tournament and player tier classifications by epoch
+# Used by epoch_harvester.py for confidence scoring
+
+epochs:
+  epoch_1:
+    label: "2020_2022"
+    date_range: ["2020-12-03", "2022-12-31"]
+    confidence_floor: 50.0
+    notes: >
+      Early Valorant esports era. Limited data coverage, many Tier 2/3 events
+      have incomplete scorecards. Lower confidence floor applied.
+
+  epoch_2:
+    label: "2023_2025"
+    date_range: ["2023-01-01", "2025-12-31"]
+    confidence_floor: 75.0
+    notes: >
+      Mature competitive ecosystem. VCT international league format established.
+      High VLR.gg coverage. Primary training period.
+
+  epoch_3:
+    label: "2026_current"
+    date_range: ["2026-01-01", "9999-12-31"]
+    confidence_floor: 100.0
+    notes: >
+      Current season. Incremental delta extraction. Full confidence for live data.
+
+tournament_tiers:
+  S:
+    label: "Masters / Champions"
+    weight: 1.0
+    examples: ["VCT Masters", "VCT Champions", "VCT Lock//In"]
+  A:
+    label: "International League"
+    weight: 0.9
+    examples: ["VCT Americas", "VCT Pacific", "VCT EMEA"]
+  B:
+    label: "Challengers"
+    weight: 0.75
+    examples: ["VCT Challengers Americas", "Game Changers"]
+  C:
+    label: "Regional / Open"
+    weight: 0.5
+    examples: ["NSG Circuit", "Challengers NA", "Third-party open cups"]
+  D:
+    label: "Showmatch / Scrimmage"
+    weight: 0.25
+    notes: "Low competitive integrity — use with caution in training"
