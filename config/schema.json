@@ -1,0 +1,83 @@
+{
+  "_comment": "KCRITR 37-Field Schema — Simplified for static site",
+  "version": "1.0.0",
+  "primary_key": ["player_id", "match_id", "map_name"],
+  
+  "fields": {
+    "identity": {
+      "player_id": { "type": "string", "required": true, "description": "Unique player identifier" },
+      "name": { "type": "string", "required": true, "description": "Player display name" },
+      "team": { "type": "string", "required": true, "description": "Current team" },
+      "region": { "type": "string", "enum": ["NA", "EMEA", "LATAM", "BR", "APAC", "KR", "JP", "CN"], "required": true },
+      "role": { "type": "string", "enum": ["Duelist", "Initiator", "Controller", "Sentinel", "IGL", "Flex"], "required": true }
+    },
+    
+    "raw_performance": {
+      "acs": { "type": "number", "min": 0, "max": 600, "description": "Average Combat Score" },
+      "kills": { "type": "integer", "min": 0, "description": "Total kills" },
+      "deaths": { "type": "integer", "min": 0, "description": "Total deaths" },
+      "assists": { "type": "integer", "min": 0, "description": "Total assists" },
+      "adr": { "type": "number", "min": 0, "max": 300, "description": "Average Damage per Round" },
+      "kast_pct": { "type": "number", "min": 0, "max": 100, "description": "Kill/Assist/Survive/Trade percentage" }
+    },
+    
+    "extended_performance": {
+      "hs_pct": { "type": "number", "min": 0, "max": 100, "description": "Headshot percentage" },
+      "first_bloods": { "type": "integer", "min": 0, "description": "First kills of round" },
+      "first_deaths": { "type": "integer", "min": 0, "description": "First deaths of round" },
+      "clutch_wins": { "type": "integer", "min": 0, "description": "1vX situations won" },
+      "clutch_attempts": { "type": "integer", "min": 0, "description": "1vX situations faced" },
+      "agent": { "type": "string", "description": "Most played agent" },
+      "economy_rating": { "type": "number", "description": "Economic efficiency" }
+    },
+    
+    "derived_metrics": {
+      "kd_ratio": { "type": "number", "formula": "kills / deaths", "description": "Kill/Death ratio" },
+      "kda": { "type": "number", "formula": "(kills + assists) / deaths", "description": "KDA ratio" },
+      "rating": { "type": "number", "min": 0, "max": 3, "description": "Overall performance rating" },
+      "impact": { "type": "number", "description": "Round impact score" }
+    },
+    
+    "rar_metrics": {
+      "role_adjusted_value": { "type": "number", "description": "Value adjusted for role" },
+      "replacement_level": { "type": "number", "description": "Baseline for role/region" },
+      "rar_score": { "type": "number", "description": "Replacement-adjusted rating" },
+      "investment_grade": { "type": "string", "enum": ["A+", "A", "B+", "B", "C", "D"], "description": "Scouting grade" }
+    },
+    
+    "temporal": {
+      "matches_played": { "type": "integer", "min": 0, "description": "Sample size" },
+      "career_stage": { "type": "string", "enum": ["Rookie", "Developing", "Prime", "Veteran", "Declining"], "description": "Career phase" },
+      "form_rating": { "type": "number", "description": "Recent performance trend" }
+    },
+    
+    "match_context": {
+      "match_id": { "type": "string", "required": true, "description": "Unique match identifier" },
+      "map_name": { "type": "string", "required": true, "description": "Map played" },
+      "tournament": { "type": "string", "description": "Tournament name" },
+      "patch_version": { "type": "string", "description": "Game patch" },
+      "opponent": { "type": "string", "description": "Opposing team" },
+      "result": { "type": "string", "enum": ["Win", "Loss", "Draw"], "description": "Match result" }
+    },
+    
+    "provenance": {
+      "data_source": { "type": "string", "enum": ["vlr_gg", "hltv", "riot_api", "liquipedia", "manual"], "description": "Origin" },
+      "extraction_timestamp": { "type": "string", "format": "iso-date-time", "description": "When scraped" },
+      "checksum_sha256": { "type": "string", "description": "Data integrity hash" },
+      "confidence_tier": { "type": "number", "min": 0, "max": 100, "description": "Data reliability" }
+    }
+  },
+  
+  "indexes": [
+    { "fields": ["player_id", "match_id"], "unique": true },
+    { "fields": ["team"], "sparse": false },
+    { "fields": ["acs"], "sparse": false },
+    { "fields": ["rating"], "sparse": false }
+  ],
+  
+  "validation_rules": {
+    "acs_range": { "field": "acs", "min": 50, "max": 500, "action": "warn" },
+    "kd_sanity": { "field": "kd_ratio", "min": 0.1, "max": 5.0, "action": "flag" },
+    "completeness": { "required_fields": ["player_id", "name", "acs", "kills", "deaths"], "action": "reject" }
+  }
+}

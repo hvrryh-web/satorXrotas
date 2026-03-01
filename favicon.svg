@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="satorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f0ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0080ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background square with rounded corners -->
+  <rect x="5" y="5" width="90" height="90" rx="18" ry="18" fill="#0a1628" stroke="url(#satorGradient)" stroke-width="2"/>
+  
+  <!-- Inner glow effect -->
+  <rect x="12" y="12" width="76" height="76" rx="14" ry="14" fill="none" stroke="url(#satorGradient)" stroke-width="0.5" opacity="0.3"/>
+  
+  <!-- S letter -->
+  <text x="50" y="65" 
+        font-family="'JetBrains Mono', 'Consolas', monospace" 
+        font-size="48" 
+        font-weight="700" 
+        fill="url(#satorGradient)" 
+        text-anchor="middle"
+        filter="url(#glow)">S</text>
+  
+  <!-- Small accent dots representing the sphere facets -->
+  <circle cx="25" cy="25" r="3" fill="#FFD700" opacity="0.8"/>
+  <circle cx="75" cy="25" r="3" fill="#FF4655" opacity="0.8"/>
+  <circle cx="25" cy="75" r="3" fill="#00D4FF" opacity="0.8"/>
+  <circle cx="75" cy="75" r="3" fill="#FFFFFF" opacity="0.6"/>
+</svg>

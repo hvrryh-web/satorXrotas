@@ -1,0 +1,167 @@
+{
+  "_comment": "Competitor feature tracking and gap analysis",
+  "last_updated": "2026-02-26",
+  
+  "competitors": {
+    "vlr-gg": {
+      "name": "VLR.gg",
+      "url": "https://vlr.gg",
+      "strengths": [
+        "Comprehensive match database",
+        "Real-time scores",
+        "Tournament brackets",
+        "Player/team pages",
+        "News aggregation",
+        "Established community"
+      ],
+      "weaknesses": [
+        "Cluttered mobile UI",
+        "Limited visualizations",
+        "No custom analytics",
+        "Slow page loads",
+        "Ad-heavy"
+      ],
+      "features_to_emulate": [
+        "Match database completeness",
+        "Player career timelines",
+        "Tournament coverage"
+      ],
+      "gaps_to_exploit": [
+        "Mobile-first design",
+        "Interactive charts",
+        "SATOR Square visualization",
+        "SimRating/RAR metrics",
+        "Investment grading"
+      ],
+      "data_sources": ["Manual entry", "Community submissions"],
+      "update_frequency": "Real-time"
+    },
+    
+    "thespike": {
+      "name": "thespike.gg",
+      "url": "https://thespike.gg",
+      "strengths": [
+        "Clean, minimal UI",
+        "Fast loading",
+        "Good mobile experience",
+        "Simple navigation"
+      ],
+      "weaknesses": [
+        "Limited stats depth",
+        "No advanced analytics",
+        "Smaller database",
+        "Basic visualizations"
+      ],
+      "features_to_emulate": [
+        "Clean aesthetic",
+        "Fast performance",
+        "Mobile optimization"
+      ],
+      "gaps_to_exploit": [
+        "Statistical depth",
+        "Custom metrics",
+        "Visualization richness"
+      ],
+      "data_sources": ["API feeds", "Manual curation"],
+      "update_frequency": "Hourly"
+    },
+    
+    "rib-gg": {
+      "name": "rib.gg",
+      "url": "https://rib.gg",
+      "strengths": [
+        "Advanced statistics",
+        "Round-by-round data",
+        "Economy analysis",
+        "Heat maps",
+        "Professional focus"
+      ],
+      "weaknesses": [
+        "Complex UI",
+        "Not mobile-friendly",
+        "Expensive ($$$)",
+        "Steep learning curve",
+        "Limited free tier"
+      ],
+      "features_to_emulate": [
+        "Advanced metrics",
+        "Round-level detail",
+        "Economy tracking"
+      ],
+      "gaps_to_exploit": [
+        "Accessibility",
+        "Mobile experience",
+        "Free tier generosity",
+        "Simpler UI"
+      ],
+      "data_sources": ["Official partnerships", "Pro league data"],
+      "update_frequency": "Real-time"
+    },
+    
+    "tracker-gg": {
+      "name": "tracker.gg",
+      "url": "https://tracker.gg/valorant",
+      "strengths": [
+        "Cross-game platform",
+        "Large user base",
+        "Profile tracking",
+        "Leaderboards"
+      ],
+      "weaknesses": [
+        "Generic (not Valorant-specific)",
+        "Limited pro coverage",
+        "Basic stats only",
+        "No tactical analysis"
+      ],
+      "features_to_emulate": [
+        "User profiles",
+        "Leaderboards",
+        "Progress tracking"
+      ],
+      "gaps_to_exploit": [
+        "Pro esports focus",
+        "Tactical depth",
+        "Valorant-specific features"
+      ],
+      "data_sources": ["Riot API", "User profiles"],
+      "update_frequency": "15 minutes"
+    }
+  },
+  
+  "our_differentiation": {
+    "core_value_props": [
+      "Mobile-first esports analytics",
+      "SATOR Square 5-layer visualization",
+      "SimRating + RAR custom metrics",
+      "Investment grading for scouting",
+      "Open data + transparency"
+    ],
+    "technical_advantages": [
+      "Static site = fast, free hosting",
+      "Deterministic game simulation",
+      "Axiom pipeline = automated updates",
+      "Firewall = data integrity"
+    ],
+    "content_strategy": [
+      "Focus on pro tier (VCT)",
+      "Deep analytics over broad coverage",
+      "Visualization-first presentation",
+      "Scouting/investment angle"
+    ]
+  },
+  
+  "monitoring": {
+    "check_frequency": "weekly",
+    "metrics_to_track": [
+      "New features launched",
+      "UI changes",
+      "Pricing changes",
+      "Data coverage expansion"
+    ],
+    "alert_conditions": [
+      "Competitor launches similar visualization",
+      "Price drops on paid tiers",
+      "Mobile UI improvements"
+    ]
+  }
+}

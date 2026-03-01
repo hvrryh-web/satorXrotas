@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-radiant-dark text-white min-h-screen;
+}
+
+.stat-card {
+  @apply bg-radiant-card rounded-lg p-4 border border-radiant-border;
+}
+
+.player-avatar {
+  @apply w-12 h-12 rounded-full bg-gradient-to-br from-radiant-red to-orange-500 flex items-center justify-center font-bold text-lg;
+}
+
+.match-row {
+  @apply flex items-center justify-between py-3 px-4 border-b border-radiant-border hover:bg-white/5 transition-colors;
+}

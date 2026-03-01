@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATOR Sphere - Three.js Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0f;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ui-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8a8a9a;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            pointer-events: auto;
+        }
+
+        .btn {
+            background: rgba(20, 20, 31, 0.8);
+            border: 1px solid #2a2a3a;
+            color: #ffffff;
+            padding: 12px 24px;
+            font-family: inherit;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 70, 85, 0.2);
+            border-color: #FF4655;
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            background: rgba(20, 20, 31, 0.9);
+            border: 1px solid #2a2a3a;
+            padding: 24px;
+            border-radius: 8px;
+            width: 220px;
+            pointer-events: auto;
+        }
+
+        .info-letter {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .info-word {
+            font-size: 12px;
+            color: #8a8a9a;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .info-meaning {
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(20, 20, 31, 0.9);
+            border: 1px solid #2a2a3a;
+            padding: 16px;
+            border-radius: 8px;
+            pointer-events: auto;
+        }
+
+        .legend-title {
+            font-size: 10px;
+            color: #8a8a9a;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            color: #ffffff;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #8a8a9a;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .info-panel {
+                right: 10px;
+                width: 160px;
+                padding: 16px;
+            }
+            .info-letter {
+                font-size: 32px;
+            }
+            .legend {
+                left: 10px;
+                bottom: 100px;
+            }
+            .controls {
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="loading" id="loading">Initializing SATOR Sphere...</div>
+    
+    <div class="ui-overlay">
+        <div class="title">SATOR Sphere — Three.js Prototype</div>
+        
+        <div class="info-panel" id="info-panel">
+            <div class="info-letter" id="info-letter" style="color: #FFD700;">S</div>
+            <div class="info-word" id="info-word">SATOR</div>
+            <div class="info-meaning" id="info-meaning">
+                The Sower. The Creator. The genesis point from which all patterns emerge.
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-title">Layer Colors</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FFD700;"></div>
+                <span>S - Sower (Genesis)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #1E3A5F;"></div>
+                <span>A - Arepo (Hidden)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FFFFFF;"></div>
+                <span>T - Tenet (Axis)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #00D4FF;"></div>
+                <span>O - Opera (Works)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF4655;"></div>
+                <span>R - Rotas (Cycle)</span>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="toggleRotation()">Pause/Play</button>
+            <button class="btn" onclick="flipSphere()">Flip SATOR/ROTAS</button>
+            <button class="btn" onclick="resetView()">Reset</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // SATOR Sphere Configuration
+        const CONFIG = {
+            radius: 100,
+            facetSize: 12,
+            colors: {
+                S: 0xFFD700,  // Gold - Sower
+                A: 0x1E3A5F,  // Deep Blue - Arepo
+                T: 0xFFFFFF,  // White - Tenet
+                O: 0x00D4FF,  // Cyan - Opera
+                R: 0xFF4655,  // Red - Rotas
+                background: 0x0a0a0f
+            },
+            meanings: {
+                S: { word: 'SATOR', meaning: 'The Sower. The Creator. The genesis point from which all patterns emerge.' },
+                A: { word: 'AREPO', meaning: 'The Hidden. The mysterious force that operates beneath the surface.' },
+                T: { word: 'TENET', meaning: 'The Axis. The center that holds all layers in connection.' },
+                O: { word: 'OPERA', meaning: 'The Works. The manifestation of action and creation.' },
+                R: { word: 'ROTAS', meaning: 'The Wheel. The cycle of completion and return.' },
+                N: { word: 'TENET', meaning: 'The Center. The heart of the palindrome where all paths cross.' },
+                P: { word: 'OPERA', meaning: 'The Works. Movement and transformation.' },
+                E: { word: 'TENET', meaning: 'The Connection. The bonds that link all elements.' }
+            }
+        };
+
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(CONFIG.colors.background);
+        scene.fog = new THREE.Fog(CONFIG.colors.background, 200, 500);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 300;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(100, 100, 100);
+        scene.add(directionalLight);
+
+        const pointLight = new THREE.PointLight(0xFFD700, 0.5, 300);
+        pointLight.position.set(0, 150, 50);
+        scene.add(pointLight);
+
+        // SATOR Sphere Group
+        const sphereGroup = new THREE.Group();
+        scene.add(sphereGroup);
+
+        // Facet geometry cache
+        const facetGeometry = new THREE.BufferGeometry();
+        const facetSize = CONFIG.facetSize;
+        const vertices = new Float32Array([
+            0, facetSize/2, 0,
+            -facetSize/2, -facetSize/2, 0,
+            facetSize/2, -facetSize/2, 0
+        ]);
+        facetGeometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+        facetGeometry.computeVertexNormals();
+
+        // Create SATOR pattern on sphere
+        const facets = [];
+        const satorPattern = [
+            ['S'],
+            ['A', 'A'],
+            ['T', 'R', 'T'],
+            ['O', 'E', 'E', 'O'],
+            ['R', 'P', 'N', 'P', 'R'],
+            ['R', 'O', 'T', 'A', 'S'],
+            ['O', 'P', 'E', 'R', 'A'],
+            ['T', 'E', 'N', 'E', 'T'],
+            ['A', 'R', 'E', 'P', 'O'],
+            ['S']
+        ];
+
+        // Create facets
+        function createFacet(letter, lat, lon, isTop) {
+            const color = CONFIG.colors[letter] || CONFIG.colors.S;
+            const material = new THREE.MeshPhongMaterial({
+                color: color,
+                shininess: 100,
+                specular: 0x444444,
+                side: THREE.DoubleSide
+            });
+
+            const mesh = new THREE.Mesh(facetGeometry, material);
+            
+            // Position on sphere
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lon + 180) * (Math.PI / 180);
+            
+            const r = CONFIG.radius;
+            mesh.position.x = -(r * Math.sin(phi) * Math.cos(theta));
+            mesh.position.y = r * Math.cos(phi);
+            mesh.position.z = r * Math.sin(phi) * Math.sin(theta);
+            
+            // Orient to face outward
+            mesh.lookAt(0, 0, 0);
+            mesh.rotateZ(Math.PI);
+            
+            // Add letter label
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = letter === 'A' || letter === 'E' || letter === 'N' ? '#0a0a0f' : '#ffffff';
+            ctx.font = 'bold 32px monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(letter, 32, 32);
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            const labelMaterial = new THREE.SpriteMaterial({ map: texture });
+            const label = new THREE.Sprite(labelMaterial);
+            label.scale.set(8, 8, 1);
+            label.position.z = 2;
+            mesh.add(label);
+            
+            // Store metadata
+            mesh.userData = { letter, lat, lon, isTop };
+            facets.push(mesh);
+            sphereGroup.add(mesh);
+            
+            return mesh;
+        }
+
+        // Generate SATOR sphere pattern
+        function generateSATORSphere() {
+            const latStep = 18; // 180 / 10 rows
+            
+            // Top hemisphere (SATOR)
+            for (let row = 0; row < 5; row++) {
+                const lat = 90 - (row * latStep) - (latStep / 2);
+                const rowLetters = satorPattern[row];
+                const lonStep = 360 / rowLetters.length;
+                
+                rowLetters.forEach((letter, i) => {
+                    const lon = (i * lonStep) - (lonStep * (rowLetters.length - 1) / 2);
+                    createFacet(letter, lat, lon, true);
+                });
+            }
+            
+            // Bottom hemisphere (ROTAS)
+            for (let row = 5; row < 10; row++) {
+                const lat = 90 - (row * latStep) - (latStep / 2);
+                const rowLetters = satorPattern[row];
+                const lonStep = 360 / rowLetters.length;
+                
+                rowLetters.forEach((letter, i) => {
+                    const lon = (i * lonStep) - (lonStep * (rowLetters.length - 1) / 2);
+                    createFacet(letter, lat, lon, false);
+                });
+            }
+        }
+
+        generateSATORSphere();
+
+        // Flow lines (particle system)
+        const flowParticles = [];
+        const flowGeometry = new THREE.BufferGeometry();
+        const flowCount = 50;
+        const flowPositions = new Float32Array(flowCount * 3);
+        
+        for (let i = 0; i < flowCount; i++) {
+            const angle = (i / flowCount) * Math.PI * 2;
+            flowPositions[i * 3] = Math.cos(angle) * 120;
+            flowPositions[i * 3 + 1] = Math.sin(angle * 2) * 50;
+            flowPositions[i * 3 + 2] = Math.sin(angle) * 120;
+        }
+        
+        flowGeometry.setAttribute('position', new THREE.BufferAttribute(flowPositions, 3));
+        
+        const flowMaterial = new THREE.PointsMaterial({
+            color: 0xFFD700,
+            size: 3,
+            transparent: true,
+            opacity: 0.6
+        });
+        
+        const flowSystem = new THREE.Points(flowGeometry, flowMaterial);
+        sphereGroup.add(flowSystem);
+
+        // Glow sphere at center
+        const glowGeometry = new THREE.SphereGeometry(30, 32, 32);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+            color: 0xFFD700,
+            transparent: true,
+            opacity: 0.1
+        });
+        const glowSphere = new THREE.Mesh(glowGeometry, glowMaterial);
+        sphereGroup.add(glowSphere);
+
+        // Animation state
+        let isRotating = true;
+        let rotationSpeed = 0.005;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+
+        // Mouse interaction
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        let hoveredFacet = null;
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            
+            // Parallax effect
+            targetRotationY = mouse.x * 0.3;
+            targetRotationX = mouse.y * 0.3;
+        }
+
+        function onClick(event) {
+            if (hoveredFacet) {
+                updateInfoPanel(hoveredFacet.userData.letter);
+                
+                // Highlight effect
+                facets.forEach(f => f.material.emissive.setHex(0x000000));
+                hoveredFacet.material.emissive.setHex(0x444444);
+            }
+        }
+
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('click', onClick);
+
+        // Update info panel
+        function updateInfoPanel(letter) {
+            const info = CONFIG.meanings[letter] || CONFIG.meanings.S;
+            const color = CONFIG.colors[letter] || CONFIG.colors.S;
+            
+            document.getElementById('info-letter').textContent = letter;
+            document.getElementById('info-letter').style.color = '#' + color.toString(16).padStart(6, '0');
+            document.getElementById('info-word').textContent = info.word;
+            document.getElementById('info-meaning').textContent = info.meaning;
+        }
+
+        // Control functions
+        window.toggleRotation = function() {
+            isRotating = !isRotating;
+        };
+
+        window.flipSphere = function() {
+            sphereGroup.rotation.x += Math.PI;
+        };
+
+        window.resetView = function() {
+            sphereGroup.rotation.set(0, 0, 0);
+            camera.position.z = 300;
+            facets.forEach(f => f.material.emissive.setHex(0x000000));
+        };
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Auto rotation
+            if (isRotating) {
+                sphereGroup.rotation.y += rotationSpeed;
+            }
+            
+            // Smooth parallax
+            sphereGroup.rotation.x += (targetRotationX - sphereGroup.rotation.x) * 0.05;
+            sphereGroup.rotation.y += (targetRotationY - sphereGroup.rotation.y) * 0.05;
+            
+            // Flow animation
+            const positions = flowSystem.geometry.attributes.position.array;
+            for (let i = 0; i < flowCount; i++) {
+                const idx = i * 3;
+                positions[idx + 1] += Math.sin(Date.now() * 0.001 + i) * 0.5;
+            }
+            flowSystem.geometry.attributes.position.needsUpdate = true;
+            flowSystem.rotation.y -= 0.01;
+            
+            // Pulse glow
+            glowSphere.material.opacity = 0.1 + Math.sin(Date.now() * 0.002) * 0.05;
+            
+            // Raycasting for hover
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(facets);
+            
+            if (intersects.length > 0) {
+                const facet = intersects[0].object;
+                if (hoveredFacet !== facet) {
+                    if (hoveredFacet) hoveredFacet.material.emissive.setHex(0x000000);
+                    hoveredFacet = facet;
+                    hoveredFacet.material.emissive.setHex(0x222222);
+                    document.body.style.cursor = 'pointer';
+                }
+            } else {
+                if (hoveredFacet) {
+                    hoveredFacet.material.emissive.setHex(0x000000);
+                    hoveredFacet = null;
+                    document.body.style.cursor = 'default';
+                }
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Hide loading
+        document.getElementById('loading').style.display = 'none';
+
+        animate();
+    </script>
+</body>
+</html>

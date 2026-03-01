@@ -1,0 +1,150 @@
+{
+  "_comment": "Key Performance Indicators for RadiantX Static",
+  "version": "1.0.0",
+  
+  "data_quality": {
+    "coverage": {
+      "description": "% of pro matches captured",
+      "target": 95,
+      "current": 0,
+      "measurement": "matches_in_db / total_vct_matches",
+      "frequency": "daily"
+    },
+    "accuracy": {
+      "description": "Validation pass rate",
+      "target": 99,
+      "current": 0,
+      "measurement": "valid_records / total_records",
+      "frequency": "per_import"
+    },
+    "freshness": {
+      "description": "Hours since last update",
+      "target": 24,
+      "current": null,
+      "measurement": "now() - last_update_timestamp",
+      "frequency": "hourly"
+    },
+    "completeness": {
+      "description": "% of 37 fields populated",
+      "target": 90,
+      "current": 0,
+      "measurement": "filled_fields / total_fields",
+      "frequency": "daily"
+    }
+  },
+  
+  "user_engagement": {
+    "page_views": {
+      "description": "Total page views",
+      "target": 1000,
+      "current": 0,
+      "measurement": "Google Analytics",
+      "frequency": "daily"
+    },
+    "unique_visitors": {
+      "description": "Unique daily visitors",
+      "target": 200,
+      "current": 0,
+      "measurement": "Google Analytics",
+      "frequency": "daily"
+    },
+    "avg_session_duration": {
+      "description": "Time on site",
+      "target": 120,
+      "current": 0,
+      "unit": "seconds",
+      "measurement": "Google Analytics",
+      "frequency": "daily"
+    },
+    "player_search_count": {
+      "description": "Player profile lookups",
+      "target": 50,
+      "current": 0,
+      "measurement": "Event tracking",
+      "frequency": "daily"
+    },
+    "chart_interactions": {
+      "description": "Chart hover/click events",
+      "target": 100,
+      "current": 0,
+      "measurement": "Event tracking",
+      "frequency": "daily"
+    }
+  },
+  
+  "technical_performance": {
+    "scraper_success_rate": {
+      "description": "% of scrapes successful",
+      "target": 95,
+      "current": 0,
+      "measurement": "successful_scrapes / total_attempts",
+      "frequency": "per_scrape"
+    },
+    "api_response_time": {
+      "description": "Data API latency",
+      "target": 200,
+      "current": 0,
+      "unit": "ms",
+      "measurement": "Response time logging",
+      "frequency": "per_request"
+    },
+    "build_time": {
+      "description": "Vite build duration",
+      "target": 30,
+      "current": 0,
+      "unit": "seconds",
+      "measurement": "CI logs",
+      "frequency": "per_build"
+    },
+    "deploy_time": {
+      "description": "GitHub Pages deploy duration",
+      "target": 60,
+      "current": 0,
+      "unit": "seconds",
+      "measurement": "GitHub Actions logs",
+      "frequency": "per_deploy"
+    },
+    "error_rate": {
+      "description": "JS errors per session",
+      "target": 0.1,
+      "current": 0,
+      "measurement": "Sentry or console tracking",
+      "frequency": "daily"
+    }
+  },
+  
+  "business_metrics": {
+    "data_lead_time": {
+      "description": "Match end → Site update",
+      "target": 6,
+      "current": null,
+      "unit": "hours",
+      "measurement": "match_end_time - site_update_time",
+      "frequency": "per_match"
+    },
+    "feature_parity": {
+      "description": "% of competitor features matched",
+      "target": 80,
+      "current": 0,
+      "measurement": "Feature checklist",
+      "frequency": "monthly"
+    },
+    "unique_value_props": {
+      "description": "Differentiating features",
+      "target": 5,
+      "current": 3,
+      "measurement": "Feature audit",
+      "frequency": "monthly"
+    }
+  },
+  
+  "dashboard": {
+    "refresh_interval": "5_minutes",
+    "alert_channels": ["email", "slack"],
+    "escalation_rules": [
+      { "condition": "coverage < 80%", "action": "alert_immediate" },
+      { "condition": "freshness > 48h", "action": "alert_immediate" },
+      { "condition": "error_rate > 1%", "action": "alert_daily" }
+    ]
+  }
+}
