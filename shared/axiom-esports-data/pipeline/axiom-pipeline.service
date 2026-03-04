@@ -1,0 +1,77 @@
+# Axiom Pipeline Daemon Systemd Service
+# =====================================
+#
+# Installation:
+#   1. Copy this file to /etc/systemd/system/axiom-pipeline.service
+#   2. Update paths and environment variables below
+#   3. Run: sudo systemctl daemon-reload
+#   4. Run: sudo systemctl enable axiom-pipeline
+#   5. Run: sudo systemctl start axiom-pipeline
+#
+# Management:
+#   sudo systemctl status axiom-pipeline    # Check status
+#   sudo systemctl start axiom-pipeline     # Start service
+#   sudo systemctl stop axiom-pipeline      # Stop service
+#   sudo systemctl restart axiom-pipeline   # Restart service
+#   sudo journalctl -u axiom-pipeline -f    # View logs
+#
+
+[Unit]
+Description=Axiom Pipeline Daemon
+Documentation=https://github.com/axiomesports/axiom-pipeline
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=pipeline
+Group=pipeline
+
+# Working directory
+WorkingDirectory=/opt/axiom-pipeline
+
+# Environment variables
+Environment="PYTHONUNBUFFERED=1"
+Environment="PIPELINE_LOG_LEVEL=INFO"
+Environment="PIPELINE_ENABLE_METRICS=true"
+
+# Load environment from file (create this file with proper permissions)
+EnvironmentFile=-/etc/axiom-pipeline/environment
+
+# Database connection (set in environment file or here)
+# Environment="DATABASE_URL=postgresql://user:pass@localhost/axiom_pipeline"
+
+# Daemon start command
+ExecStart=/opt/axiom-pipeline/venv/bin/axiom-pipeline daemon --host 0.0.0.0 --port 8080
+
+# Restart configuration
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Graceful shutdown
+TimeoutStopSec=30
+KillSignal=SIGTERM
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=4096
+
+# Security hardening (adjust as needed)
+NoNewPrivileges=false
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/axiom-pipeline/data /var/log/axiom-pipeline
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=axiom-pipeline
+
+[Install]
+WantedBy=multi-user.target

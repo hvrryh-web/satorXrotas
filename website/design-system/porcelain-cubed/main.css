@@ -1,0 +1,58 @@
+/**
+ * Porcelain³ Design System
+ * Main entry point
+ */
+
+@import 'tokens/colors.css';
+@import 'tokens/typography.css';
+@import 'tokens/spacing.css';
+@import 'tokens/elevation.css';
+@import 'tokens/animations.css';
+@import 'components/quarter-grid.css';
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background: var(--bg-dark);
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: var(--gold-medium);
+  color: var(--abyssal-void);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--abyssal-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-pale);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-medium);
+}

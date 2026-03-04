@@ -1,9 +1,16 @@
 {
   "version": 2,
-  "name": "satorx-website",
+  "name": "satorx-platform",
   "builds": [
     {
       "src": "website/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "shared/apps/sator-web/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist"
@@ -12,11 +19,40 @@
   ],
   "routes": [
     {
+      "src": "/web/(.*)",
+      "dest": "/shared/apps/sator-web/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/website/$1"
     }
   ],
   "github": {
     "enabled": false
-  }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://sator-api.onrender.com/api/$1"
+    }
+  ]
 }

@@ -1,0 +1,61 @@
+# =============================================================================
+# GitHub Actions Workflow: API Keepalive
+# =============================================================================
+# Purpose: Prevent Render free tier cold starts by pinging every 10 minutes
+# Strategy: HTTP GET to /health endpoint (Render free tier: 15min idle timeout)
+# Cost: $0 (GitHub Actions free tier: 2000 minutes/month)
+# =============================================================================
+
+name: API Keepalive
+
+on:
+  schedule:
+    # Run every 10 minutes (cron: minute hour day month day-of-week)
+    - cron: '*/10 * * * *'
+  
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  ping:
+    name: Ping API Health Endpoint
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Ping API Health Endpoint
+        # Allow failure during initial deployment phase (API not deployed yet)
+        continue-on-error: true
+        run: |
+          API_URL="${{ secrets.RENDER_API_URL }}"
+          
+          # Handle case where secret is not set (initial deployment phase)
+          if [ -z "$API_URL" ]; then
+            echo "⚠️  RENDER_API_URL secret not set - skipping ping"
+            echo "Set the secret when API is deployed to enable keepalive"
+            exit 0
+          fi
+          
+          echo "Pinging API at $API_URL/health ($(date))"
+          
+          # Make HTTP GET request with retries
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
+            --max-time 30 \
+            --retry 3 \
+            --retry-delay 5 \
+            "$API_URL/health" 2>&1) || {
+            echo "⚠️  Request failed (API may not be deployed yet)"
+            exit 0
+          }
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          echo "Response Code: $HTTP_CODE"
+          echo "Response Body: $BODY"
+          
+          # Print friendly status (don't fail workflow)
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ API is healthy and warm"
+          else
+            echo "⚠️  API returned $HTTP_CODE (continuing anyway)"
+          fi

@@ -1,0 +1,107 @@
+# =============================================================================
+# Render.com Blueprint Configuration for SATOR Platform
+# =============================================================================
+# This file enables "Infrastructure as Code" deployment to Render.com
+# 
+# To deploy:
+# 1. Push this file to your GitHub repository
+# 2. Go to https://dashboard.render.com/blueprints
+# 3. Connect your repository
+# 4. Render will automatically create and configure services
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # FastAPI Web Service - Core API
+  # ---------------------------------------------------------------------------
+  - type: web
+    name: sator-api
+    runtime: python
+    plan: free
+    region: oregon  # Closest to Supabase us-east-1 region
+    
+    # Build configuration
+    buildCommand: |
+      cd shared/axiom-esports-data/api && \
+      pip install -r requirements.txt
+    
+    # Start command
+    startCommand: |
+      cd shared/axiom-esports-data/api && \
+      uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1
+    
+    # Environment variables (set in Render Dashboard)
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: DATABASE_URL
+        sync: false  # Set manually in dashboard for security
+      - key: API_PORT
+        value: "8000"
+      - key: API_WORKERS
+        value: "1"
+      - key: LOG_LEVEL
+        value: "INFO"
+      - key: APP_ENVIRONMENT
+        value: "production"
+      - key: DATA_RETENTION_DAYS
+        value: "365"
+      - key: RATE_LIMIT_REQUESTS_PER_MINUTE
+        value: "30"
+      - key: ENABLE_WARMUP
+        value: "true"
+    
+    # Health check endpoint
+    healthCheckPath: /health
+    
+    # Auto-deploy on push to main
+    autoDeploy: true
+    
+    # Branch to deploy
+    branch: main
+
+  # ---------------------------------------------------------------------------
+  # Background Worker (Optional - for data processing)
+  # Commented out - uncomment when you need background job processing
+  # ---------------------------------------------------------------------------
+  # - type: worker
+  #   name: sator-worker
+  #   runtime: python
+  #   plan: free
+  #   region: oregon
+  #   buildCommand: |
+  #     cd shared/axiom-esports-data && \
+  #     pip install -r api/requirements.txt
+  #   startCommand: |
+  #     cd shared/axiom-esports-data && \
+  #     python -m scripts.daily_health_check
+  #   envVars:
+  #     - key: PYTHON_VERSION
+  #       value: "3.11"
+  #     - key: DATABASE_URL
+  #       sync: false
+
+  # ---------------------------------------------------------------------------
+  # Cron Job - Keep API Warm (Prevent Cold Start)
+  # ---------------------------------------------------------------------------
+  - type: cron
+    name: sator-keepalive
+    runtime: python
+    plan: free
+    region: oregon
+    schedule: "*/10 * * * *"  # Every 10 minutes
+    buildCommand: |
+      pip install requests
+    startCommand: |
+      python -c "import requests; requests.get('https://sator-api.onrender.com/health', timeout=30)"
+
+# =============================================================================
+# Environment Group (Shared across services)
+# =============================================================================
+envVarGroups:
+  - name: sator-production
+    envVars:
+      - key: APP_NAME
+        value: "SATOR-API"
+      - key: APP_VERSION
+        value: "0.1.0"

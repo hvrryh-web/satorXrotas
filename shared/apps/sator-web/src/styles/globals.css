@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radiant-black: #0a0a0f;
+  --radiant-card: #14141f;
+  --radiant-border: #2a2a3a;
+  --radiant-white: #ffffff;
+  --radiant-gray: #8a8a9a;
+  --radiant-red: #ff4655;
+  --radiant-red-glow: rgba(255, 70, 85, 0.4);
+  --radiant-gold: #ffd700;
+  --radiant-cyan: #00d4ff;
+  --radiant-green: #00ff88;
+  --radiant-orange: #ff6b00;
+  --radiant-blue: #1e3a5f;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--radiant-black);
+    color: var(--radiant-white);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .stat-card {
+    @apply bg-radiant-card rounded-xl border border-radiant-border transition-all duration-300;
+  }
+
+  .stat-card:hover {
+    border-color: rgba(255, 70, 85, 0.5);
+    box-shadow: 0 0 20px rgba(255, 70, 85, 0.1);
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-radiant-red hover:bg-radiant-red/90 text-white font-medium rounded-lg transition-all;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(255, 70, 85, 0.25);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-radiant-card hover:bg-radiant-border text-white font-medium rounded-lg border border-radiant-border transition-all;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 bg-radiant-card border border-radiant-border rounded-lg text-white placeholder-radiant-gray focus:outline-none focus:border-radiant-red/50 focus:ring-1 focus:ring-radiant-red/50 transition-all;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-1 text-xs font-mono rounded;
+  }
+
+  .badge-gold {
+    @apply badge bg-radiant-gold/20 text-radiant-gold;
+  }
+
+  .badge-cyan {
+    @apply badge bg-radiant-cyan/20 text-radiant-cyan;
+  }
+
+  .badge-red {
+    @apply badge bg-radiant-red/20 text-radiant-red;
+  }
+
+  .live-dot {
+    animation: livePulse 2s ease-in-out infinite;
+  }
+
+  .skeleton {
+    @apply animate-pulse bg-radiant-border/50 rounded;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-radiant-red to-radiant-orange;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--radiant-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--radiant-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4a;
+}
+
+/* Animations */
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Recharts Customization */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+.recharts-default-tooltip {
+  background-color: var(--radiant-card) !important;
+  border: 1px solid var(--radiant-border) !important;
+  border-radius: 8px !important;
+}
+
+.recharts-tooltip-label {
+  color: var(--radiant-white) !important;
+}
+
+.recharts-tooltip-item {
+  color: var(--radiant-gray) !important;
+}

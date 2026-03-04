@@ -1,0 +1,178 @@
+/**
+ * PORCELAIN³ Design System
+ * Inspired by: Ralph Lauren, Apple, Nike, 5 Gum
+ * 
+ * WHITE HUES: White, Cream, Ash, Light Greys, Cloud whites, dirty whites, Pristine White
+ * BLUE HUES: Porcelain Blues, Abyssal Blues, Navy Blues, Royal Blues, Ultramarine Blues
+ * GOLD HUES: Celestial Yellows, Metallic Golds, Neon Yellows
+ */
+
+:root {
+  /* ============================================
+     WHITE HUES - Foundation Layer
+     ============================================ */
+  
+  /* Pristine Whites */
+  --white-pristine: #FFFFFF;
+  --white-pure: #FAFAFA;
+  --white-soft: #F5F5F5;
+  
+  /* Cream & Warm Whites */
+  --cream-vanilla: #FFFEF0;
+  --cream-butter: #FFF8E7;
+  --cream-ivory: #FFFFF0;
+  --cream-warm: #F5F5DC;
+  
+  /* Ash & Cool Greys */
+  --ash-light: #E8E8E8;
+  --ash-medium: #D3D3D3;
+  --ash-cool: #C0C0C0;
+  --ash-smoke: #B8B8B8;
+  
+  /* Cloud Whites - Atmospheric */
+  --cloud-pearl: #F0F2F5;
+  --cloud-mist: #E5E7EB;
+  --cloud-fog: #D1D5DB;
+  --cloud-storm: #9CA3AF;
+  
+  /* Dirty Whites - Aged Character */
+  --dirty-linen: #E8E4E1;
+  --dirty-canvas: #DDD8D3;
+  --dirty-paper: #D4CFC7;
+  --dirty-plaster: #C9C4BC;
+  
+  /* Light Greys - Neutral Balance */
+  --grey-50: #F9FAFB;
+  --grey-100: #F3F4F6;
+  --grey-200: #E5E7EB;
+  --grey-300: #D1D5DB;
+  --grey-400: #9CA3AF;
+  
+  /* ============================================
+     BLUE HUES - Primary Identity
+     ============================================ */
+  
+  /* Porcelain Blues - Delicate & Refined */
+  --porcelain-light: #E8F4F8;
+  --porcelain-soft: #D0E8F0;
+  --porcelain-medium: #A8D4E6;
+  --porcelain-deep: #7FB8D3;
+  --porcelain-rich: #5A9CBD;
+  
+  /* Abyssal Blues - Deep & Mysterious */
+  --abyssal-shallow: #1E3A5F;
+  --abyssal-mid: #152A45;
+  --abyssal-deep: #0D1B2A;
+  --abyssal-void: #061220;
+  --abyssal-black: #030A12;
+  
+  /* Navy Blues - Classic Authority */
+  --navy-light: #3D5A80;
+  --navy-medium: #2E4A6E;
+  --navy-classic: #1E3A5F;
+  --navy-deep: #142A45;
+  --navy-dark: #0D1B2A;
+  
+  /* Royal Blues - Regal Presence */
+  --royal-bright: #4169E1;
+  --royal-medium: #3658C5;
+  --royal-deep: #2B47A9;
+  --royal-rich: #20368D;
+  --royal-dark: #152571;
+  
+  /* Ultramarine Blues - Intense & Vibrant */
+  --ultramarine-light: #4A6CF7;
+  --ultramarine-medium: #3D5CE8;
+  --ultramarine-deep: #2F4BD9;
+  --ultramarine-rich: #223ACA;
+  --ultramarine-dark: #1529BB;
+  
+  /* Neon/Frost Blues - Electric Accents */
+  --neon-blue: #00F0FF;
+  --frost-blue: #B8E6FF;
+  --pastel-blue: #A8D8EA;
+  --baby-blue: #89CFF0;
+  --electric-blue: #0080FF;
+  
+  /* Glass Effects - Dark Tinted */
+  --glass-dark: rgba(13, 27, 42, 0.85);
+  --glass-mid: rgba(30, 58, 95, 0.75);
+  --glass-light: rgba(61, 90, 128, 0.65);
+  --glass-frost: rgba(255, 255, 255, 0.1);
+  
+  /* ============================================
+     GOLD HUES - Accent & Luxury
+     ============================================ */
+  
+  /* Celestial Yellows - Ethereal Glow */
+  --celestial-light: #FFF8DC;
+  --celestial-soft: #FFF5C3;
+  --celestial-medium: #FFF0A0;
+  --celestial-rich: #FFEB7D;
+  --celestial-deep: #FFE65A;
+  
+  /* Metallic Golds - Premium Finish */
+  --gold-champagne: #F7E7CE;
+  --gold-pale: #E6D5A8;
+  --gold-medium: #D4AF37;
+  --gold-rich: #C5A028;
+  --gold-deep: #B69119;
+  
+  /* Neon Yellows - Electric Accents */
+  --neon-yellow: #FFFF00;
+  --neon-chartreuse: #DFFF00;
+  --neon-lime: #CCFF00;
+  --electric-yellow: #FFE600;
+  --acid-yellow: #E5FF00;
+  
+  /* ============================================
+     SEMANTIC TOKENS - Usage Mapping
+     ============================================ */
+  
+  /* Backgrounds */
+  --bg-primary: var(--white-pristine);
+  --bg-secondary: var(--cloud-pearl);
+  --bg-tertiary: var(--cream-vanilla);
+  --bg-elevated: var(--white-soft);
+  --bg-dark: var(--abyssal-deep);
+  --bg-glass: var(--glass-dark);
+  
+  /* Text */
+  --text-primary: var(--abyssal-void);
+  --text-secondary: var(--navy-classic);
+  --text-tertiary: var(--grey-400);
+  --text-inverse: var(--white-pristine);
+  --text-gold: var(--gold-medium);
+  
+  /* Brand Accents */
+  --brand-primary: var(--porcelain-rich);
+  --brand-secondary: var(--abyssal-mid);
+  --brand-accent: var(--gold-medium);
+  --brand-electric: var(--neon-blue);
+  --brand-highlight: var(--celestial-rich);
+  
+  /* Borders */
+  --border-subtle: var(--ash-light);
+  --border-medium: var(--porcelain-soft);
+  --border-strong: var(--navy-light);
+  --border-gold: var(--gold-pale);
+  
+  /* Interactive States */
+  --hover-bg: var(--cloud-mist);
+  --active-bg: var(--porcelain-light);
+  --selected-bg: var(--royal-bright);
+  --selected-text: var(--white-pristine);
+  
+  /* Status */
+  --success: #22C55E;
+  --warning: var(--celestial-deep);
+  --error: #EF4444;
+  --info: var(--royal-bright);
+  
+  /* Gradients */
+  --gradient-porcelain: linear-gradient(135deg, var(--porcelain-light) 0%, var(--white-soft) 50%, var(--cream-butter) 100%);
+  --gradient-abyss: linear-gradient(180deg, var(--abyssal-mid) 0%, var(--abyssal-deep) 50%, var(--abyssal-void) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--gold-champagne) 0%, var(--gold-medium) 50%, var(--gold-rich) 100%);
+  --gradient-electric: linear-gradient(90deg, var(--neon-blue) 0%, var(--electric-blue) 50%, var(--royal-bright) 100%);
+  --gradient-glass: linear-gradient(180deg, var(--glass-frost) 0%, transparent 100%);
+}

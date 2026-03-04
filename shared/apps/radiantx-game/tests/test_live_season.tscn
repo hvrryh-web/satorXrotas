@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1234567890abcdef"]
+
+[ext_resource type="Script" path="res://apps/radiantx-game/tests/test_live_season.gd" id="1_testlive"]
+
+[node name="TestLiveSeason" type="Node"]
+script = ExtResource("1_testlive")

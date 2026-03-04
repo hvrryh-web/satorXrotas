@@ -1,0 +1,195 @@
+/* Landing Page Styles - Porcelain³ */
+
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--abyssal-void) 0%, var(--abyssal-deep) 50%, var(--navy-dark) 100%);
+}
+
+/* Background Effects */
+.landing-page__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 30%, var(--porcelain-deep) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, var(--gold-pale) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, var(--royal-deep) 0%, transparent 60%);
+  opacity: 0.15;
+}
+
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+.bg-glow--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--porcelain-deep);
+  top: -200px;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+.bg-glow--2 {
+  width: 500px;
+  height: 500px;
+  background: var(--gold-medium);
+  bottom: -150px;
+  right: -150px;
+  animation-delay: 2s;
+}
+
+.bg-glow--3 {
+  width: 400px;
+  height: 400px;
+  background: var(--royal-bright);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 4s;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* Content */
+.landing-page__content {
+  text-align: center;
+  z-index: 1;
+  padding: var(--space-8);
+}
+
+/* Logo */
+.landing-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.landing-logo__symbol {
+  font-size: var(--text-6xl);
+  color: var(--gold-medium);
+  text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+}
+
+.landing-logo__text {
+  font-family: var(--font-display);
+  font-size: var(--text-7xl);
+  font-weight: var(--font-light);
+  letter-spacing: var(--tracking-widest);
+  color: var(--white-pristine);
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.3);
+}
+
+.landing-logo__cube {
+  font-size: var(--text-4xl);
+  color: var(--gold-medium);
+  vertical-align: super;
+  font-weight: var(--font-bold);
+}
+
+/* Tagline */
+.landing-tagline {
+  font-family: var(--font-accent);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-light);
+  color: var(--cloud-mist);
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-12);
+}
+
+/* Enter Button */
+.landing-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-10);
+  background: linear-gradient(135deg, var(--gold-champagne), var(--gold-medium));
+  border: 2px solid var(--gold-rich);
+  border-radius: var(--radius-full);
+  color: var(--abyssal-void);
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-widest);
+  cursor: pointer;
+  box-shadow: 
+    0 4px 20px rgba(212, 175, 55, 0.3),
+    0 0 0 4px rgba(212, 175, 55, 0.1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.landing-enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 30px rgba(212, 175, 55, 0.5),
+    0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+.enter-btn__arrow {
+  font-size: var(--text-xl);
+  transition: transform 0.3s;
+}
+
+.landing-enter-btn:hover .enter-btn__arrow {
+  transform: translateX(4px);
+}
+
+/* Footer */
+.landing-footer {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.footer-brand {
+  font-size: var(--text-sm);
+  color: var(--ash-smoke);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing-logo__text {
+    font-size: var(--text-5xl);
+  }
+  
+  .landing-logo__symbol {
+    font-size: var(--text-5xl);
+  }
+  
+  .landing-tagline {
+    font-size: var(--text-lg);
+  }
+  
+  .landing-enter-btn {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-base);
+  }
+}

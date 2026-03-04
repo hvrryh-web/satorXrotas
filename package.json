@@ -11,9 +11,8 @@
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "workspaces": [
-    "packages/*",
-    "apps/*",
-    "api"
+    "shared/packages/*",
+    "shared/apps/*"
   ],
   "keywords": ["sator", "esports", "tactical-fps", "simulation"],
   "license": "MIT"

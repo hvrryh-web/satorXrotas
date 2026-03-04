@@ -5,25 +5,94 @@ services:
     image: timescale/timescaledb:latest-pg15
     container_name: axiom_postgres
     environment:
-      POSTGRES_DB: axiom_esports
+      POSTGRES_DB: ${POSTGRES_DB:-axiom_esports}
       POSTGRES_USER: ${POSTGRES_USER:-axiom}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=en_US.UTF-8"
+      TZ: UTC
+      PGTZ: UTC
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./migrations:/docker-entrypoint-initdb.d
+      - ./migrations:/docker-entrypoint-initdb.d:ro
+      - ./seed_data:/seed_data:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-axiom}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-axiom} -d ${POSTGRES_DB:-axiom_esports}"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=100"
+      - "-c"
+      - "shared_buffers=256MB"
+      - "-c"
+      - "effective_cache_size=768MB"
+      - "-c"
+      - "maintenance_work_mem=64MB"
+      - "-c"
+      - "work_mem=4MB"
+      - "-c"
+      - "wal_buffers=16MB"
+      - "-c"
+      - "default_statistics_target=100"
+      - "-c"
+      - "random_page_cost=1.1"
+      - "-c"
+      - "effective_io_concurrency=200"
+      - "-c"
+      - "checkpoint_completion_target=0.9"
+      - "-c"
+      - "log_timezone=UTC"
+      - "-c"
+      - "datestyle=iso,mdy"
+      - "-c"
+      - "timezone=UTC"
+      - "-c"
+      - "lc_messages=en_US.utf8"
+      - "-c"
+      - "lc_monetary=en_US.utf8"
+      - "-c"
+      - "lc_numeric=en_US.utf8"
+      - "-c"
+      - "lc_time=en_US.utf8"
+      - "-c"
+      - "default_text_search_config=pg_catalog.english"
+    networks:
+      - axiom_network
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: axiom_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@axiom.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - axiom_network
+    restart: unless-stopped
+    profiles:
+      - with-pgadmin
 
   redis:
     image: redis:7-alpine
     container_name: axiom_redis
+    command: redis-server --appendonly yes --maxmemory 64mb --maxmemory-policy allkeys-lru
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT:-6379}:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -31,7 +100,22 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+      start_period: 10s
+    networks:
+      - axiom_network
+    restart: unless-stopped
 
 volumes:
   postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
   redis_data:
+    driver: local
+
+networks:
+  axiom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

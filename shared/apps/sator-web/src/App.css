@@ -1,0 +1,58 @@
+/* App Container */
+.app {
+  min-height: 100vh;
+  background: var(--abyssal-void);
+  color: var(--white-pristine);
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Global Link Styles */
+a {
+  color: var(--gold-medium);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--celestial-rich);
+}
+
+/* Button Reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--gold-medium);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--gold-medium);
+  color: var(--abyssal-void);
+}

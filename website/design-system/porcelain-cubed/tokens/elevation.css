@@ -1,0 +1,74 @@
+/**
+ * Elevation & Glass System
+ * Premium glass effects with brand colors
+ */
+
+:root {
+  /* Shadows - Subtle & Premium */
+  --shadow-sm: 0 1px 2px 0 rgba(13, 27, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(13, 27, 42, 0.1), 0 2px 4px -1px rgba(13, 27, 42, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(13, 27, 42, 0.1), 0 4px 6px -2px rgba(13, 27, 42, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(13, 27, 42, 0.1), 0 10px 10px -5px rgba(13, 27, 42, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(13, 27, 42, 0.25);
+  
+  /* Glow Effects */
+  --glow-blue: 0 0 20px rgba(0, 240, 255, 0.3);
+  --glow-gold: 0 0 20px rgba(212, 175, 55, 0.4);
+  --glow-white: 0 0 30px rgba(255, 255, 255, 0.5);
+  
+  /* Glass Variants */
+  --glass-dark: 
+    linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(30, 58, 95, 0.85));
+  --glass-mid: 
+    linear-gradient(135deg, rgba(30, 58, 95, 0.8), rgba(61, 90, 128, 0.75));
+  --glass-light: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  --glass-frost: 
+    backdrop-filter: blur(20px) saturate(180%);
+  
+  /* Borders - Refined */
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-full: 9999px;
+}
+
+/* Glass Utility Classes */
+.glass-dark {
+  background: var(--glass-dark);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-mid {
+  background: var(--glass-mid);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: var(--glass-light);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Premium Card */
+.card-premium {
+  background: var(--white-pristine);
+  border: 1px solid var(--porcelain-soft);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  box-shadow: var(--shadow-xl), var(--glow-blue);
+  border-color: var(--porcelain-medium);
+}

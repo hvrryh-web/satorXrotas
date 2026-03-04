@@ -1,0 +1,281 @@
+# Axiom Pipeline Alert Configuration
+# ===================================
+# 
+# This file configures alert rules and notification channels.
+# Copy to alerts.local.yaml and customize for your environment.
+
+# Alert Rules
+# -----------
+# Rules are evaluated against pipeline run state.
+# Available condition variables:
+#   - run.status: running, completed, failed, cancelled
+#   - run.duration_seconds: elapsed time
+#   - run.error_rate: failed / total records
+#   - run.validation_failure_rate: validation failures / total
+#   - run.duplicate_rate: duplicates / total
+#   - run.records_processed: successful records
+#   - run.records_failed: failed records
+
+rules:
+  # Critical: Pipeline completely failed
+  pipeline_failure:
+    enabled: true
+    condition: 'run.status == "failed"'
+    severity: critical
+    channels:
+      - slack
+      - github
+    message_template: "Pipeline {run_id} failed at stage {stage}"
+    cooldown_minutes: 5
+
+  # Critical: No successful runs for extended period
+  no_recent_success:
+    enabled: true
+    condition: "duration > 7200 and records_processed == 0"
+    severity: critical
+    channels:
+      - slack
+      - pagerduty
+    message_template: "No successful pipeline runs in 2+ hours"
+    cooldown_minutes: 60
+
+  # Warning: High error rate
+  high_error_rate:
+    enabled: true
+    condition: "error_rate > 0.1 and records_processed > 100"
+    severity: warning
+    channels:
+      - slack
+    message_template: "High error rate ({error_rate:.1%}) in run {run_id}"
+    cooldown_minutes: 30
+
+  # Warning: Data quality degradation
+  data_quality_drop:
+    enabled: true
+    condition: "validation_failure_rate > 0.05 and records_processed > 50"
+    severity: warning
+    channels:
+      - slack
+      - email
+    message_template: "Data quality degraded: {validation_failure_rate:.1%} validation failures"
+    cooldown_minutes: 60
+
+  # Warning: Pipeline running too long
+  stuck_pipeline:
+    enabled: true
+    condition: "duration > 3600 and status == 'running'"
+    severity: warning
+    channels:
+      - slack
+    message_template: "Pipeline {run_id} stuck for {duration/60:.0f} minutes"
+    cooldown_minutes: 30
+
+  # Info: High duplicate detection
+  duplicate_surge:
+    enabled: true
+    condition: "duplicate_rate > 0.2 and records_processed > 50"
+    severity: info
+    channels:
+      - slack
+    message_template: "High duplicate rate: {duplicate_rate:.1%}"
+    cooldown_minutes: 120
+
+  # Warning: Volume drop (detected by anomaly detector)
+  volume_anomaly:
+    enabled: true
+    # This rule is triggered by the anomaly detector, not evaluated directly
+    condition: "anomaly_detector.triggered"
+    severity: warning
+    channels:
+      - slack
+    message_template: "Volume anomaly detected: {current_volume} records (expected: {expected_volume})"
+    cooldown_minutes: 120
+
+  # Warning: Schema drift detected
+  schema_drift:
+    enabled: true
+    condition: "schema_drift_detected == true"
+    severity: warning
+    channels:
+      - slack
+      - github
+    message_template: "Schema drift detected in {source}"
+    cooldown_minutes: 5
+
+# Notification Channels
+# ---------------------
+channels:
+  slack:
+    enabled: false  # Set to true and configure webhook to enable
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    # Optional: Override channel
+    # channel: "#pipeline-alerts"
+    # Optional: Username to post as
+    # username: "Axiom Pipeline"
+
+  github:
+    enabled: false
+    token: "${GITHUB_TOKEN}"
+    repo: "${GITHUB_REPO}"  # Format: owner/repo
+    # Only create issues for these severities
+    create_for_severity:
+      - critical
+
+  pagerduty:
+    enabled: false
+    integration_key: "${PAGERDUTY_INTEGRATION_KEY}"
+    # Source identifier for events
+    source: "axiom-pipeline"
+
+  email:
+    enabled: false
+    smtp_host: "${SMTP_HOST}"
+    smtp_port: 587
+    smtp_user: "${SMTP_USER}"
+    smtp_pass: "${SMTP_PASS}"
+    from_address: "pipeline@axiom.local"
+    to_addresses:
+      - "alerts@example.com"
+
+  webhook:
+    enabled: false
+    url: "${ALERT_WEBHOOK_URL}"
+    headers:
+      Authorization: "Bearer ${WEBHOOK_TOKEN}"
+    # Request timeout in seconds
+    timeout: 30
+
+# Anomaly Detection Settings
+# --------------------------
+anomaly_detection:
+  enabled: true
+  
+  # Volume anomaly detection
+  volume:
+    enabled: true
+    # Z-score threshold (higher = less sensitive)
+    threshold_sigma: 2.5
+    # Minimum historical data points required
+    min_historical_points: 5
+    # Check for drops, spikes, or both
+    direction: "drop"  # Options: drop, spike, both
+  
+  # Error rate anomaly detection
+  error_rate:
+    enabled: true
+    # Absolute threshold before triggering
+    threshold: 0.15  # 15%
+  
+  # Latency anomaly detection
+  latency:
+    enabled: true
+    threshold_sigma: 2.0
+  
+  # Duplicate rate detection
+  duplicates:
+    enabled: true
+    threshold: 0.25  # 25%
+
+# Health Check Settings
+# ---------------------
+health_checks:
+  # How often to run health checks (seconds)
+  interval: 60
+  
+  # Database connectivity check
+  database:
+    enabled: true
+    # Timeout for DB query
+    timeout: 5
+    # Query to execute
+    query: "SELECT 1"
+  
+  # Registry check
+  registry:
+    enabled: true
+    # Warn if registry is empty
+    min_records: 1
+  
+  # Disk space check
+  disk:
+    enabled: true
+    # Minimum free space in GB
+    min_free_gb: 1.0
+  
+  # Memory check
+  memory:
+    enabled: true
+    # Maximum memory usage percentage
+    max_percent: 90
+  
+  # Recent runs check
+  recent_runs:
+    enabled: true
+    # Alert if no successful runs in this many hours
+    max_hours_without_success: 2
+
+# Dashboard Settings
+# ------------------
+dashboard:
+  # Title shown on dashboards
+  title: "Axiom Pipeline Monitor"
+  
+  # Refresh interval for dashboards
+  refresh_interval: "30s"
+  
+  # Timezone for display
+  timezone: "UTC"
+  
+  # Default time range for Grafana dashboards
+  default_time_range: "6h"
+
+# Metrics Export
+# --------------
+metrics:
+  # Prometheus endpoint settings
+  prometheus:
+    enabled: true
+    # Port to expose metrics on
+    port: 9090
+    # Path for metrics endpoint
+    path: "/metrics"
+  
+  # Store metrics in database (fallback for systems without Prometheus)
+  database:
+    enabled: false
+    # Retention period
+    retention_days: 30
+
+# Reporting
+# ---------
+reports:
+  # Generate daily summary reports
+  daily:
+    enabled: true
+    # Time to generate report (UTC)
+    schedule: "00:00"
+    # Format: json, markdown, or both
+    format: "markdown"
+    # Where to save reports
+    output_path: "reports/daily"
+  
+  # Generate weekly reports
+  weekly:
+    enabled: true
+    # Day of week (1=Monday, 7=Sunday)
+    day: 1
+    # Time to generate report (UTC)
+    schedule: "06:00"
+    format: "markdown"
+    output_path: "reports/weekly"
+  
+  # Email reports
+  email:
+    enabled: false
+    smtp_host: "${SMTP_HOST}"
+    smtp_port: 587
+    smtp_user: "${SMTP_USER}"
+    smtp_pass: "${SMTP_PASS}"
+    from_address: "pipeline@axiom.local"
+    to_addresses:
+      - "reports@example.com"

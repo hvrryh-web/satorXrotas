@@ -1,0 +1,26 @@
+# =============================================================================
+# Integration Test Dependencies
+# =============================================================================
+
+# Testing Framework
+pytest==8.0.0
+pytest-asyncio==0.23.5
+pytest-cov==4.1.0
+
+# HTTP Client
+requests==2.31.0
+httpx==0.26.0
+
+# Database
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Data Validation
+pydantic==2.6.1
+
+# Process management for build tests
+subprocess-tee==0.4.1
+
+# Utilities
+python-dotenv==1.0.1
+pyyaml==6.0.1
