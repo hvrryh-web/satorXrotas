@@ -1,0 +1,1934 @@
+﻿[
+    {
+        "sha":  "0F93BFA25CB1604DCF2A8471CDCD11D1E8782999613A3F27C3194AF6AB0BC3E4",
+        "path":  "AGENTS.md"
+    },
+    {
+        "sha":  "2D57226395A83E2F554BC6949BCDED2547EB4EC53C60DE607982F1F8B7B6F164",
+        "path":  "ARCHITECTURE.md"
+    },
+    {
+        "sha":  "3C8777E961F43C54EBE175EC6AF4F31D79CC380A84E0BD87EE39304B19895A6E",
+        "path":  "CHANGELOG.md"
+    },
+    {
+        "sha":  "6C8A4483C2C70065253DAAFEB274737B53405A87822EBEFFA307B11D2DF7BDB9",
+        "path":  "CONTRIBUTING.md"
+    },
+    {
+        "sha":  "52399379380E2244828CF6D60CB2A302CEC990DAB409000E38237A802F632BF2",
+        "path":  "CRIT_REPORT.md"
+    },
+    {
+        "sha":  "1673E7B82182D115B82AC29D508A1B19A1EBBCCC81FBC3BB650BA0937D9E0D2E",
+        "path":  "DEPLOYMENT_ARCHITECTURE.md"
+    },
+    {
+        "sha":  "2AD2566F83D0D93E74285D1F6A08FA1DCA6F92A2A33B578965799236CB53CEE2",
+        "path":  "DEPLOYMENT_CHECKLIST.md"
+    },
+    {
+        "sha":  "C6A0A4A379069D903F5C5E40D6FAF6CC75948BD80C926D40B0380F3DED90C76A",
+        "path":  "DESIGN_GAP_ANALYSIS.md"
+    },
+    {
+        "sha":  "ABD9965015B90486CE396AFD892D1772643549B8F1BDD1BB0FC183A5B6EC4826",
+        "path":  "DESIGN_OVERVIEW.md"
+    },
+    {
+        "sha":  "A1878DBD04F008621BBE49D3DE60CB1EDB6DF6E71FC4E4615D418803E7126855",
+        "path":  "LICENSE"
+    },
+    {
+        "sha":  "E840FC9E66E7215649D46D1AAED751C49541B157B387A88B843E413A91B9743D",
+        "path":  "package-lock.json"
+    },
+    {
+        "sha":  "00119D02EF8576FD518ADF5747ED8A47D15A82BDFB51F5D302AB7AA0B5D319CB",
+        "path":  "package.json"
+    },
+    {
+        "sha":  "345E2AE892055C888F883F762CDE7CDC13126C338BAE765D940663B00454D587",
+        "path":  "README.md"
+    },
+    {
+        "sha":  "DC37A84F2133FDC2E9FB9AFDDFCFA2D49B80C71ED13003A4D3E61EFF1CE7CDCA",
+        "path":  "render.yaml"
+    },
+    {
+        "sha":  "880DFF713D10FADD770FD593F3C643B4C28126616A179C9F244015B9CF59725F",
+        "path":  "REPOSITORY_CHANGES.md"
+    },
+    {
+        "sha":  "11D4930E42EDB23520D002A305264EA7B5471227BA368F8383BE222FE47CB908",
+        "path":  "REPOSITORY_TRANSFER_GUIDE.md"
+    },
+    {
+        "sha":  "B002CD8B7E8C15BC3979BF815F05BA07A259FFCABBEC7BB532FDAB967CAB0A0B",
+        "path":  "SKILL_ARCHITECTURE_ANALYSIS.md"
+    },
+    {
+        "sha":  "2BD371F35E954B6B829002E9D828C0CD54181ECE63CEB3AF04D10189CCF01137",
+        "path":  "vercel.json"
+    },
+    {
+        "sha":  "71DA923D0FE0F8B02F3F1943FC9E7FBDA2B137DC31203E81EC93BDBD380BDA25",
+        "path":  ".vscode\\settings.json"
+    },
+    {
+        "sha":  "AC1ABCBFFEEBC64EE71555C4A350C991EDD6C1AB4E4AD758533AE4C2635A8E27",
+        "path":  "shared\\api\\__init__.py"
+    },
+    {
+        "sha":  "3323A67E83C0BA6F0904C843BB9B4AC1970BCB1D471A444BA56117C9D691F3AE",
+        "path":  "shared\\api\\src\\README.md"
+    },
+    {
+        "sha":  "B7593E8DB653BF6DF98088C23FE3C9578D7415B1A5A9E8331ACD2DDF5AF27520",
+        "path":  "shared\\api\\src\\__init__.py"
+    },
+    {
+        "sha":  "32FDB27D07920466AB6C8FB27F890B83940657769EACE2B9BAAB972F85326EED",
+        "path":  "shared\\api\\src\\staging\\data_collection_service.py"
+    },
+    {
+        "sha":  "063E3A674750F98C7218AFDE37FD4E0A6B9280FAA690AB5FD82D1404184AB073",
+        "path":  "shared\\api\\src\\staging\\game_export_form.py"
+    },
+    {
+        "sha":  "45F62B7F78A28D2E9C0E5938BA5FF33E6F808C37E531C866257B0F75C7989E27",
+        "path":  "shared\\api\\src\\staging\\ingest_service.py"
+    },
+    {
+        "sha":  "5521C3F77B338E7B6D32CFB2FC4420B8E463925B7EB9CE4C783A12261A5B53AA",
+        "path":  "shared\\api\\src\\staging\\staging_safety_protocol.json"
+    },
+    {
+        "sha":  "4E8231DD24EEB0907FB4015831DA5310849E9615B44ACDCFC002406F7E40B7DE",
+        "path":  "shared\\api\\src\\staging\\test_staging_pipeline.py"
+    },
+    {
+        "sha":  "B84C370D7213E46CEA1107337ECDC75C00887AB1BFB949BE0317EE3F7F0C5FA5",
+        "path":  "shared\\api\\src\\staging\\web_export_form.py"
+    },
+    {
+        "sha":  "8087B81F4DD48C8952011223B3A4508F9AACA617388AC9DDCD7BA19024055AC2",
+        "path":  "shared\\api\\src\\staging\\__init__.py"
+    },
+    {
+        "sha":  "C02E0A1484B82417B0EF71CF43BBF35F0E4C6901C1027D28194F62F17A15B7E6",
+        "path":  "shared\\apps\\radiantx-game\\src\\ExportClient.gd"
+    },
+    {
+        "sha":  "A88191D616CB59CEA035B63CB51CA47297D91AB44999F25DF2379A01D7116C09",
+        "path":  "shared\\apps\\radiantx-game\\src\\LiveSeasonModule.gd"
+    },
+    {
+        "sha":  "81BE5EB664148C4E895215E0D41EAC052EBA6DE7FD9BA361F4FAC832C1A6999D",
+        "path":  "shared\\apps\\radiantx-game\\src\\README.md"
+    },
+    {
+        "sha":  "FF4AE1C1AA3553201892E0B74094C4325C72D8829417BFA9B955BAEF553641E3",
+        "path":  "shared\\apps\\radiantx-game\\tests\\test_live_season.gd"
+    },
+    {
+        "sha":  "4ED509089B1735B8D2B90114A52EFBE3A387025D0BCCA36FE69D57AAF193E4A1",
+        "path":  "shared\\apps\\radiantx-game\\tests\\test_live_season.tscn"
+    },
+    {
+        "sha":  "63819A113580F11ED285899495806B1A65283F921D57BE266D349DF6E6EFDD2D",
+        "path":  "shared\\apps\\sator-web\\.env.example"
+    },
+    {
+        "sha":  "5F16D2CD841848F155E52AA84DB76E115331F801264D0D47F87A7A91F624EEBF",
+        "path":  "shared\\apps\\sator-web\\.eslintrc.cjs"
+    },
+    {
+        "sha":  "BF0431B452D44686080410FD47FECA40DFA8BC61B29BF406C0CDD4694CF9C0EB",
+        "path":  "shared\\apps\\sator-web\\index.html"
+    },
+    {
+        "sha":  "3D8845FB0749D4B1A5CC194E5E25439B500B3B889BF4EA117116725B849C0EE4",
+        "path":  "shared\\apps\\sator-web\\package.json"
+    },
+    {
+        "sha":  "374F669F08B18E67D0A7264FA45B71228017E604FE7F6DB8A5C1BD5BA27E5C98",
+        "path":  "shared\\apps\\sator-web\\postcss.config.js"
+    },
+    {
+        "sha":  "E04A37466D5309CE1B54846318C0D485A7C192014B3C7E0309A97B609D2EE8CF",
+        "path":  "shared\\apps\\sator-web\\README.md"
+    },
+    {
+        "sha":  "B575CA9F96CB12829199394FA7EAA5DB2C778382959E6BE256BFD86FF9F89510",
+        "path":  "shared\\apps\\sator-web\\tailwind.config.js"
+    },
+    {
+        "sha":  "259CD95A19FE795BAA3F1F115218AD7A46A3F741B1F7D0BE3D46B761E47ECF4E",
+        "path":  "shared\\apps\\sator-web\\tsconfig.json"
+    },
+    {
+        "sha":  "6EC602B8AA146888C76F0B41CA3515F91F95919F6E6417A4670DECABA8FCB982",
+        "path":  "shared\\apps\\sator-web\\tsconfig.node.json"
+    },
+    {
+        "sha":  "CFF7BDD090BC27D84DDE57DE885AF8CBEA8BBA3CA0E86F9511598CC5B7B28018",
+        "path":  "shared\\apps\\sator-web\\vercel.json"
+    },
+    {
+        "sha":  "047CD674EB085DC5E556CF6C55210CE9ED018864CEF956457B2030FAAAEB3EF8",
+        "path":  "shared\\apps\\sator-web\\vite.config.ts"
+    },
+    {
+        "sha":  "3B157CE4888C1A864D12DCEA8A5B6BC30CAE09939740E43CB8C8D0750635F761",
+        "path":  "shared\\apps\\sator-web\\public\\sator-icon.svg"
+    },
+    {
+        "sha":  "34BA37FC5B46F40B8803C02752050E816E82D8C28FA81E2605FFF32C8C1F277F",
+        "path":  "shared\\apps\\sator-web\\src\\App.css"
+    },
+    {
+        "sha":  "DED6FD07CDC115EADEF517C8E813E036DF768E67596BF4A9F35CF4BF46444D4F",
+        "path":  "shared\\apps\\sator-web\\src\\App.tsx"
+    },
+    {
+        "sha":  "EFBF51ECFADC0EDF0596C1F307C0E6EF026C68C22337985E86351619EE5BC8B1",
+        "path":  "shared\\apps\\sator-web\\src\\main.tsx"
+    },
+    {
+        "sha":  "FAFD3C8CEBC2CB0E6E7F0F08FCCCB41737B575928C071FF635B4CB77AE1394DF",
+        "path":  "shared\\apps\\sator-web\\src\\vite-env.d.ts"
+    },
+    {
+        "sha":  "21CAE37BD225C720D03F9D3CB6BE9583544204BA87BD54D7AFB28BFA0AD4007C",
+        "path":  "shared\\apps\\sator-web\\src\\components\\ErrorBoundary.tsx"
+    },
+    {
+        "sha":  "A4B80139C138B4DF833DD137156E9F986E5C270286BC4462A3FFF978212D067C",
+        "path":  "shared\\apps\\sator-web\\src\\components\\index.ts"
+    },
+    {
+        "sha":  "F30FF46E99FEA4C5820F5B766B4263BDDD4BCB4299EC67867B9AF94BB4B0708B",
+        "path":  "shared\\apps\\sator-web\\src\\components\\SatorSphere.tsx"
+    },
+    {
+        "sha":  "67CA9BC504BF17CB993E8C93CC0628B144AE5576377D60B11784740241D0D401",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Analytics\\SimRatingChart.tsx"
+    },
+    {
+        "sha":  "C2961EAE078470CF41DCCF4EA0B33590A9152A87B03B47296439542D45B34569",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Analytics\\StatsTable.tsx"
+    },
+    {
+        "sha":  "CF834D53450B1EBEF73AED639BB566B14618AB870987F6F408298769D9825400",
+        "path":  "shared\\apps\\sator-web\\src\\components\\HelpHub\\HealthCheckDashboard.css"
+    },
+    {
+        "sha":  "26248D1B5A59423EA9E1B85869B6CC54C649581C55ACBB3FE35E289FE66C5C86",
+        "path":  "shared\\apps\\sator-web\\src\\components\\HelpHub\\HealthCheckDashboard.tsx"
+    },
+    {
+        "sha":  "F94340D6871344A2842371658670E091699A5D9E8B0F0E2965CB10C658C199C1",
+        "path":  "shared\\apps\\sator-web\\src\\components\\HelpHub\\HelpHub.css"
+    },
+    {
+        "sha":  "DD10A462C4A2E8A5A730E5F4BEF37978FD662BB2A8D3265BEB7F061CF73319D5",
+        "path":  "shared\\apps\\sator-web\\src\\components\\HelpHub\\HelpHub.tsx"
+    },
+    {
+        "sha":  "9CE5EB4C49FE869790DEC105FBF4E2710406B6062F5739FEE7C3AD21C59EA921",
+        "path":  "shared\\apps\\sator-web\\src\\components\\HelpHub\\index.ts"
+    },
+    {
+        "sha":  "8068AF6E15C718C27EDB5345CC8DD856BC2E414819CF346714BAC827F736BA50",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Layout\\Footer.tsx"
+    },
+    {
+        "sha":  "21D4CE023B3EB99DF4F9C6238A9AE40ACD72A61619FC8F40C3BDB5C977C9DFC7",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Layout\\Header.tsx"
+    },
+    {
+        "sha":  "2EF1C2D0D159479A5BAA748A7496F0A34767A84CCF0A0D898A24EE39D3493696",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Layout\\Sidebar.tsx"
+    },
+    {
+        "sha":  "81D3B1752C18F0F05E55BD5B4E1DA6136B376854841D8B7AA6603BB31D8785BC",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Matches\\MatchCard.tsx"
+    },
+    {
+        "sha":  "AD25400ABCBD2386DC490ACE66BDB3345B46BC489D709E01DA16D471B1FB420F",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Matches\\MatchList.tsx"
+    },
+    {
+        "sha":  "AE456603469C4A156862EE65752679D85F9C5AFF8C92E13BBC03563F29C28C76",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Players\\PlayerCard.tsx"
+    },
+    {
+        "sha":  "69B67D76DE924EA84C3810BB26295CDC94B9FFBA1CA90C5E238F81E015D26A95",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Players\\PlayerDetail.tsx"
+    },
+    {
+        "sha":  "36D62514906008A72BBE2FF63A5353F00A1F468E3A7D9643B5D686D89DE4562B",
+        "path":  "shared\\apps\\sator-web\\src\\components\\Players\\PlayerList.tsx"
+    },
+    {
+        "sha":  "A810A7282A859AD095C445F86E122801722261C2F45268344738168E8A256D0E",
+        "path":  "shared\\apps\\sator-web\\src\\components\\QuarterGrid\\index.ts"
+    },
+    {
+        "sha":  "A4706BD16BCAED54BEF8878A780CBDF804FF82DEF619829D2D41108238BFC896",
+        "path":  "shared\\apps\\sator-web\\src\\components\\QuarterGrid\\QuarterGrid.css"
+    },
+    {
+        "sha":  "426F3FC4ADC653A865B06CE5E4F1A6FAB47AB6E457355F982DCAA45C196D0F6B",
+        "path":  "shared\\apps\\sator-web\\src\\components\\QuarterGrid\\QuarterGrid.tsx"
+    },
+    {
+        "sha":  "1A233E1E1F048C4C325FB64A29393F1573DE88BB6C23184D1AB5F6DC5957E6DC",
+        "path":  "shared\\apps\\sator-web\\src\\hooks\\index.ts"
+    },
+    {
+        "sha":  "5B0322ADC69FB40DA79DE1707D11B7E2AE9CF830479A07749C818E0F5F3DF2BB",
+        "path":  "shared\\apps\\sator-web\\src\\hooks\\useApi.ts"
+    },
+    {
+        "sha":  "09EDF8F2A2F6A8ECEDD66522A6DD6F0B147FE1AD0524A731ED9F451BF0076397",
+        "path":  "shared\\apps\\sator-web\\src\\hooks\\usePlayers.ts"
+    },
+    {
+        "sha":  "D4678D955D02CA8D4355E0F600F41313227FB49101E25ECC9B486DE2C1E5C93B",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\AnalyticsPage.tsx"
+    },
+    {
+        "sha":  "D474AA2D2A1CB0C637FF499B01ACE0E0963F24E6429BAC72B44ABA1008E78217",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\DashboardPage.tsx"
+    },
+    {
+        "sha":  "326996ED34199FBD292134DD0059F64A5C8952DEEDFB44EFCBB2AD8054A7087E",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\index.ts"
+    },
+    {
+        "sha":  "E9B916EB1D910B92D0DB339B3915EB56343A38B6E5BA42AE3B51C7212230578B",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\LandingPage.css"
+    },
+    {
+        "sha":  "F077459E933A87078AB9248BE3C3EB9BC2F3CA17844DC385338CA77689BA9560",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\LandingPage.tsx"
+    },
+    {
+        "sha":  "BF3794738B767B424603AFDA4FB30C5C4C547FAF17FFC4230F2A4293F4F375ED",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\LoadingCorridor.css"
+    },
+    {
+        "sha":  "439A2E4F992D955E3CC8FCA84678C5A73BDC26C9548AB7EE337645B6DC52F887",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\LoadingCorridor.tsx"
+    },
+    {
+        "sha":  "B15BE8B4E3D52D68E29E8FA8011443284C17B7C469609871EF0687A0A2D32854",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\MatchDetailPage.tsx"
+    },
+    {
+        "sha":  "C3B35DD0CBACF3DB860B056C6ECDAA80363F6B4B6835B1C93BCD51ECF3387797",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\MatchesPage.tsx"
+    },
+    {
+        "sha":  "6289C0E041D56A51EBB801AD7B952159C16A5233E6F9A3B8FE69B95E9DDDA3DA",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\PlayerDetailPage.tsx"
+    },
+    {
+        "sha":  "4CCF0073E0DF931D235DC3D48F3C9A77871A63E0D57F90A7D2D8A4FE9730E55E",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\PlayersPage.tsx"
+    },
+    {
+        "sha":  "CF3502BF5F08AA3F45FBC08CFD3EB0F16E4FBADDA6A8E2157F298306F9B4ACA5",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\ServiceSelection.css"
+    },
+    {
+        "sha":  "BE5932923FF6AE4D7D06D39CECDEB7579241C2BA9741C836879FBB67FA7C399A",
+        "path":  "shared\\apps\\sator-web\\src\\pages\\ServiceSelection.tsx"
+    },
+    {
+        "sha":  "C65E3A17B4307B54E322782DBF073836CC16FF93C06E22E1B451195E23B1B39C",
+        "path":  "shared\\apps\\sator-web\\src\\services\\api.ts"
+    },
+    {
+        "sha":  "4DE6394587D15787D6E1D0FD135023ABBCDB802595DBE7D61FC38BF761F28A50",
+        "path":  "shared\\apps\\sator-web\\src\\styles\\globals.css"
+    },
+    {
+        "sha":  "91281F7BB82DD33FDD4E6E42FB76695FA1DD9CC964003E41BF8BA9FBCBB9A99F",
+        "path":  "shared\\apps\\sator-web\\src\\types\\index.ts"
+    },
+    {
+        "sha":  "06EF6AAC9948596B0BD698CDC59085948E316F65868D460EE60CF8828E8314AC",
+        "path":  "shared\\axiom-esports-data\\.env.example"
+    },
+    {
+        "sha":  "8E99FB0893F7CC682E794D91F29ECCDE29F296BC764072AF6DD6C768243E16AE",
+        "path":  "shared\\axiom-esports-data\\.env.production"
+    },
+    {
+        "sha":  "F7D34E9AB72B1E0896B6421ECC0FC6AE0662E0C6EC88112DF3FEE3E8306DF2AE",
+        "path":  "shared\\axiom-esports-data\\AXIOM.md"
+    },
+    {
+        "sha":  "1A4C7CA0320980B32B99ABD709B94DA942A25367FEBE51427B828E5FCE6E4C23",
+        "path":  "shared\\axiom-esports-data\\conftest.py"
+    },
+    {
+        "sha":  "C10265001C564E5AEE99FAAFF9B09959BE3BDC16C5A6C5C05595FEA6482191E1",
+        "path":  "shared\\axiom-esports-data\\DUAL_GAME_ARCHITECTURE.md"
+    },
+    {
+        "sha":  "D008167BF3A7BA2650D1E5791B3EA00D73FFF32192E909B5203BF932C0018D60",
+        "path":  "shared\\axiom-esports-data\\LICENSE"
+    },
+    {
+        "sha":  "57D5FE972A60236FDE272536EFA8E6161EF9250E3B564649A602CD8311E8F7DD",
+        "path":  "shared\\axiom-esports-data\\pytest.ini"
+    },
+    {
+        "sha":  "B2F40A730A79F6BEB06973B226D5ED30C960727729A57E9E967DBEED8322EE5E",
+        "path":  "shared\\axiom-esports-data\\README.md"
+    },
+    {
+        "sha":  "A2F97B6139F9BDC2B9170CD0E5BF6E2BF2AED6FE632EE57AFC7DA0A9C372DAF2",
+        "path":  "shared\\axiom-esports-data\\requirements-pipeline.txt"
+    },
+    {
+        "sha":  "67EF14E4BEB0A184F361DA0035323590742C63A0971B1A45E9494831DA386BC6",
+        "path":  "shared\\axiom-esports-data\\setup.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\__init__.py"
+    },
+    {
+        "sha":  "36A38644B94A111582F6BBDBD23AB61E707A9CB32BC20A4B5117115CC71796A2",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\guardrails\\confidence_sampler.py"
+    },
+    {
+        "sha":  "6EE6C8FB95E9AC8F537D0E96F8FB32863E3AB83F62C4B9437BD24F122C58CAF5",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\guardrails\\leakage_detector.py"
+    },
+    {
+        "sha":  "52049853196DBDCF9ED5498555D0AAD31D0DE3DD0E9C9A945E04A45677FEB510",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\guardrails\\overfitting_guard.py"
+    },
+    {
+        "sha":  "20EC078015CE24D2B43032E7C4287CC8C77C39DF033CCA9FD7A512F4FBE85D62",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\guardrails\\temporal_wall.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\guardrails\\__init__.py"
+    },
+    {
+        "sha":  "3D2B232B9A268F49E5AEBA8D3C3B4E8F3C3A0151D039B3535B0E528F9E6FAC39",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\investment\\grader.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\investment\\__init__.py"
+    },
+    {
+        "sha":  "6660C7042892A477D3086596AAEE38B068958D00A7F8927A29BB4FFED40EBF57",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\rar\\decomposer.py"
+    },
+    {
+        "sha":  "A0EEA9B78A927EDBBF0FCF0D4672877FE87741D223B44266ECA4B505D745B7F7",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\rar\\replacement_levels.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\rar\\__init__.py"
+    },
+    {
+        "sha":  "B20083ECCF2FEB505AF4742CA21BA6785598650277A3B13C37F57598059CEA08",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\simrating\\calculator.py"
+    },
+    {
+        "sha":  "E486E1EA7A482B03752550FFDEE6AFDB1CA5DC3A2D50267259997B2DAB87F71B",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\simrating\\normalizer.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\simrating\\__init__.py"
+    },
+    {
+        "sha":  "CCAB89F6E88F8925E034496D2A1AB57FBE310EBF9546EA33AC3603C96355F4EB",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\temporal\\age_curves.py"
+    },
+    {
+        "sha":  "F9F307AA2D121C557A6E2A77B268DF9AD61DC0ADEBE9DBBA1484421BF29E5807",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\temporal\\decay_weights.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\src\\temporal\\__init__.py"
+    },
+    {
+        "sha":  "709FA61BCA36A568C85B8DE374D1B14BF25B20D0E20C66FCDBA030636DA3964B",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_analytics_schema.py"
+    },
+    {
+        "sha":  "98B30FDEA27A576E6C63CD8D50AB5A23B741A63AE3D873746EDB05C2C363E49E",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_investment_grader.py"
+    },
+    {
+        "sha":  "BC54E3CBFC412CDC567CBEC34897C9672326A09680399FE70E9DF7BF6CBECF6D",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_leakage_detector.py"
+    },
+    {
+        "sha":  "ADF734D120598F0E5C8BF245ED3007421E8007AC300DE048632AD6995E2E9828",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_overfitting_guard.py"
+    },
+    {
+        "sha":  "100E7BB552E84E2E08C9983706AB7DA8D67BA1CD8646F832B91DFEE6E4A59DF7",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_rar.py"
+    },
+    {
+        "sha":  "746DC2B2EF0513C168E4C62A9AA44DA66F7E2983998263C0617DDC4E992F42F2",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_simrating.py"
+    },
+    {
+        "sha":  "4D43FA27C16281FBD11BF0644152F2AE4F3758E6DF494E12CF6A537EBFBE6838",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\test_temporal_wall.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\analytics\\tests\\__init__.py"
+    },
+    {
+        "sha":  "2E136F55BC5648071EAA8151820DDDB7CD512EDA7D4132F8F3D7AA28FE29A29C",
+        "path":  "shared\\axiom-esports-data\\api\\.env.example"
+    },
+    {
+        "sha":  "9B66DDF1D66CE0C180A7041F24DFB945EE1D12A5D3C295D2104E7BB1B85ECF2D",
+        "path":  "shared\\axiom-esports-data\\api\\Dockerfile"
+    },
+    {
+        "sha":  "78944D3B62F054050042EC211A342A59D1105A4EC459A161E56FDB1E750EE58C",
+        "path":  "shared\\axiom-esports-data\\api\\main.py"
+    },
+    {
+        "sha":  "08CFA1FAFB2E9401F73A54D5DBA14CC4698E60834983612B17CCDC9B66A9060A",
+        "path":  "shared\\axiom-esports-data\\api\\requirements-dev.txt"
+    },
+    {
+        "sha":  "B69B929201288096D1342708B01B716B764CEAEE2B33EEE62D080755B4DDE48F",
+        "path":  "shared\\axiom-esports-data\\api\\requirements.txt"
+    },
+    {
+        "sha":  "5BA85CCD3D6E51A0B05FE88CD29B82C2B51F0FE90CFAE57BA54C3BFE40128D13",
+        "path":  "shared\\axiom-esports-data\\api\\src\\db.py"
+    },
+    {
+        "sha":  "AD7FA016FD55C5C9E8908F2C7DC729DFEF4C02C95B918CE9757857198FE85603",
+        "path":  "shared\\axiom-esports-data\\api\\src\\__init__.py"
+    },
+    {
+        "sha":  "4EF46BFA1C19409E6E9DBE52BF15DEDFB6F1AE37C27306EAA0499BD890ACF65D",
+        "path":  "shared\\axiom-esports-data\\api\\src\\middleware\\firewall.py"
+    },
+    {
+        "sha":  "8F3FBE95398217D6458C6721A34E6ECE39661CC105EAE11E91EFA999BDDFCC60",
+        "path":  "shared\\axiom-esports-data\\api\\src\\middleware\\__init__.py"
+    },
+    {
+        "sha":  "4860F707EAD3D14680C14818634B06CC0E8C02728E827978B501ADAF4C6EC9D5",
+        "path":  "shared\\axiom-esports-data\\api\\src\\routes\\analytics.py"
+    },
+    {
+        "sha":  "7C659B2716C3CE5B4C944799ABCFCBE51A781D1672BDCCF648390CC8E83FA2BB",
+        "path":  "shared\\axiom-esports-data\\api\\src\\routes\\matches.py"
+    },
+    {
+        "sha":  "7A30D96CD622391D67B41EFA0680F9EB9A4F1E5610045120E00452D0F25C8FE1",
+        "path":  "shared\\axiom-esports-data\\api\\src\\routes\\players.py"
+    },
+    {
+        "sha":  "C6219A1DDA72AC8A93C68B03B194FE2A8A6E112CBD49E204D4AE8A2E479073ED",
+        "path":  "shared\\axiom-esports-data\\api\\src\\routes\\__init__.py"
+    },
+    {
+        "sha":  "E914E73F001A54A6AAC55E74275A57439F40F9F7AB07265FA682F83D9FB78344",
+        "path":  "shared\\axiom-esports-data\\api\\src\\schemas\\player_schema.py"
+    },
+    {
+        "sha":  "C022655647F89D58E8740F0739B46B14C95EE02236BBF8967773714380ED5C60",
+        "path":  "shared\\axiom-esports-data\\api\\src\\schemas\\__init__.py"
+    },
+    {
+        "sha":  "CE84F6F77C34ECA5D764AB87C252A35FC55F4E115E3F114CB3916683FDD5E1E9",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\test_analytics.py"
+    },
+    {
+        "sha":  "8FA44C67D3E0C3515839211FD71867442CC9DE6156C8B7EE4724835AAA6C9E5F",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\test_firewall.py"
+    },
+    {
+        "sha":  "E89328A0DC716E8E279D372ECCF807A795E510D8DF9B7787DF9B794FC102FAC0",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\test_main.py"
+    },
+    {
+        "sha":  "BF6C56F8D7F5161BA3C8ED9E745ED9D5FF1F7071E29CD98D5B6216C055B756C3",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\test_matches.py"
+    },
+    {
+        "sha":  "D30D8F5E07CE052091BABA7AF49791A07D3D031737D12AAEA6F869B3FDECC352",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\test_players.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\api\\tests\\__init__.py"
+    },
+    {
+        "sha":  "4EB7D4BE358E989710E530834C58421B711A0BFC2DC4E50FEF0F49F65614A708",
+        "path":  "shared\\axiom-esports-data\\config\\datapoint_naming.json"
+    },
+    {
+        "sha":  "429F29F49436153A5A960F74FF179BA72471DB9F5250F490040EE92202A94EE9",
+        "path":  "shared\\axiom-esports-data\\config\\harvest_protocol.json"
+    },
+    {
+        "sha":  "8821C7E95D4E57709B37579DE89C63B6D5F469232054E4E870A1E91943EA25AB",
+        "path":  "shared\\axiom-esports-data\\config\\overfitting_guardrails.json"
+    },
+    {
+        "sha":  "11460E77325BB2442C687959CF870F5C12D1E7B4D258758C8D3CDB24D830990F",
+        "path":  "shared\\axiom-esports-data\\config\\role_matrix.json"
+    },
+    {
+        "sha":  "12BDD49A70D869E8ADC4254539F8DC5EBEFA01B22C7ADD326C6682E21AFBE002",
+        "path":  "shared\\axiom-esports-data\\config\\tier_definitions.yaml"
+    },
+    {
+        "sha":  "1F3DB4B51D154076FC947D0AF6D6BEDB1F24EC5A4EAEE5B8BFA413D447C3A465",
+        "path":  "shared\\axiom-esports-data\\docs\\API_REFERENCE.md"
+    },
+    {
+        "sha":  "72B339FB67E280E976CF496D853ABEB541FCF4CECB49A95AFC5E535F53C58C42",
+        "path":  "shared\\axiom-esports-data\\docs\\CONFIDENCE_TIERS.md"
+    },
+    {
+        "sha":  "F021501E9CB5D25074C41EB98334EE8AE31EB6FE427C72009F7DD48CEE4970EF",
+        "path":  "shared\\axiom-esports-data\\docs\\DATA_DICTIONARY.md"
+    },
+    {
+        "sha":  "514D50D3DE86B669E5B238A4F071BC6A53A9F02DD16E959E725206B8B5A604E5",
+        "path":  "shared\\axiom-esports-data\\docs\\EXTRACTION_EPOCHS.md"
+    },
+    {
+        "sha":  "5D2DE8671451188CBC8CFD65C47D83CB86C9B78BE22946A57119DB5C172F57FC",
+        "path":  "shared\\axiom-esports-data\\docs\\SATOR_ARCHITECTURE.md"
+    },
+    {
+        "sha":  "BACE3E7BEFD36309276EDD9EBC528FDB6A15167339B43353B2EB25C817EDC5E3",
+        "path":  "shared\\axiom-esports-data\\docs\\TRAIN_TEST_PROTOCOL.md"
+    },
+    {
+        "sha":  "F0790F7B7C1FA6BF492448885936E5AB928F1303C694AAE6001DCFB30E9EE0A2",
+        "path":  "shared\\axiom-esports-data\\extraction\\requirements.txt"
+    },
+    {
+        "sha":  "694F3955351553C028F63E9F798F309E07B1860B8D0C91DDCFEF041F10A7F553",
+        "path":  "shared\\axiom-esports-data\\extraction\\fixtures\\example_match.json"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\__init__.py"
+    },
+    {
+        "sha":  "88C4D156E2D1B7543A08D8566C3D5823EB6B8349CAC4F3450D8A650184B9B6B2",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\bridge\\canonical_id.py"
+    },
+    {
+        "sha":  "3C895D34E691FAA8A3C91A025534A1385E93F5A25BBDA4C481E281A0C1E06B9B",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\bridge\\extraction_bridge.py"
+    },
+    {
+        "sha":  "E8A4AD5F5643F877CE99AFB53F6E04EB6043294ABD52E9B7E05115848F40D1D2",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\bridge\\field_translator.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\bridge\\__init__.py"
+    },
+    {
+        "sha":  "EEF104C0A73ECDD8A8E60B37475DFD79ABE4B66AB4349E2F206BCEFD86781A54",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\parsers\\economy_inference.py"
+    },
+    {
+        "sha":  "21BB211A9C6ADBAD9076D0DFD90D406234F570CF0DBB386A97BA2DA807EA5410",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\parsers\\match_parser.py"
+    },
+    {
+        "sha":  "E4C6E217834118E712F51BB5D266FD7597120D64F3F86B024EF8F61A2DB889C7",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\parsers\\role_classifier.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\parsers\\__init__.py"
+    },
+    {
+        "sha":  "A6B757576D6129639E25C1C335A7FB0F3937B0CF7B5AE66DB6DBC2D277CC60EC",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\scrapers\\epoch_harvester.py"
+    },
+    {
+        "sha":  "EEFE4DF6633A320CAF424D2770F71A54DD4B579433D1B2DF89F025A368F8C36E",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\scrapers\\validation_crossref.py"
+    },
+    {
+        "sha":  "F68C618445B976FA57CAA6FEAABA384A7E95F93AB663299E72A52F5CBAAFE196",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\scrapers\\vlr_resilient_client.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\scrapers\\__init__.py"
+    },
+    {
+        "sha":  "6A2F9FE572BE279D92CF252D9AA6CB6D70294E802076BD9502639A4A03E8B713",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\example_corpus.py"
+    },
+    {
+        "sha":  "5C827547A34C9A020E214DB437F86097D2DFA6206B46BB64F1F5A0E938EC94C8",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\exclusion_list.py"
+    },
+    {
+        "sha":  "F87BA68F6927B9BE12ABA17A0DB65E3524856712B565E754030018AA6A49C0BF",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\integrity_checker.py"
+    },
+    {
+        "sha":  "82ED175132E8ACE0CFC77AE000BC43961126E10A340186B75C27A1DBB0341880",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\known_record_registry.py"
+    },
+    {
+        "sha":  "9836A4A29394A750CEE642B335DE5A1E02EEE63C9B315BD1D1355B08FB09BB6B",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\raw_repository.py"
+    },
+    {
+        "sha":  "6E578B5A387BFD398F380B071C41979E084B611800B1C25DDF8096A553C4D22B",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\reconstruction_repo.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\src\\storage\\__init__.py"
+    },
+    {
+        "sha":  "D6CE42188F26E992A9F7586C0DFE3AB77C9AAD7355274AB00D162587DCCFB3CC",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_canonical_id.py"
+    },
+    {
+        "sha":  "194118DAD3879A63E3BDD52BB11FAEFCE064C5AFC6C67A4C90B4FE20C310BDA0",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_epoch_harvester.py"
+    },
+    {
+        "sha":  "C0D610F7374174E88987089D3367C3CA0A1FA76101C90F26E6B06C8F6650258C",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_example_corpus.py"
+    },
+    {
+        "sha":  "83C36A5A56A91CCD2AB54A45DD839867B2EC13E72D358D31FD69806804558E3F",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_extraction_bridge.py"
+    },
+    {
+        "sha":  "01B93B06CB8B27EB57F31880F129E7B67E68E95ED4F3D386BDD044B259CB8A6A",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_field_translator.py"
+    },
+    {
+        "sha":  "9B7A0C36492F82D5FCBF8ED5F4D22296938BE1055B78D9275C4E1BE3C3DC0FDB",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_integrity_checker.py"
+    },
+    {
+        "sha":  "1C5E7ED8B0C0555E5DEB65FB8979E1005DCF646A89370622F49771CEC9AA1762",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_known_record_registry.py"
+    },
+    {
+        "sha":  "6CA5D43F9F07493B15A0308C321CA143CCF7BA568ED1F57B821DAFBEBD942730",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_match_parser.py"
+    },
+    {
+        "sha":  "D57001A3FC091B091E5AD2932DDA1E9D757B7D2349DE84674D5CA1135DF8F124",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_pipeline_integration.py"
+    },
+    {
+        "sha":  "24E09E284F9F52A980A8AE99F1F04943D513B852B6500D674085ECC90B802903",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_rate_limiting.py"
+    },
+    {
+        "sha":  "1E714EE1A34A232843E5F6079928D37EA842598B39E6EB6C7DD08473BB2BA15E",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_role_classifier.py"
+    },
+    {
+        "sha":  "6788693302A4E9FBC42449387320B6BCEE0B987E548E4A63844FE3FEFB0F2414",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_scheduled_maintenance.py"
+    },
+    {
+        "sha":  "429A2BDEF7A4039EDE605EA75828F5D318018587309471011DB6D2F1FED6C7FB",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\test_schema_validation.py"
+    },
+    {
+        "sha":  "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "path":  "shared\\axiom-esports-data\\extraction\\tests\\__init__.py"
+    },
+    {
+        "sha":  "C4F572A95A44060616B39D8480413C75633B1DCD0E8718A50EE5D9C0E17C3FC1",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\.env.example"
+    },
+    {
+        "sha":  "6BC7EFFD61DA16D08E91605D2AEC618191E5DEDDE5BBAAD7EE22E1C03DD312EA",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\docker-compose.yml"
+    },
+    {
+        "sha":  "8B2FDFC8392564A2D7F28BBE98AE6856772DC7C363D2770689FA804506BC9B7C",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\README.md"
+    },
+    {
+        "sha":  "8A9D1B49C68067AC7DD258C9B99721054CCD1C586064BBBFC230E914BC1ADDA5",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\setup.ps1"
+    },
+    {
+        "sha":  "37F81BADF092698B143305F5195F8CEFFE85F29A285E8647DA36AA57ADF657BC",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\setup.sh"
+    },
+    {
+        "sha":  "B74C02CB2A3CB9526FA3124D523580C58B9800EC184E56FC588F1882CD7999C4",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\001_initial_schema.sql"
+    },
+    {
+        "sha":  "7C15A886756CB367D569E5113F68716B96BB1CF80C750315C1238FC2D605D643",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\002_sator_layers.sql"
+    },
+    {
+        "sha":  "D70DD633A1DCECE3EFDB2124EB520DC2DD24D824E4DF62465F86A735008C48AD",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\003_dual_storage.sql"
+    },
+    {
+        "sha":  "BBA30A945742FBDFBF3FE30A6B7D04E18622AADD40A3DE202F01759EBB7F1D66",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\004_extraction_log.sql"
+    },
+    {
+        "sha":  "0FCAE36AFC29BFD98D64E8B99D138F8E7AD10CCA1237B023B1EDC0569A06A0C9",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\005_staging_system.sql"
+    },
+    {
+        "sha":  "430600411265CC3C29E4F2BFE9A27CB79F8319A89076DFC643039876398C2104",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\006_monitoring_tables.sql"
+    },
+    {
+        "sha":  "5FB3B4CCABF61E6BFE00E673877E3ABF4F5F6227D276209CD291138DB07761FB",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\007_dual_game_partitioning.sql"
+    },
+    {
+        "sha":  "0BDA7586A959EDF0ECB61230C9654CB97A900431708EF980BBB8C0B1E9C39DD1",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\008_dashboard_tables.sql"
+    },
+    {
+        "sha":  "146C073B29D4170BC278A9347AE6B511222F5A5376D1E92D1C276A2AC40F50AD",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\migrations\\009_alert_scheduler_tables.sql"
+    },
+    {
+        "sha":  "336F5309F29E5D579062C2129BF1791FB922A23C3C1911AC6E67D0DA1ECCD64C",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\seed_data\\ground_truth_roles.csv"
+    },
+    {
+        "sha":  "A4912A31CDCC7423E5CEBBB350F5500128123CD9E4B26FC9CA62F42BC16830B1",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\seed_data\\role_baselines.yaml"
+    },
+    {
+        "sha":  "5FCD9ECF300A1AEAF33806ADB17F82F3B39CBCD9E62C8E209ED30EA15851555F",
+        "path":  "shared\\axiom-esports-data\\infrastructure\\seed_data\\seed_database.py"
+    },
+    {
+        "sha":  "3F28B83F481CB105CEE241DCAB0A2DA9839D8A14B242258026BD597845533987",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\alerts.py"
+    },
+    {
+        "sha":  "3694973FF4449E4244400F5A9463BE322888DDCDD795DD99622CBBB22C8A3394",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\cli.py"
+    },
+    {
+        "sha":  "8500DBE8806BD489814F9E99822CF3BB0B226EBC84C646633D1D8CD3D4E71CCA",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\models.py"
+    },
+    {
+        "sha":  "A1ED529EE4B69B8F0820A8A6399956F4704D4216DB2A58ACC2C7EC891B8D839E",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\README.md"
+    },
+    {
+        "sha":  "41920C53AECF9835ACDDB965231B064E77FDB48D824C159BA7C4DCB3C3668F1F",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\registry.py"
+    },
+    {
+        "sha":  "12611C0A3E5DF795EA508CF3583F7BE1B4695EE7CFCCBB094DDF9FC49CBD066A",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\scheduler.py"
+    },
+    {
+        "sha":  "B2CBD8D04AEF30A6B1FBE45C63F5D534DDFCF3F320F97836B679B567DB1FCED4",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\__init__.py"
+    },
+    {
+        "sha":  "FA81C12FA10CACC73AD8F905D96D544503719199357D19D294AF17A491D73965",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\api_collector.py"
+    },
+    {
+        "sha":  "01AD8D2B325CB66368B4D07841A2E337B46A1AF6ABD0E0306D8D1F040EC7995E",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\base.py"
+    },
+    {
+        "sha":  "14B415B58D0F1ACFA22C9FBEF794B791896F148A44BE4411BBCA52D37315AFEC",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\database_collector.py"
+    },
+    {
+        "sha":  "9BE83F11B6ADB726A20B9CA76DB4C10928AEBFB2CC70AA2AF755FAD02AAA2630",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\external_collector.py"
+    },
+    {
+        "sha":  "F4EBEB69FB2FEDE189D6EDD5779C6349DE2F5C8AAC58DFA03EBFED9BF17506E6",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\pipeline_collector.py"
+    },
+    {
+        "sha":  "743C41A1295FD5582821C4F7F83B3A0FA9ABC088E8147CC03DAE4B35477754F4",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\website_collector.py"
+    },
+    {
+        "sha":  "8FFA4FE482D3389ACFCD778B8580E8E21D1022E1F4382B72949DB67C768ED5C1",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\collectors\\__init__.py"
+    },
+    {
+        "sha":  "6A45441262C082278AAF7A6AFFE2BAC148019B5B93B148EA8994C73B1B3F3ADC",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\web\\app.py"
+    },
+    {
+        "sha":  "21F57613B1A4D8AE238C249D04CBF11D95BD76C653B2624AFE97ADB968882E14",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\web\\README.md"
+    },
+    {
+        "sha":  "402FAB54BBB8F6ECA23E34C1C8DE39DBC48FFE8AB49898E47ECA01B03D690233",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\web\\__init__.py"
+    },
+    {
+        "sha":  "E7304B3E17949E14E269E31A01C83C4248B03335A32F5822D7F97E7678F37EE7",
+        "path":  "shared\\axiom-esports-data\\monitoring\\dev_dashboard\\web\\static\\dashboard.js"
+    },
+    {
+        "sha":  "531D4DD2251EFA68F85D3BAD3A1A855CB58CD1BB558E53552F9723F8737ADF5F",
+        "path":  "shared\\axiom-esports-data\\pipeline\\axiom-pipeline.service"
+    },
+    {
+        "sha":  "33C272CECF4D22D9A9EA177DE9B8D2BD23BB4113E096F52C1A24EC409932E8C8",
+        "path":  "shared\\axiom-esports-data\\pipeline\\cli.py"
+    },
+    {
+        "sha":  "A2E9E6C4EDC2BD35974E0BEEF52A75B8A93DDDE19A4681F929CA0FB45D12A3C3",
+        "path":  "shared\\axiom-esports-data\\pipeline\\config.py"
+    },
+    {
+        "sha":  "F853874EB6C7F21E141E036233ED95016192A690A53905B75D2E6F170904784C",
+        "path":  "shared\\axiom-esports-data\\pipeline\\daemon.py"
+    },
+    {
+        "sha":  "EA41BFEAB4AD103A2A89626FA32B028F80D3C9A3797F8EC008F5904DF545744B",
+        "path":  "shared\\axiom-esports-data\\pipeline\\dead_letter.py"
+    },
+    {
+        "sha":  "F3CB2A5B933E19D96F18A4BE377D22EB89E52CF28358D69C1799FE671A2643DA",
+        "path":  "shared\\axiom-esports-data\\pipeline\\metrics.py"
+    },
+    {
+        "sha":  "395EE6F188C0D7DA0CBC06C2394DC2030DFE833272EF8FA2B7EEC78D77E9594B",
+        "path":  "shared\\axiom-esports-data\\pipeline\\models.py"
+    },
+    {
+        "sha":  "9B7A70605C1C2F8772F5AE6652F2CBBFBEC98A639915910244F1983681F9D1BB",
+        "path":  "shared\\axiom-esports-data\\pipeline\\orchestrator.py"
+    },
+    {
+        "sha":  "81AA4CECF11C391A83E40312EEDBCF8964C52EC8E28D202D72B11A2568E82ADD",
+        "path":  "shared\\axiom-esports-data\\pipeline\\README.md"
+    },
+    {
+        "sha":  "F30F6101B62A3C5CF4CCAF84186D040890F05D84D51EDDF67D0B4E6B822501D4",
+        "path":  "shared\\axiom-esports-data\\pipeline\\runner.py"
+    },
+    {
+        "sha":  "1328614FEEBD3C84D9EF43281002F8D5780B234CF5320243991A92E42955BBEB",
+        "path":  "shared\\axiom-esports-data\\pipeline\\scheduler.py"
+    },
+    {
+        "sha":  "DA0CE271480771BE5C25C0C525ED46BA993B0C906A38F1890F39F4B2193C85A0",
+        "path":  "shared\\axiom-esports-data\\pipeline\\schema.sql"
+    },
+    {
+        "sha":  "378E79EF9E98E131B85CCCEDF2EBE3C8ADE0362159922FD370239F9986827703",
+        "path":  "shared\\axiom-esports-data\\pipeline\\stage_tracker.py"
+    },
+    {
+        "sha":  "3EAFF01CE782E1C6E87615600B3D636B35B9A63AC13D36E13836984B93C73E1D",
+        "path":  "shared\\axiom-esports-data\\pipeline\\state_store.py"
+    },
+    {
+        "sha":  "B3A0B0D5833F72CF65826278FC976FC708DDB662D63562FF8A1BC292FA040C1F",
+        "path":  "shared\\axiom-esports-data\\pipeline\\__init__.py"
+    },
+    {
+        "sha":  "061C78246CB6E5AA99C5F98BC23B6C49BC25A2EEEDC7D2A54657D15E646BB40E",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\agent_manager.py"
+    },
+    {
+        "sha":  "7865A196E0723BD6C0327D6723486A808A45E96358D086F38A8AF84968391483",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\conflict_resolver.py"
+    },
+    {
+        "sha":  "3920B5406EBA3FD5E53C26F904226E285413DDA2185E7A68682444BE0AEE1E93",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\distributor.py"
+    },
+    {
+        "sha":  "ED75E91F626DD180AF2FA615A59A49F1358FA3AD45846612B313711E2934BBEB",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\main.py"
+    },
+    {
+        "sha":  "7D4B4C88C4E23B511F3173A31FD308E2CF1C7EED7E8A92EDB4FDBC35EC44E798",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\models.py"
+    },
+    {
+        "sha":  "57253530875F96442131C8977C83ABE58E34788F8F2852A5C62229DACECC1BEB",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\monitoring.py"
+    },
+    {
+        "sha":  "9D82463A1EABACD4B95ADF8CF768B61DD817BEB6106E25C7C378AE108F31EBB4",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\queue_manager.py"
+    },
+    {
+        "sha":  "677AFA14E9822C2739F8BDF305BB8711136E9A9778C25CEF1230CFEEEF05A8BC",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\rate_limiter.py"
+    },
+    {
+        "sha":  "D97B9C578EA01659E4BADEFD75ACA8CAD1361D6B5BAACFC23F3DE780BE7448BB",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\README.md"
+    },
+    {
+        "sha":  "32C3814C516028AC8BDDBD2A94C371EE08E69939317FE5B65D387C531E950F04",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\requirements.txt"
+    },
+    {
+        "sha":  "32291AEECA3A62DF21F9FA06ED77259F8F9A8032E2C03763E6B55659F9ABCF58",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\__init__.py"
+    },
+    {
+        "sha":  "D9CF50C87970D99E430B13CBC5FD0FD394311BF3B455B776B46873D2253148C9",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\migrations\\001_initial.sql"
+    },
+    {
+        "sha":  "EC98B8591268B90345539CCE12304418B4C45F087B414C1314B22DF956770B5C",
+        "path":  "shared\\axiom-esports-data\\pipeline\\coordinator\\migrations\\__init__.py"
+    },
+    {
+        "sha":  "86787277EDCCB01617EE26FC602AD1BDD40451FEF64A12657E541531D1979DBF",
+        "path":  "shared\\axiom-esports-data\\pipeline\\extractors\\agent_worker.py"
+    },
+    {
+        "sha":  "10F4CF764A039F72B228B79575C7A54300FEC58C68306F729B178204E06A0218",
+        "path":  "shared\\axiom-esports-data\\pipeline\\extractors\\base.py"
+    },
+    {
+        "sha":  "DC0F5670474443E9B9FB782EE66F427A33CC97EB5C5BE518EEA03E35F979E03E",
+        "path":  "shared\\axiom-esports-data\\pipeline\\extractors\\__init__.py"
+    },
+    {
+        "sha":  "29A5A6852BA3DDDE2071264A1F8B17093CE8BF9E13D5ADBB3E6DC43079AF7490",
+        "path":  "shared\\axiom-esports-data\\pipeline\\extractors\\cs\\extractor.py"
+    },
+    {
+        "sha":  "4B33EBAEEEEFC6DBBA894CBDC8930C1719B9F30B4EA47F05E375EF9EA92F2819",
+        "path":  "shared\\axiom-esports-data\\pipeline\\extractors\\valorant\\extractor.py"
+    },
+    {
+        "sha":  "3BE8D605111840A283BC2B32366548C9023A7DBE67A198C86A5F862AA91430D1",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\alert_manager.py"
+    },
+    {
+        "sha":  "4BDE71DDAC349A60B5EAD8FD98EBBD381DC36781080AA526A5110E61CBB9E105",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\anomaly_detector.py"
+    },
+    {
+        "sha":  "8B488F4038DBB849DECDB23C56A2B8336B04788111CB7021A6B52B181135D147",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\dashboard.py"
+    },
+    {
+        "sha":  "102D4BDED6AF41BC6AA10F49420350D5B89FAE10B134D17B423357565AEA93E3",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\dashboard_generator.py"
+    },
+    {
+        "sha":  "A23E723AF16D8073B579DF24F1DDA42AF5F93A4FEBC2BB884389AC9846530152",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\health_reporter.py"
+    },
+    {
+        "sha":  "7A9FF8C48F489C5C058850302247BCF4DAA6E799E02F982C35035651CD2FBAC7",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\metrics_collector.py"
+    },
+    {
+        "sha":  "F07A1D63979043603C23EA5FADABB39AD20F9BA6279434AEF8BA93EE55B6B8D7",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\queue_cli.py"
+    },
+    {
+        "sha":  "5A6E66679E90C2376085B84CF01987BF07EA8CCBD9EA2EB8D8F6353B7C465F93",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\README.md"
+    },
+    {
+        "sha":  "1BFB2EE3E9470EFD6ED088DE1C5400B5EAAC85D4C3992A44F82FE0DD349DD16C",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\reports.py"
+    },
+    {
+        "sha":  "ADF3AB4BAFD06BDEB0489EA448010632559FD61D3273E3D95C3F6DF47C54C3CC",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\__init__.py"
+    },
+    {
+        "sha":  "7812F7835E4911305D995E000506568663A19DE3E08FE20B05D19FEC280E0341",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\config\\alerts.yaml"
+    },
+    {
+        "sha":  "6284AC4E149AD06E6B5DC65C3D2B3B5FEEDDA3B26AE5C0C7000E74279BA58F29",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\notifiers\\github.py"
+    },
+    {
+        "sha":  "85F64D980ECEDB384950FE08E1EFB1341811C55E17D9F2404411EDA06301451B",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\notifiers\\pagerduty.py"
+    },
+    {
+        "sha":  "D5500AACF71FAB1A3E2C1DC313B98B48BDF3CDE54C996CD7CD827240F1C1AD37",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\notifiers\\slack.py"
+    },
+    {
+        "sha":  "52A55A743CCDCF0D18B49FE2CFE282C286C0F8893EDC1D5309ADC07E8890BA01",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\notifiers\\webhook.py"
+    },
+    {
+        "sha":  "0763E965BE1FB8B5DEEBEEB35B6C32B8A2097B6F64067701D60C7BA6613B06D7",
+        "path":  "shared\\axiom-esports-data\\pipeline\\monitoring\\notifiers\\__init__.py"
+    },
+    {
+        "sha":  "506626E65A26FB66B28A686526E599192AD4DC9F42F817B7155AF5D327BF0305",
+        "path":  "shared\\axiom-esports-data\\pipeline\\storage\\partitioned_storage.py"
+    },
+    {
+        "sha":  "3E49F51D648AB6DF2A892C841AF755A36F10F25BE05FCAA869AC37AE4C2985AC",
+        "path":  "shared\\axiom-esports-data\\pipeline\\tests\\test_orchestrator.py"
+    },
+    {
+        "sha":  "3C71F6F9CA5E60F048B91BD9BFBB12E8B0F8F66709DE87926C8C9A79FF2CFC96",
+        "path":  "shared\\axiom-esports-data\\pipeline\\tests\\__init__.py"
+    },
+    {
+        "sha":  "FC75BF58A26DDC822697A0D476EF24F38988BFA7EA071751C2E3F3B138AD7F95",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\confidence_calculator.py"
+    },
+    {
+        "sha":  "423F07BAC99F10CFDA5E1DE3B57F2912C06E8846A3FCEAA0D9DAD839E6D7AA4A",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\duplicate_detector.py"
+    },
+    {
+        "sha":  "8BFEF55257D389A539BC668FCC64A64967E8A5661FB826EC72AD1CE9444B2CF1",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\integrity_verifier.py"
+    },
+    {
+        "sha":  "D615CFAE746694F812789F44375F10060CF4A0D1BDF15256EA2C050AEAEC0A04",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\models.py"
+    },
+    {
+        "sha":  "36441E2CB2F9A7EC8FE3258BD7B43AF1DB7C034CEB565308E368A13024FC33F8",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\schema_validator.py"
+    },
+    {
+        "sha":  "18853EC58000C41306F03BAB3F5D86AFDBFE3A0E00284641633019DA64F8C6D5",
+        "path":  "shared\\axiom-esports-data\\pipeline\\verification\\__init__.py"
+    },
+    {
+        "sha":  "1507E74BE63D7D8116C647DCC6CF56083AD8C78DB3F1EBB9A5E1118CE3B5B9FE",
+        "path":  "shared\\axiom-esports-data\\scripts\\agent_security_check.py"
+    },
+    {
+        "sha":  "2193FEB2906A6C92583C7B80395AD7FF1FB5EF8A141A1EF73E7B57F55E307A19",
+        "path":  "shared\\axiom-esports-data\\scripts\\daily_health_check.py"
+    },
+    {
+        "sha":  "770D49FA515F6884A9460596BD1A6C32B369A7AF07D5BA1F649EC8D05FE8E375",
+        "path":  "shared\\axiom-esports-data\\scripts\\duplicate_detector.py"
+    },
+    {
+        "sha":  "06B61CD90038BB74198B031B9B032F178F41D4D9E12BA38B8B7D56A17E1516F5",
+        "path":  "shared\\axiom-esports-data\\scripts\\export_csv.py"
+    },
+    {
+        "sha":  "7606BDF5EBC3862911D3DFDED469A9E7BEA58FC40202ECB1C54D2E9BEFC73DEC",
+        "path":  "shared\\axiom-esports-data\\scripts\\monthly_full_harvest.py"
+    },
+    {
+        "sha":  "41AB8C9F0D8FCA90B604631A9C33C9C3684B518394FC270C911FC60F1B38069D",
+        "path":  "shared\\axiom-esports-data\\scripts\\overfitting_scan.py"
+    },
+    {
+        "sha":  "C92DA3858E0256A0A6F5094D7BAD2EAF68CE6B41179CF22967968FF948877BF4",
+        "path":  "shared\\axiom-esports-data\\scripts\\validate_vs_liquipedia.py"
+    },
+    {
+        "sha":  "B8829D37C2312727C625EC6889B93191F85A19350C96F2881B4643A848FD61BF",
+        "path":  "shared\\axiom-esports-data\\scripts\\weekly_analytics_refresh.py"
+    },
+    {
+        "sha":  "51B49A2BCB5822AFFEF32EC135263B4B3FE70A037B6F50A6755403E9D8E570D0",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\hooks\\useSpatialData.ts"
+    },
+    {
+        "sha":  "47DDB5AEB1EF610FDC70560F6C0669D002E416AA89118CDC1C5E4573AB5A803D",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\layers\\ArepoLayer.tsx"
+    },
+    {
+        "sha":  "FAB3AF1F81804CAD07CEFCD722B2CA7F15DA877C71B7A9FAF2E2B3BF80FABFEE",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\layers\\OperaLayer.tsx"
+    },
+    {
+        "sha":  "960383E7BD9FC3F21AC98D40E3B7C666AD1759AE29FEC79380F3707379596E8A",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\layers\\RotasLayer.tsx"
+    },
+    {
+        "sha":  "C2477EFBB592AEE8C3E2E1CC6449C820E398AA2F0D88BFF0242C140519908274",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\layers\\SatorLayer.tsx"
+    },
+    {
+        "sha":  "7105C211CD99A041D96F415B87F348531542443418B47A7DAACFB17C71271B94",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\layers\\TenetLayer.tsx"
+    },
+    {
+        "sha":  "6B2E9BBF37EF70A6717FA1648BF42C2EEEE7A801463CBD5F88F08409FF3B9B85",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\shaders\\dust.vert"
+    },
+    {
+        "sha":  "919CD18AF57983E789DEAEE71FA3E6E33D2469DA46AA89670BC6D2D227FE186F",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\shaders\\fog.frag"
+    },
+    {
+        "sha":  "5BF07E29848CC210C311C66C3BDA5A1DCD23144F2CBCF4C8C35B33B90A7696DA",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\__tests__\\ArepoLayer.test.tsx"
+    },
+    {
+        "sha":  "4D7F40329F6104F01B65D3A9ED0B829681F6BB60CAC35597690EBC86CD1C095B",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\__tests__\\OperaLayer.test.tsx"
+    },
+    {
+        "sha":  "B325469F4E71831858CAD99FD0CDECED0ABE318A45947441A7A2FBCEF89CB955",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\__tests__\\RotasLayer.test.tsx"
+    },
+    {
+        "sha":  "8D0328806D1D78EA67B44648CC3366CEC20B73094795E6312D46154E4BDB751A",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\__tests__\\SatorLayer.test.tsx"
+    },
+    {
+        "sha":  "09D097313E457526217BB231A071B33FB3149CC9E9F57F79D043082AADA5A7E5",
+        "path":  "shared\\axiom-esports-data\\visualization\\sator-square\\__tests__\\TenetLayer.test.tsx"
+    },
+    {
+        "sha":  "485E39E729B0DD453E73934B1586B04A423639DA1BB3C1C245CD0DAB94469E7F",
+        "path":  "shared\\docs\\agents.md"
+    },
+    {
+        "sha":  "6D84FC60E384EEFB92A3960A9A59191AB9FDD73FB428E2154796B11D2D4EC888",
+        "path":  "shared\\docs\\AGENT_DATA_PROCESS.md"
+    },
+    {
+        "sha":  "E2738BBCB7A7AA20AB75D698F79950F212D2F801993A0165474FFE0A13502690",
+        "path":  "shared\\docs\\AGENT_RUNBOOK.md"
+    },
+    {
+        "sha":  "D6182CB8768702631A207D34D283B6E24FEB1E107B2C1ADB6D6391072E4D8452",
+        "path":  "shared\\docs\\architecture.md"
+    },
+    {
+        "sha":  "DE9197FA6A27AD610B698A6DA2EE1DF2A97B56D11B7C84C3588D8966F32C65DF",
+        "path":  "shared\\docs\\backend_architecture_review.md"
+    },
+    {
+        "sha":  "B58B04BB995412F527E0620245140A001CEC931CE5CF6F09404EB984F6C47C09",
+        "path":  "shared\\docs\\BRANCH_STRATEGY.md"
+    },
+    {
+        "sha":  "CBC11673B8A670BA59987C277B6B594A7A9B71C34D72A7B7F74A448585D0D84A",
+        "path":  "shared\\docs\\combat_system_review.md"
+    },
+    {
+        "sha":  "8A2C1C4D9F4B0D50F93800B01E7C8891E2BE708219E99050498F9ECF05EC4CA5",
+        "path":  "shared\\docs\\CRIT_FEATURE_GAP.md"
+    },
+    {
+        "sha":  "DBAFD31D37D94F3BF0B57723070776981BC726DBCF0FD87C501CBCF42FF33724",
+        "path":  "shared\\docs\\custom-agents.md"
+    },
+    {
+        "sha":  "7B196D92406F9D0A6EE4FC01C935190E44157E850434749873FC6C297C917B91",
+        "path":  "shared\\docs\\FIREWALL_POLICY.md"
+    },
+    {
+        "sha":  "1841BF35A8C20391B5AE276CCA0D3B4BA9A34C989DA34F563472D099934C2BB7",
+        "path":  "shared\\docs\\map_format.md"
+    },
+    {
+        "sha":  "D972762D81CCBE1CDCD6295DD3A8065F37AE2103DAAA1897914EA1E9136A6E88",
+        "path":  "shared\\docs\\PROJECT_STRUCTURE.md"
+    },
+    {
+        "sha":  "A216C63EE16593E6C65A92A8BC8A977F3DD86C5ABA2EF60171865E6E76257EE4",
+        "path":  "shared\\docs\\quick_start.md"
+    },
+    {
+        "sha":  "DFCA2D2528A92F62C7522488CE34A50F453B7C8E6FE7C74714C123DA8C7E2EC1",
+        "path":  "shared\\docs\\replay.md"
+    },
+    {
+        "sha":  "9037751A47FB173B4039EC7DE5BA39F435A5D4A587FC641797492682C5C95CBD",
+        "path":  "shared\\docs\\STAGING_SYSTEM.md"
+    },
+    {
+        "sha":  "72F389B4FE6CCEACF2FF06ADB0C1C78308F84B97940A18ED4D549DCDC3B5C9A4",
+        "path":  "shared\\docs\\UI_UX_ACCESSIBILITY_ASSESSMENT.md"
+    },
+    {
+        "sha":  "6302C4FE5C644AAE6A8C11D4D3BD9488B46AEA0C5D8E73755CCF3B116D08EDF0",
+        "path":  "shared\\docs\\api\\README.md"
+    },
+    {
+        "sha":  "9CE27E0F489E9899D93DC2357E4F9B7641305B07B8EA82F8B8BA22390731C620",
+        "path":  "shared\\docs\\game\\README.md"
+    },
+    {
+        "sha":  "1BCFC976ECEC7D33A4DC4759DC3AAE079550CF3ABD5EAD8CA7ED535DB63020D9",
+        "path":  "shared\\docs\\web\\README.md"
+    },
+    {
+        "sha":  "0008973CE4873224CC83204F36098ECDD6E0D195AAEBB1ED7EBCA26EC2C6AFA3",
+        "path":  "shared\\packages\\api-client\\src\\README.md"
+    },
+    {
+        "sha":  "F1274F833AC581C209155B1044C8E8344939360CEAB5CEB6F3C29F7BEC087B02",
+        "path":  "shared\\packages\\data-partition-lib\\package.json"
+    },
+    {
+        "sha":  "9E4958F1710AB20E7AF39EB1753706E98C977D26EE0A22BC1A20126052DD336F",
+        "path":  "shared\\packages\\data-partition-lib\\README.md"
+    },
+    {
+        "sha":  "BEB69FD12DCF671C473DAF9DDA289DB7208A01AC93D0B74CABF6211213FE1F0F",
+        "path":  "shared\\packages\\data-partition-lib\\src\\FantasyDataFilter.ts"
+    },
+    {
+        "sha":  "E5F907F9AE8C465F9C84674BC0BB4F3D1837AF61674BFF45A1F2B79D9470652F",
+        "path":  "shared\\packages\\stats-schema\\package.json"
+    },
+    {
+        "sha":  "41254AAB3EDEB7F79DDE89BEAE68CDF00B5531723333BDFE2552350D35C6060A",
+        "path":  "shared\\packages\\stats-schema\\README.md"
+    },
+    {
+        "sha":  "2716FB0EF9854CF878D7F8644D4C5198C1F46010AD2D78B21F6F091074E4D267",
+        "path":  "shared\\packages\\stats-schema\\tsconfig.json"
+    },
+    {
+        "sha":  "BB48338D61D3C11189830FEA5D3C83F185D31E787944CBEC207AD6D907231F97",
+        "path":  "shared\\packages\\stats-schema\\src\\types\\index.ts"
+    },
+    {
+        "sha":  "97C970202354DFFC4C4C6CFC7E44F47B69B4A366CB7E37D5DFEC687E384D7DA2",
+        "path":  "shared\\packages\\stats-schema\\src\\types\\Match.ts"
+    },
+    {
+        "sha":  "C7FBD67FC2CAFBCB7F1F015C49FABA3561D4866F7FE9E2C07DAD5880E3DA8DDF",
+        "path":  "shared\\packages\\stats-schema\\src\\types\\Player.ts"
+    },
+    {
+        "sha":  "4FE36D4E719BC4E7C37BAF473C079CDC90263AD34AD98B54E24C2231B4D130D5",
+        "path":  "shared\\packages\\stats-schema\\src\\types\\Season.ts"
+    },
+    {
+        "sha":  "D33A11EAA57C9B1036D172AB75C6FBE92875AAA3E7FF66B05F4FA6AA9FDBE8F8",
+        "path":  "shared\\packages\\stats-schema\\src\\types\\Statistics.ts"
+    },
+    {
+        "sha":  "28B121EEDE61E656F542C843B63C064BEC343213795DFA842FC2D04A8F63117F",
+        "path":  "simulation-game\\icon.svg"
+    },
+    {
+        "sha":  "0312A88F964298745429A1B13778C831CC39E7BF1B24A6C9EC57C9CBDB79D206",
+        "path":  "simulation-game\\project.godot"
+    },
+    {
+        "sha":  "22C31872EC7989AB910C4999CA402002142708962CC11C6F04354C676DCCAD61",
+        "path":  "simulation-game\\Defs\\agents\\agents.json"
+    },
+    {
+        "sha":  "C0ABC55E7EE7D6671BF72E5F03F5FC8FD81C523A792CAC1679E244669C391B80",
+        "path":  "simulation-game\\Defs\\rulesets\\rulesets.json"
+    },
+    {
+        "sha":  "C4516448DA79688CBEF72726DE30771FA169C2C8BC89927E7A5321612CFF7ABD",
+        "path":  "simulation-game\\Defs\\utilities\\cs_grenades.json"
+    },
+    {
+        "sha":  "A143BA8A337573CD80B6064CCFE97BB193CB1C5BCDD9853A8C791AA74A7A05BE",
+        "path":  "simulation-game\\Defs\\utilities\\val_abilities.json"
+    },
+    {
+        "sha":  "B9FD40EAD9A1A812BE74342896CAA785D0DF60E58AD9EA57A20A0B24E21D4AAF",
+        "path":  "simulation-game\\Defs\\weapons\\weapons.json"
+    },
+    {
+        "sha":  "70B059EB242DBAA2C67A2B2C94204ABD58A019E3EF717BCF2A1A6EDF16192024",
+        "path":  "simulation-game\\maps\\training_ground.json"
+    },
+    {
+        "sha":  "911C1A633C9AB3A11E74CC486AAEBA8CD156E017CF86F7FE6848749A5BD9E048",
+        "path":  "simulation-game\\scenes\\Main.tscn"
+    },
+    {
+        "sha":  "4E57B0107E185513E03CB5EA92D21FD3EADE4576B8209D29FBCBC8502C9A4255",
+        "path":  "simulation-game\\scripts\\Agent.gd"
+    },
+    {
+        "sha":  "2329A3FA8D6004405F0D52E1A7D1C3E3A14E46260B0EC8B7A0488203FC08EE0B",
+        "path":  "simulation-game\\scripts\\EventLog.gd"
+    },
+    {
+        "sha":  "96B067E405B66248E500AF36AB1462EB65087448736445F5094D4303635D16A6",
+        "path":  "simulation-game\\scripts\\Main.gd"
+    },
+    {
+        "sha":  "FD7DDC51A7DACEAC80424092EA317D1487F90388DC3855413D5E0C6378530C35",
+        "path":  "simulation-game\\scripts\\MapData.gd"
+    },
+    {
+        "sha":  "12356F4C3D7C1AA820E6E927502F071C4856E0C11EE37E7B1C939D26E79853DF",
+        "path":  "simulation-game\\scripts\\MatchEngine.gd"
+    },
+    {
+        "sha":  "83793495C1384A5ACA6A3BFC135FFADE3182448C97CB473367C565626A81609C",
+        "path":  "simulation-game\\scripts\\PlaybackController.gd"
+    },
+    {
+        "sha":  "7EFECD33599D2ABC4BB5500D499055ADE6B7472C51AB32DF01ECF6CD125734FA",
+        "path":  "simulation-game\\scripts\\README.md"
+    },
+    {
+        "sha":  "655C87F687403320F8B795A7DE32DA13934C465F1D62CB57157B00E2E6E7032B",
+        "path":  "simulation-game\\scripts\\Viewer2D.gd"
+    },
+    {
+        "sha":  "36DEB52B884A1CC557F40FA02734B87F2C4031421D1EF72797A98E9AA84A0D2A",
+        "path":  "simulation-game\\scripts\\Data\\AgentBridge.gd"
+    },
+    {
+        "sha":  "899B0C79EE1BF806E6D130C79FA9E66BE021668CD5EA143818E268B944E3BAB3",
+        "path":  "simulation-game\\scripts\\Data\\AgentDef.gd"
+    },
+    {
+        "sha":  "C99C640F2124052D76996197E3F2DFEC931AB3C88E1F14A61A2D2DA97902EAE5",
+        "path":  "simulation-game\\scripts\\Data\\AgentState.gd"
+    },
+    {
+        "sha":  "F6BE54DF8873F2D6874FCC003432DC930CFDEC000E7991A8B7E3D9F608CF24A2",
+        "path":  "simulation-game\\scripts\\Data\\AnimCurve.gd"
+    },
+    {
+        "sha":  "DA3A9C7ADB072C6B65242FFD0525727DDA3C4D35CA106663F6779177D8F0CE23",
+        "path":  "simulation-game\\scripts\\Data\\DamageProfile.gd"
+    },
+    {
+        "sha":  "B89FA78C8C173E6901823A48CBE1F0863DB77292F409CED717527C34D35F92FA",
+        "path":  "simulation-game\\scripts\\Data\\DataLoader.gd"
+    },
+    {
+        "sha":  "7DDAF046F395577E7C85D04780F77002047C2F941AA4B40D169E7DC4B974B845",
+        "path":  "simulation-game\\scripts\\Data\\DataTypes.gd"
+    },
+    {
+        "sha":  "8146194C34B688C199BA387CC616F716B552855F611D88330943F021E9825054",
+        "path":  "simulation-game\\scripts\\Data\\EffectSpec.gd"
+    },
+    {
+        "sha":  "8805DC7B695652AAF01F33D422DC0F81A9F76D9557349625AFD80D1767718C93",
+        "path":  "simulation-game\\scripts\\Data\\MatchConfig.gd"
+    },
+    {
+        "sha":  "C93F54EF35A96C2F982C5E5C8BCFC07279DD5826712D65F9C673022E8AA31601",
+        "path":  "simulation-game\\scripts\\Data\\PenetrationProfile.gd"
+    },
+    {
+        "sha":  "F4280F2AC93C8EE168D5EE1D831D848749D97D2446CBEBE52E24E99EA602A53A",
+        "path":  "simulation-game\\scripts\\Data\\ProjectileDef.gd"
+    },
+    {
+        "sha":  "636700455DFFF4ED9AADFBCA4C0FB1F1887F2DB2EAC4844D7B76A45AF7FA1724",
+        "path":  "simulation-game\\scripts\\Data\\RecoilProfile.gd"
+    },
+    {
+        "sha":  "0BAA408884CA99D7F5E8BF1643B5F8510666F77A9BF5AB109659699A0750CF93",
+        "path":  "simulation-game\\scripts\\Data\\RulesetDef.gd"
+    },
+    {
+        "sha":  "C2D5E2EED832EC6E524146BDC8935493A3962752ACCF24292F53321AE93B59FD",
+        "path":  "simulation-game\\scripts\\Data\\SimEvent.gd"
+    },
+    {
+        "sha":  "135AF9A9CDF395C85E7A03287F3325544A2764B83AB559D202B32D9C2E52E9B7",
+        "path":  "simulation-game\\scripts\\Data\\SpreadProfile.gd"
+    },
+    {
+        "sha":  "D1BE1FD1FCF70ACC036B192718DE1DAE68BFAAD63FA2AE17481AC702B0AB50D1",
+        "path":  "simulation-game\\scripts\\Data\\StatusState.gd"
+    },
+    {
+        "sha":  "7E284C9C62A5FBED199ADA90C7CD2E48852ACAE15027E7F0CD73845ED901E6D1",
+        "path":  "simulation-game\\scripts\\Data\\ThrowBallistics.gd"
+    },
+    {
+        "sha":  "CDCE82EF8FDBA4B1393C2FE1625AAAD3B9B083D8FE0E413F59895BEE157A65BD",
+        "path":  "simulation-game\\scripts\\Data\\TraitBlock.gd"
+    },
+    {
+        "sha":  "8531A22ABA4F1E8BC287E282A6E8D3BF1A7749B6CA790F64DDD062941F38DA43",
+        "path":  "simulation-game\\scripts\\Data\\UtilityDef.gd"
+    },
+    {
+        "sha":  "F5865E3B4E187B1C8675A5B4D0E11138687B7F379DB67962105B8833CE6390E5",
+        "path":  "simulation-game\\scripts\\Data\\UtilityState.gd"
+    },
+    {
+        "sha":  "3A59409AA37D6085C8726ED6F159FE712229BCF42786642268E4F1EA697CB738",
+        "path":  "simulation-game\\scripts\\Data\\WeaponDef.gd"
+    },
+    {
+        "sha":  "4C3A59625B56B2FF59F454F9D9F91AE048ECD67FD3664FFBD42AA4D71C2E9AF4",
+        "path":  "simulation-game\\scripts\\Data\\WeaponState.gd"
+    },
+    {
+        "sha":  "18AF6B3D57240093ABAFDAEEE902EB17F8E302A7E5275D1312D02CBA68A83745",
+        "path":  "simulation-game\\scripts\\Sim\\CombatResolver.gd"
+    },
+    {
+        "sha":  "72D8F7F0C6E316F275DA67434735E61B6D30D84DEA3359D6CDB7F3B8887D640C",
+        "path":  "simulation-game\\scripts\\Sim\\DuelContext.gd"
+    },
+    {
+        "sha":  "E4AFBCDE704B7917E89341FCCCBA0CB3B3A838C4EC79187AB4D89753C521569A",
+        "path":  "simulation-game\\scripts\\Sim\\DuelResolver.gd"
+    },
+    {
+        "sha":  "8403A521D43FFAFE5F199C67543EA2462CF49C746D0EDD1789D1A9C02DB8B0F8",
+        "path":  "simulation-game\\scripts\\Sim\\DuelResult.gd"
+    },
+    {
+        "sha":  "B7A935BB9FF4FCC8E25EB2C97ECC64B7316DE8578A60ED4C0FDAB9CE2F71925E",
+        "path":  "simulation-game\\scripts\\Sim\\RaycastDuelEngine.gd"
+    },
+    {
+        "sha":  "82597E934CDBFFE58175F46684064CD0E1E6370FF0A237CCAD0A6DF683EC8FCD",
+        "path":  "simulation-game\\scripts\\Sim\\TTKDuelEngine.gd"
+    },
+    {
+        "sha":  "8FFA6C072AEE71655047AB09EEF2A5C2762FF475E693F7D96750671568E52A29",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\README.md"
+    },
+    {
+        "sha":  "4D26B44994CBDDEB91B2A6F1FF3753654B90A03FBCB05608EA7EDE5B86FF5373",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\tactical-fps-sim-core.sln"
+    },
+    {
+        "sha":  "17AE3D54E374AA51E2C3FF025A1F833677D1A8F9E8DE70035BD7D3AFD519B004",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\TacticalFpsSim.sln"
+    },
+    {
+        "sha":  "9461485CEAC55666F59A65A7F657D5FC151D3288FF56C55471F29E3B87D03417",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\ConsoleRunner\\ConsoleRunner.csproj"
+    },
+    {
+        "sha":  "ED6C72709DC644632E44B2837E950CF2FDCAA862567AC33BA8152C0B89E9E3BC",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\ConsoleRunner\\Program.cs"
+    },
+    {
+        "sha":  "6A2248C7DE391E234815A21BCE517A314D6B28AF9870BA8265E6F511C59A64F8",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\agents.sample.json"
+    },
+    {
+        "sha":  "87784EB6A7F1953247B3150E0691FC097D9CED3FD1BFBA2937B2A79BC47EABEA",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\agents.val.sample.json"
+    },
+    {
+        "sha":  "02ECFE619E3CC41DABDD8FA122D7FF52EC0BD2A94CA0D1CBF63F5585D3730EE5",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\map.sample.json"
+    },
+    {
+        "sha":  "15E4A06917D569FC5A4683B880F61576B6BA76BCA23B065BE6EF29333038AB14",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\rules.cs.json"
+    },
+    {
+        "sha":  "A7990690ABEB8BF921E4B4957BDECCA85336FF4B66C955B7AEA73F18510E35F4",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\rules.val.json"
+    },
+    {
+        "sha":  "EE390AFD30D152424E694D3E52C8340E6D4A15CF8ED5863D06425211D22BA8BA",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\utilities.cs.json"
+    },
+    {
+        "sha":  "CA885FF89647C11451920A49BE9307E532628A62E7A3ADE8869112BA75350E7D",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\utilities.val.templates.json"
+    },
+    {
+        "sha":  "AE7CD347F240029BF11E6830095CA31CEC9CDA63DA6CE7B9934849D0B6096918",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\Defs\\weapons.sample.json"
+    },
+    {
+        "sha":  "AFA977C8A524A0D97837491C6C5337019DE4E7953CAF58C1F66DB69086142871",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SchemasTS\\types.ts"
+    },
+    {
+        "sha":  "24CD5BDDD5B73BC37842B34F9740B8BA5C5F5FF9F0DD958AC0F11C02C053ED6D",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimConsoleRunner\\Program.cs"
+    },
+    {
+        "sha":  "0F3A15B591BEEF9E773E9E4E52568E6C04767A4044AE982B266DD85ED5C74392",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimConsoleRunner\\SimConsoleRunner.csproj"
+    },
+    {
+        "sha":  "0F01CD9F1BF6BC88B720B29108504BED95A04DA69E776876CC913FDF7992D4B4",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\SimCore.csproj"
+    },
+    {
+        "sha":  "3104E0691DA3CE703DE1B66AF2FC5EE74FBC83A7F0FD84FA6AED210E95370304",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\CombatContext.cs"
+    },
+    {
+        "sha":  "AACD35EC2A328BDA5FB0E4E5218BC56CFD08060A292740FF40B67097065DD789",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\Damage.cs"
+    },
+    {
+        "sha":  "AA0A1F8274FF8B0F11AB7C68EC7783CA6F442E318CC601DE213D141148646E84",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\DuelEngine.cs"
+    },
+    {
+        "sha":  "BA8255B7DF5B57ED586620E326E74E355439AF1834C8B3B4942951D469CCCA02",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\HitModel.cs"
+    },
+    {
+        "sha":  "6DDFD3DC10B40D1076C8F21811664C655FF7A4792B581CC62D724977FF87E7FC",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\RaycastDuelEngine.cs"
+    },
+    {
+        "sha":  "39E7D1AEF281388DFB82915B5AB34F2F54F284DE34B3192BD363DB424403791C",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\Status.cs"
+    },
+    {
+        "sha":  "2DB621BE2DCEC2A5FE837A16BE6EC801739A099A08BE88EEEF73B6D84CF6C02A",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\TtkDuelEngine.cs"
+    },
+    {
+        "sha":  "3D763367F441BBFF6E52E49232DC90E37746A4DE19CD3307E446A029AC9EE203",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Combat\\TwoWayDuel.cs"
+    },
+    {
+        "sha":  "3EB5B282C20F389E65C815ADFCA36B04E84F50782FD41E4C3ADCA809CC0FD6ED",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Defs\\DefDatabase.cs"
+    },
+    {
+        "sha":  "CB8C0DE5F7E7AC9E0979BA857E096B0BF8C14E354FED7EB66A2B92DD2EDD5E44",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Defs\\DefModels.cs"
+    },
+    {
+        "sha":  "E27E607CE5F056D562990DCC90AA5A4AA5C9561B02A64874912E4883E77B2F44",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Economy\\EconomySystem.cs"
+    },
+    {
+        "sha":  "52D7399EC3E8B1339D4B692EB6EBEC2771BD3C6836149DADF4D511A7ACAE626A",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Economy\\RoundRunner.cs"
+    },
+    {
+        "sha":  "FD9622FBDAE61D07F434BD5D53839DF6322D66FEE49A38E5882B18CCB2138BE4",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Geometry\\MapRuntime.cs"
+    },
+    {
+        "sha":  "8B512AA3156F99878482FC4461DB0EBB9BFEABF011AB18EE4043CDAD87E19FFB",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Geometry\\Raycast2D.cs"
+    },
+    {
+        "sha":  "91C6F1DCE1758F9FD2645623ED530E98D35F3A8C5834FE78D6AE91EE165448FB",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Geometry\\Segment.cs"
+    },
+    {
+        "sha":  "22EEEBB43B1AEA1C7E49F3A0FFB66C5F9AD62F3129EE9FCF834E584679E08630",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Geometry\\SmokeField.cs"
+    },
+    {
+        "sha":  "341ED7F7687DA5EA938DF984008C0EE44F3AA165AD06E256F5310F19865E0F3F",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Math\\Curves.cs"
+    },
+    {
+        "sha":  "2A602E6F47861FE6CC126E56965CEF822910D6F329D7FBFAE7B38092F69C6936",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Math\\DeterministicRng.cs"
+    },
+    {
+        "sha":  "3444D995797C7C471CEBED358BF32DAF863DEE1361DA76C6527679AB276F9BB0",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\BuySystem.cs"
+    },
+    {
+        "sha":  "D4F6311D10C1CA692640F687729D551D407F581CFE6DF0041E6E6887AD7EB9ED",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\EventQueue.cs"
+    },
+    {
+        "sha":  "3A9F3C2139CB99BD8055884763F25CDF4BAD1ECE9E4622A1B9697E6B49D2032E",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\MatchState.cs"
+    },
+    {
+        "sha":  "1EA37436B638FFC38848EA55B9EFF1DBFC15E75B546BAEB4229A0D6CFC2C7861",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\QuickStartExample.cs"
+    },
+    {
+        "sha":  "66CB2404070FCD1B7687DB4ABCA4318C94D9F4C3A892105AFEC60FC00AF94259",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\RoundSystem.cs"
+    },
+    {
+        "sha":  "4F23A5ED75FBB33A406B536BF373A537535419BE29AAF2C63A760D5B7E5F501C",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\SimEvent.cs"
+    },
+    {
+        "sha":  "47292990847BA6DDFE1F1A8B08ADE6515C459B5AC76BB5346E22F4C2AA0F493C",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\SimState.cs"
+    },
+    {
+        "sha":  "F69D95F28A6EC574F6F7C6319638CADE14170A04880C7668355738AA8E965B5D",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Sim\\Simulator.cs"
+    },
+    {
+        "sha":  "80B7F9BF12DE90A22401E1314A9EADB6EE209F68CB37ADCB7016E4B8E59628C9",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Utility\\ActiveEffects.cs"
+    },
+    {
+        "sha":  "43D3091719B29EC57EFD826073D18F3095D2B9B78E4BCF41DC04870D219E0736",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\SimCore\\Utility\\UtilitySystem.cs"
+    },
+    {
+        "sha":  "1C3D7DDBC8DAF3556112E97BA53DB26C499D0FEC384A70752E3EDDBB444788D3",
+        "path":  "simulation-game\\tactical-fps-sim-core-updated\\tools\\validate_defs.ps1"
+    },
+    {
+        "sha":  "B3F68745D1CFC798F8612D70791499C0934BCD24682DBDB7763811A2AA9A1F44",
+        "path":  "simulation-game\\tests\\README.md"
+    },
+    {
+        "sha":  "BE5EC0B0BE5526D70A74EF741AB3DD75DCA26EBFD4EB0A7D7BD1400AE7437878",
+        "path":  "simulation-game\\tests\\test_determinism.gd"
+    },
+    {
+        "sha":  "AD8D96A3A2B9066D33073A4468E88863879FDCEC1F94E5E1DAEE215B8F3170BB",
+        "path":  "simulation-game\\tests\\test_determinism.tscn"
+    },
+    {
+        "sha":  "ACE32A9DA88A9E0C2DAE44FBC877D0EAD4B3FFA31A0DBC365B26A2746E96DA4A",
+        "path":  "tests\\integration\\conftest.py"
+    },
+    {
+        "sha":  "1801AD270BD453416C0F4F6CF40844DE72A8DCDE85C00CCF6AD5A39E96108514",
+        "path":  "tests\\integration\\README.md"
+    },
+    {
+        "sha":  "F41276D16E7F1CCB55B1E69723E4B43D428544532BBDF3EBF1329D49D4372819",
+        "path":  "tests\\integration\\requirements.txt"
+    },
+    {
+        "sha":  "0818A1291C99CEFECAE347604DD1A9A7B8C8CEDDB7457C328C35D69C917E85C4",
+        "path":  "tests\\integration\\test_api_firewall.py"
+    },
+    {
+        "sha":  "1528FF57FA0E5C101F4DDF646FA1ED0A5FF0E9E06CBFD79F031C11DCAB889F6A",
+        "path":  "tests\\integration\\test_cold_start_resilience.py"
+    },
+    {
+        "sha":  "B418693D4C4DF9DF1B02E85CB53B3D4538C6F3A387B330D3DD8C4C3F63D872D0",
+        "path":  "tests\\integration\\test_database_connection.py"
+    },
+    {
+        "sha":  "1552A5E3F417474E5F6CFB09CBB4CF8160DE5881DFE45C2BFE4387EC4B56EA23",
+        "path":  "tests\\integration\\test_dedup_redundancy.py"
+    },
+    {
+        "sha":  "FC290231E392D4DB5EC4B236A983768A86938080373873F4042E1308C46992EF",
+        "path":  "tests\\integration\\test_end_to_end.py"
+    },
+    {
+        "sha":  "296CA4654E323273EC87E881E67AC13A21258E9DF061ADA87E7773DCB9022DBE",
+        "path":  "tests\\integration\\test_pipeline_e2e.py"
+    },
+    {
+        "sha":  "E6B85292EA6E9602A39BB29BE8BD2648725522980D13E6A71C26AF0886645FA5",
+        "path":  "website\\ARCHITECTURE.md"
+    },
+    {
+        "sha":  "13DF979029993A4CE951EA2D6F114E714CED392FD44AB723610FD3F149E4B7B7",
+        "path":  "website\\CHANGELOG.md"
+    },
+    {
+        "sha":  "6C8A4483C2C70065253DAAFEB274737B53405A87822EBEFFA307B11D2DF7BDB9",
+        "path":  "website\\CONTRIBUTING.md"
+    },
+    {
+        "sha":  "8643495C8F90704BE84DA6BE292D563C94CA402BD1A20B79941F2D2A7464E05E",
+        "path":  "website\\DATA_ARCHITECTURE.md"
+    },
+    {
+        "sha":  "710A4A35171A850E0A01877B9794B83F1A06147D82D37F6BFE0BF4C8ED58EB55",
+        "path":  "website\\DESIGN_SYSTEM.md"
+    },
+    {
+        "sha":  "B1DE2D543217905EAE51525C734BBEC93752486131AFCC3E96BE70FF61ECC25C",
+        "path":  "website\\favicon.svg"
+    },
+    {
+        "sha":  "413FCCC3221DFB778A01128573EA7C3C230AAB918F71AF4405933975B81CD344",
+        "path":  "website\\FOREMAN_STATUS.md"
+    },
+    {
+        "sha":  "892DAD9BC17DAC355ABFDCE8744CCB2BF1596B90A43D2080B16A0BAADF2F40CB",
+        "path":  "website\\index.html"
+    },
+    {
+        "sha":  "1D43A466C751A15A447AAA4282347F6EF215C1D9C53C89CFD8688E4F48898372",
+        "path":  "website\\landing.html"
+    },
+    {
+        "sha":  "0A443870C75D2BF137DA898B0106ED17C0F8B74FD804281EDF32D4FE234222F1",
+        "path":  "website\\launchpad.html"
+    },
+    {
+        "sha":  "A1878DBD04F008621BBE49D3DE60CB1EDB6DF6E71FC4E4615D418803E7126855",
+        "path":  "website\\LICENSE"
+    },
+    {
+        "sha":  "E840FC9E66E7215649D46D1AAED751C49541B157B387A88B843E413A91B9743D",
+        "path":  "website\\package-lock.json"
+    },
+    {
+        "sha":  "7A7C10A65E8CCF096B50678096677AC18B331E6334AA8E197F7C8CC350EE67D0",
+        "path":  "website\\package.json"
+    },
+    {
+        "sha":  "374F669F08B18E67D0A7264FA45B71228017E604FE7F6DB8A5C1BD5BA27E5C98",
+        "path":  "website\\postcss.config.js"
+    },
+    {
+        "sha":  "48027A878024FA2E709B37BF14A8A58AA626543A333EDAF4303C5A6FF195E704",
+        "path":  "website\\PRESENTATION.md"
+    },
+    {
+        "sha":  "6C4D2194FA15DED6CDF4F392DE363499E2093D2E05F28D0B3CDA79ABE90026C8",
+        "path":  "website\\PR_DESCRIPTION.md"
+    },
+    {
+        "sha":  "C45B250BAB9B3F16F5AAE70FC26B966CAA335D51D2D9E09FCE4BCD1F8F54611D",
+        "path":  "website\\QA_REPORT.md"
+    },
+    {
+        "sha":  "BCC2911D4AA7DC09D6F863027C23BBE90A7A477462728D9164A5E0AA052E662A",
+        "path":  "website\\README.md"
+    },
+    {
+        "sha":  "D9E35EE0D85C35C163F492A75D3A4E552103F046B6C63B5E36E037966990569C",
+        "path":  "website\\robots.txt"
+    },
+    {
+        "sha":  "BDCE28940A021AC91C3D5EB340D5841CE7057A0490D6C0ABFD3EF734ADF528CC",
+        "path":  "website\\sator-sphere-css.html"
+    },
+    {
+        "sha":  "0AA04218470BCA5478559141C4EFCB3F75D8A1C57913AE43D31114FDC0A55588",
+        "path":  "website\\sator-sphere-dual-triangle.html"
+    },
+    {
+        "sha":  "E65E61947800785843B9B1A9AABA310646279704FC5EB5EC884F5282F18F3D7E",
+        "path":  "website\\sator-sphere-threejs.html"
+    },
+    {
+        "sha":  "02A3C085869256D86A7B3F028AC099AD386D8490A975171072713E6DC32226A9",
+        "path":  "website\\SATOR_SPHERE_DESIGN_DOC.md"
+    },
+    {
+        "sha":  "E0461ED5D45D52DFA5F008941C550C562FC69F66AFFB9C69A64A0FB3F6943DAD",
+        "path":  "website\\sitemap.xml"
+    },
+    {
+        "sha":  "3BB173100816D7CB0B7AF5455BD4922BD3248910882D23FF3B52392515DDB6AE",
+        "path":  "website\\tailwind.config.js"
+    },
+    {
+        "sha":  "553C35E5B0D4D0707240B3BADC8F755A1F5DB37EFCBD4CA03C70E4F8991F647C",
+        "path":  "website\\config\\metrics.json"
+    },
+    {
+        "sha":  "104C8D233D0E5B84DDA392147850ECF01D5AA01858557E627359CCA69FAEFD18",
+        "path":  "website\\config\\schema.json"
+    },
+    {
+        "sha":  "CC2899E25B28426C9AE4A05303773531EE8B74CE65DE1481E43E88437759EE67",
+        "path":  "website\\data\\matches.json"
+    },
+    {
+        "sha":  "576015599CBA747E18BF1D7B35424BB81BEAF37A32F16929B26C7172E97150D4",
+        "path":  "website\\data\\players.json"
+    },
+    {
+        "sha":  "C07FE0B0D6A44633EC00DC01D5A46F72399D62EA2EBBF9081F612BDD8CB87871",
+        "path":  "website\\data\\competitors\\analysis.json"
+    },
+    {
+        "sha":  "4C0FA9927D03B3E361B38EAA24BED0610F9EE91736ED528A363ACEE98C70B16A",
+        "path":  "website\\design-system\\porcelain-cubed\\main.css"
+    },
+    {
+        "sha":  "D5CF1677AC888E16EC6F6E86CB7096F65023BD74553B3BB2900D16F1F827D953",
+        "path":  "website\\design-system\\porcelain-cubed\\components\\quarter-grid.css"
+    },
+    {
+        "sha":  "DA9963485834B8418240FFFCB2F6D619FB10F1FF5730398DB54808D5949DE400",
+        "path":  "website\\design-system\\porcelain-cubed\\tokens\\animations.css"
+    },
+    {
+        "sha":  "8A37DE1B8EC9A06E3AD09C3A6878851B480417A35324E584A2DBF165664A853E",
+        "path":  "website\\design-system\\porcelain-cubed\\tokens\\colors.css"
+    },
+    {
+        "sha":  "DC0E8486DCDDAC5F79F54753637DC40D09ADE8E19337B5142DBD4644C7B1327C",
+        "path":  "website\\design-system\\porcelain-cubed\\tokens\\elevation.css"
+    },
+    {
+        "sha":  "96443442B99B89A45B5285B664E05C7FF1DC2037AB0B40076BA45A1FE36885C0",
+        "path":  "website\\design-system\\porcelain-cubed\\tokens\\spacing.css"
+    },
+    {
+        "sha":  "C9A08A2B6900CCE5D67FE499C5EFE301FCFD2FAE4AC4E998CC6E7DDBCADF1FF9",
+        "path":  "website\\design-system\\porcelain-cubed\\tokens\\typography.css"
+    },
+    {
+        "sha":  "D249EBB75D2E72B387C0048B5EA88EA6C7379B92B3C41E380DCEF261398C48CD",
+        "path":  "website\\profiles\\radiantx\\index.html"
+    },
+    {
+        "sha":  "347778FA32BC49EF58FFEE45CCC3A5A296152B4D71AD1C157947E9D067C2E8F2",
+        "path":  "website\\profiles\\radiantx\\theme.css"
+    },
+    {
+        "sha":  "0056581FA36D13EA33ACFF50002096AB80B5CECC3E11244FA226ACA302213836",
+        "path":  "website\\src\\style.css"
+    },
+    {
+        "sha":  "C6D614F2FE2E55ACB6CC5DAA58CDC83664046CB549BCFEABFFF20646090B71B2",
+        "path":  "website\\system\\core.css"
+    },
+    {
+        "sha":  "B61E24C6A12395237415C1840F7842028FCE0E60B88D231CEA08A25039F9ADD6",
+        "path":  "website\\system\\js\\hub.js"
+    }
+]
