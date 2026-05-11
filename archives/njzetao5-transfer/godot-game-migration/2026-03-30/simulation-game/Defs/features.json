@@ -1,0 +1,40 @@
+{
+  "features": {
+    "new_rating_algorithm": {
+      "enabled": true,
+      "description": "Updated SimRating calculation with economy weighting",
+      "rollout_percentage": 25,
+      "allowed_users": ["test_match_001", "test_match_002"]
+    },
+    "advanced_ai_agents": {
+      "enabled": false,
+      "description": "Belief-based AI with utility reasoning",
+      "rollout_percentage": 0,
+      "allowed_users": []
+    },
+    "deterministic_replays": {
+      "enabled": true,
+      "description": "Seed-based replay reconstruction",
+      "rollout_percentage": 100,
+      "allowed_users": []
+    },
+    "real_time_api_sync": {
+      "enabled": true,
+      "description": "Sync simulation with live API data",
+      "rollout_percentage": 50,
+      "allowed_users": []
+    },
+    "enhanced_economy": {
+      "enabled": true,
+      "description": "Improved economic simulation model",
+      "rollout_percentage": 75,
+      "allowed_users": []
+    },
+    "spatial_heatmaps": {
+      "enabled": false,
+      "description": "Visual heatmap generation for positioning",
+      "rollout_percentage": 10,
+      "allowed_users": ["dev_test"]
+    }
+  }
+}

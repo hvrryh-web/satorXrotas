@@ -1,0 +1,17 @@
+{
+  "dirs": [
+    "res://tests/unit",
+    "res://tests/integration"
+  ],
+  "include_subdirs": true,
+  "ignore_pause": true,
+  "log_level": 2,
+  "opacity": 100,
+  "port": 6008,
+  "prefix": "test_",
+  "suffix": ".gd",
+  "should_exit": true,
+  "should_exit_on_success": false,
+  "should_maximize": false,
+  "compact_mode": true
+}
