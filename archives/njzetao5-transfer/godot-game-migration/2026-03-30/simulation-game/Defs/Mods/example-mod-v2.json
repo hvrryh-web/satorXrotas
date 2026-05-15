@@ -1,0 +1,91 @@
+{
+  "moddingSystem": {
+    "version": "2.0",
+    "schema": "https://sator.io/schemas/mod-v2.json",
+    "description": "SATOR Mod Definition Schema with scripting support"
+  },
+  "mod": {
+    "id": "example-advanced-mod",
+    "name": "Advanced Weapons Pack",
+    "version": "1.0.0",
+    "author": "ModAuthor",
+    "description": "Adds 5 new weapons with custom behavior scripts",
+    "gameVersion": "2.0+",
+    "dependencies": [],
+    "tags": ["weapons", "gameplay"]
+  },
+  "scripts": {
+    "weapons": {
+      "vandal-x": {
+        "file": "scripts/weapons/vandal-x.lua",
+        "type": "weapon_behavior",
+        "events": ["on_fire", "on_reload", "on_equip"]
+      },
+      "operator-mk2": {
+        "file": "scripts/weapons/operator-mk2.lua",
+        "type": "weapon_behavior",
+        "events": ["on_fire", "on_zoom"]
+      }
+    },
+    "agents": {
+      "custom-duelist": {
+        "file": "scripts/agents/custom-duelist.cs",
+        "type": "agent_ai",
+        "inherits": "BaseDuelist"
+      }
+    }
+  },
+  "definitions": {
+    "weapons": [
+      {
+        "defName": "Weapon_VandalX",
+        "label": "Vandal X",
+        "description": "Enhanced Vandal with burst fire mode",
+        "stats": {
+          "damage": 40,
+          "fireRate": 8.5,
+          "accuracy": 0.85
+        },
+        "script": "weapons.vandal-x"
+      }
+    ],
+    "agents": [
+      {
+        "defName": "Agent_CustomDuelist",
+        "label": "Shadow",
+        "description": "Custom duelist with stealth abilities",
+        "role": "Duelist",
+        "abilities": ["smoke_dash", "silent_step"],
+        "script": "agents.custom-duelist"
+      }
+    ]
+  },
+  "assets": {
+    "models": [
+      {
+        "id": "vandal-x-model",
+        "path": "assets/models/vandal-x.fbx",
+        "type": "weapon"
+      }
+    ],
+    "textures": [
+      {
+        "id": "shadow-skin",
+        "path": "assets/textures/shadow-skin.png",
+        "type": "agent_skin"
+      }
+    ],
+    "sounds": [
+      {
+        "id": "vandal-x-fire",
+        "path": "assets/sounds/vandal-x-fire.ogg",
+        "type": "weapon_sound"
+      }
+    ]
+  },
+  "workshop": {
+    "steamWorkshopId": null,
+    "visible": true,
+    "downloadUrl": "https://example.com/mods/vandal-x.zip"
+  }
+}

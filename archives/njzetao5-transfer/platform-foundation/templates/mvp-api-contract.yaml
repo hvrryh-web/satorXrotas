@@ -1,0 +1,364 @@
+openapi: 3.0.3
+info:
+  title: NJZetao5 MVP API Contract
+  version: 0.1.0
+servers:
+  - url: https://api.example.local
+security:
+  - bearerAuth: []
+
+paths:
+  /v1/projects:
+    post:
+      summary: Create project
+      operationId: createProject
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+
+  /v1/projects/{projectId}/tasks:
+    post:
+      summary: Create task in project
+      operationId: createTask
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+      responses:
+        '201':
+          description: Task created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /v1/tasks/{taskId}/status:
+    patch:
+      summary: Update task status with transition checks
+      operationId: updateTaskStatus
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskStatusRequest'
+      responses:
+        '200':
+          description: Task updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /v1/agent-actions:
+    post:
+      summary: Submit asynchronous agent action
+      operationId: createAgentAction
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentActionRequest'
+      responses:
+        '202':
+          description: Action accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentAction'
+
+  /v1/agent-actions/{actionId}/approvals:
+    post:
+      summary: Approve or reject high-impact action
+      operationId: createAgentActionApproval
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: actionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentActionApprovalRequest'
+      responses:
+        '200':
+          description: Approval state recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentAction'
+
+  /v1/context-sync/jobs:
+    post:
+      summary: Create context sync job
+      operationId: createContextSyncJob
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContextSyncJobRequest'
+      responses:
+        '202':
+          description: Sync accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextSyncJob'
+
+  /v1/context-sync/jobs/{jobId}:
+    get:
+      summary: Get context sync job status
+      operationId: getContextSyncJob
+      parameters:
+        - $ref: '#/components/parameters/CorrelationId'
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextSyncJob'
+
+  /healthz:
+    get:
+      summary: Liveness probe
+      operationId: healthz
+      responses:
+        '200':
+          description: Service is alive
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+  /readyz:
+    get:
+      summary: Readiness probe with dependency checks
+      operationId: readyz
+      responses:
+        '200':
+          description: Service is ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+        '503':
+          description: Service not ready
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadinessStatus'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    CorrelationId:
+      name: x-correlation-id
+      in: header
+      required: false
+      description: Correlates API/UI/audit telemetry for a request chain.
+      schema:
+        type: string
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      description: Required for retry-safe asynchronous writes.
+      schema:
+        type: string
+
+  schemas:
+    Project:
+      type: object
+      required: [id, name, createdAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    Task:
+      type: object
+      required: [id, projectId, title, status, createdAt]
+      properties:
+        id:
+          type: string
+        projectId:
+          type: string
+        title:
+          type: string
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        createdAt:
+          type: string
+          format: date-time
+
+    AgentAction:
+      type: object
+      required: [id, actionName, status, requiresApproval, createdAt]
+      properties:
+        id:
+          type: string
+        actionName:
+          type: string
+        status:
+          type: string
+          enum: [pending, approved, rejected, running, succeeded, failed]
+        requiresApproval:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+
+    ContextSyncJob:
+      type: object
+      required: [id, source, status, createdAt]
+      properties:
+        id:
+          type: string
+        source:
+          type: string
+          enum: [notion, obsidian, hermes]
+        status:
+          type: string
+          enum: [queued, running, succeeded, failed]
+        createdAt:
+          type: string
+          format: date-time
+
+    CreateProjectRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+
+    CreateTaskRequest:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+
+    UpdateTaskStatusRequest:
+      type: object
+      required: [toStatus, actorId]
+      properties:
+        toStatus:
+          $ref: '#/components/schemas/TaskStatus'
+        actorId:
+          type: string
+        reason:
+          type: string
+
+    CreateAgentActionRequest:
+      type: object
+      required: [actionName, actorId, payload]
+      properties:
+        actionName:
+          type: string
+        actorId:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
+
+    AgentActionApprovalRequest:
+      type: object
+      required: [approved, approverId]
+      properties:
+        approved:
+          type: boolean
+        approverId:
+          type: string
+        rationale:
+          type: string
+
+    CreateContextSyncJobRequest:
+      type: object
+      required: [source, actorId]
+      properties:
+        source:
+          type: string
+          enum: [notion, obsidian, hermes]
+        actorId:
+          type: string
+
+    TaskStatus:
+      type: string
+      enum: [todo, in_progress, blocked, done]
+
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          example: ok
+
+    ReadinessStatus:
+      type: object
+      required: [status, checks]
+      properties:
+        status:
+          type: string
+          enum: [ready, not_ready]
+        checks:
+          type: object
+          additionalProperties:
+            type: string
