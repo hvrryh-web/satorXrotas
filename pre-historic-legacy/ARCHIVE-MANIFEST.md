@@ -9,17 +9,18 @@ Migration Phase: Initial Archive
 
 ### 01-simulation-game/
 **Source:** Root `simulation-game/`
-**Contents:** Godot 4 tactical FPS simulation project
-- Defs/ - Type definitions
-- maps/ - Game maps
-- scenes/ - Godot scenes
-- scripts/ - GDScript files
-- tactical-fps-sim-core-updated/ - Core simulation logic
-- project.godot - Project configuration
-- icon.svg - Project icon
+**Contents:** _Moved out — see pointer below._
 
-**Status:** ARCHIVE - Godot simulation preserved for reference
-**Migration Decision:** Review for reusable components
+**Status:** MOVED to notbleaux/ESPORTEZ-MANAGER on 2026-05-11.
+The Godot 4 tactical FPS simulation project (formerly "Tact FPS Simulation
+Game") was relocated to
+`imported/satorxrotas/frozen-game-material/01-simulation-game/` in
+[notbleaux/ESPORTEZ-MANAGER](https://github.com/notbleaux/ESPORTEZ-MANAGER)
+at source commit `05616d3`.
+
+**Migration Decision:** FROZEN / DEFERRED at destination. Only
+`MOVED-TO-ESPORTEZ-MANAGER.md` remains in this directory as a pointer.
+See `pre-historic-legacy/01-simulation-game/MOVED-TO-ESPORTEZ-MANAGER.md`.
 
 ---
 
@@ -89,7 +90,7 @@ Migration Phase: Initial Archive
 
 | Category | Items | Size |
 |----------|-------|------|
-| Simulation Game | 7 entries | ~2MB |
+| Simulation Game | MOVED to ESPORTEZ-MANAGER (2026-05-11) | — |
 | Website | 7 entries | ~500KB |
 | Shared (Monorepo) | 5 entries | ~50MB |
 | Tests | 1 entry | ~100KB |
