@@ -1,0 +1,7 @@
+{
+  "name": "@njz-os/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.cjs",
+  "files": ["index.cjs", "react.cjs"]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@njz-os/rat-os-api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NJZ RAT-OS Backend-For-Frontend aggregator (Phase 2+)",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "echo 'rat-os-api not implemented in Phase 0 — see README'",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@njz-os/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@njz-os/tsconfig": "workspace:*",
+    "typescript": "^5.6.0"
+  }
+}

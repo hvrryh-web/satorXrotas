@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: rat-os-api
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    rootDir: services/rat-os-api
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @njz-os/rat-os-api build
+    startCommand: node dist/server.js
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VAULTBRAIN_API_URL
+        sync: false
+      - key: VAULTBRAIN_SHARED_SECRET
+        sync: false
+      - key: AGENT_GATEWAY_API_KEY
+        sync: false
+      - key: IDENTITY_JWKS_URL
+        sync: false

@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: NJZ RAT-OS — Upstream API Surface
+  version: 0.1.0
+  description: |
+    The subset of the upstream `services/api` (in notbleaux/ZeSporteXte) that
+    RAT-OS depends on. The upstream is the source of truth; this file mirrors
+    only what RAT-OS calls. Bumps here require a coordinated ADR.
+servers:
+  - url: https://api.staging.njz-rat-os.app
+    description: Staging
+  - url: https://api.njz-rat-os.app
+    description: Production
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: getHealth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+
+  /v1/users/me:
+    get:
+      summary: Current authenticated user
+      operationId: getCurrentUser
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/sessions/start:
+    post:
+      summary: Start a focus / training / writing session
+      operationId: startSession
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSessionRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+
+  /v1/sessions/{id}/complete:
+    post:
+      summary: Mark a session complete; emits progression event
+      operationId: completeSession
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteSessionRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+
+  /v1/progression/state:
+    get:
+      summary: Get current progression state (XP + streaks across modules)
+      operationId: getProgressionState
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressionState'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Health:
+      type: object
+      required: [status, version, commit]
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded]
+        version:
+          type: string
+        commit:
+          type: string
+    User:
+      type: object
+      required: [id, tier, createdAt]
+      properties:
+        id:
+          type: string
+        tier:
+          type: string
+          enum: [free, premium, team]
+        displayName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    StartSessionRequest:
+      type: object
+      required: [module, mode]
+      properties:
+        module:
+          $ref: '#/components/schemas/ModuleSlug'
+        mode:
+          type: string
+        plannedDurationMs:
+          type: integer
+    CompleteSessionRequest:
+      type: object
+      required: [completedAt]
+      properties:
+        completedAt:
+          type: string
+          format: date-time
+        durationMs:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties: true
+    Session:
+      type: object
+      required: [id, module, state, startedAt]
+      properties:
+        id:
+          type: string
+        module:
+          $ref: '#/components/schemas/ModuleSlug'
+        mode:
+          type: string
+        state:
+          type: string
+          enum: [pending, running, paused, completed, abandoned]
+        startedAt:
+          type: string
+          format: date-time
+        durationMs:
+          type: integer
+        xpAwarded:
+          type: integer
+    ProgressionState:
+      type: object
+      required: [xp, streaks]
+      properties:
+        xp:
+          type: object
+          additionalProperties:
+            type: integer
+        streaks:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Streak'
+    Streak:
+      type: object
+      required: [currentDays, longestDays, lastActiveAt]
+      properties:
+        currentDays:
+          type: integer
+        longestDays:
+          type: integer
+        lastActiveAt:
+          type: string
+          format: date-time
+    ModuleSlug:
+      type: string
+      enum:
+        - focus-hero
+        - soundscapes
+        - distraction-blocker
+        - writing-space
+        - micro-learning
+        - brain-training
+        - polyco-world
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string

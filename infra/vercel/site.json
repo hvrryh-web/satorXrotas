@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm turbo run build --filter=@njz-os/site",
+  "outputDirectory": "apps/site/.next",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "trailingSlash": false,
+  "cleanUrls": true
+}
