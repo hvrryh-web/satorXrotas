@@ -7,7 +7,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "echo 'rat-os-api not implemented in Phase 0 — see README'",
-    "build": "tsc",
+    "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist .turbo"
   },
