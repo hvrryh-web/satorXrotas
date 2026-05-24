@@ -1,0 +1,16 @@
+{
+  "_comment": "Authoritative channel registry. Prose in COORDINATION_PROTOCOL.md is derived from this.",
+  "channels": [
+    { "name": "framework",        "owner_role": "coordinator", "paths": [".agents/**", "ROOT_AXIOMS/**", ".doc-tiers.json", ".doc-registry.json"], "gate": "G0.framework" },
+    { "name": "product-docs",     "owner_role": "architect",   "paths": ["docs/product/**"],                                                          "gate": "G0.docs" },
+    { "name": "architecture",     "owner_role": "architect",   "paths": ["docs/architecture/**", "ARCHITECTURE.md"],                                  "gate": "G0.docs" },
+    { "name": "web-app",          "owner_role": "implementer", "paths": ["apps/web/**"],                                                              "gate": "G0.skeleton" },
+    { "name": "site",             "owner_role": "implementer", "paths": ["apps/site/**"],                                                             "gate": "G0.skeleton" },
+    { "name": "packages-ui",      "owner_role": "designer",    "paths": ["packages/@njz-os/ui/**"],                                                   "gate": "G0.skeleton" },
+    { "name": "packages-engines", "owner_role": "implementer", "paths": ["packages/@njz-os/{core,audio-engine,focus-engine,polyworld,pixel-art,progression,analytics,learning-cards,writing,tsconfig}/**"], "gate": "G0.skeleton" },
+    { "name": "adapters",         "owner_role": "data-engineer","paths": ["packages/adapters/**", "contracts/**"],                                     "gate": "G0.adapters" },
+    { "name": "infra",            "owner_role": "platform",    "paths": ["infra/**", ".github/workflows/**", "services/rat-os-api/**"],                "gate": "G0.skeleton" },
+    { "name": "tests",            "owner_role": "critic",      "paths": ["tests/**", "packages/**/test/**", "apps/**/test/**"],                       "gate": "G0.skeleton" },
+    { "name": "dev-reports",      "owner_role": "coordinator", "paths": ["docs/dev-reports/**"],                                                       "gate": "G0.docs" }
+  ]
+}

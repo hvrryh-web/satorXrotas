@@ -1,0 +1,19 @@
+name: Doc Hygiene
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '.doc-tiers.json'
+      - '.doc-registry.json'
+
+jobs:
+  doc-tier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate doc-tiers + manifest
+        run: node tools/doc-tier-check/index.mjs

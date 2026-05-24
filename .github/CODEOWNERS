@@ -1,0 +1,25 @@
+# NJZ RAT-OS CODEOWNERS
+# Mirror of `.agents/CODEOWNER_CHECKLIST.md` reviewer table.
+# Until contributor roles are assigned, all paths default to the repo owner.
+
+*                                       @hvrryh-web
+
+.agents/                                @hvrryh-web
+ROOT_AXIOMS/                            @hvrryh-web
+.doc-tiers.json                         @hvrryh-web
+.doc-registry.json                      @hvrryh-web
+
+docs/architecture/                      @hvrryh-web
+docs/architecture/ADR/                  @hvrryh-web
+docs/product/                           @hvrryh-web
+
+apps/site/                              @hvrryh-web
+apps/web/                               @hvrryh-web
+
+packages/@njz-os/ui/                    @hvrryh-web
+packages/@njz-os/                       @hvrryh-web
+packages/adapters/                      @hvrryh-web
+contracts/                              @hvrryh-web
+
+infra/                                  @hvrryh-web
+.github/workflows/                      @hvrryh-web

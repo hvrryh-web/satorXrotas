@@ -1,0 +1,86 @@
+version: 1
+framework: NJZPOF v0.2
+repo: hvrryh-web/satorXrotas
+
+# Lineage map: where does each canonical concept come from?
+# Used by agents to trace "why does this exist?" without spelunking history.
+
+concepts:
+  - name: NJZ RAT-OS
+    type: brand
+    origin: User direction (2026-05-24)
+    relates_to:
+      - njz-os (technical platform name)
+      - satorXrotas (repository name)
+
+  - name: NJZ-OS
+    type: platform
+    origin: 3NJZOS_PRD.docx (uploaded 2026-05-24)
+    description: Neural Operating System — wellness-productivity OS, 7 modules + PolyCo.World
+
+  - name: PolyCo.World
+    type: feature
+    origin: 3NJZOS_PRD.docx §1.2
+    description: Pixel-art isometric metaverse, Office + Home modules, unifies progression
+    parent: NJZ-OS
+
+  - name: NJZPOF v0.2
+    type: framework
+    origin: notbleaux/ZeSporteXte (`.doc-tiers.json`)
+    description: NJZ Platform Operations Framework — doc tiering, agent coordination
+
+  - name: TENET / GameNodeID / Quarter GRID
+    type: architecture
+    origin: notbleaux/ZeSporteXte (CLAUDE.md, docs/architecture/TENET_TOPOLOGY.md)
+    status: out-of-scope-for-RAT-OS
+    note: TENET belongs to the eSports platform; RAT-OS does not implement it
+
+  - name: legacy/satire-deck-veritas
+    type: branch
+    origin: Pre-2026-05-24 contents of hvrryh-web/satorXrotas
+    description: Archive of the prior Satire-deck-Veritas restructure; immutable
+
+  - name: '@njz/*'
+    type: package-scope
+    origin: notbleaux/ZeSporteXte (packages/@njz/)
+    description: Shared NJZ-wide packages (ui, etc.); RAT-OS consumes via npm
+
+  - name: '@njz-os/*'
+    type: package-scope
+    origin: hvrryh-web/satorXrotas (this repo)
+    description: RAT-OS-specific packages (focus-engine, audio-engine, polyworld, etc.)
+
+phases:
+  - id: 0
+    name: Foundation
+    source: docs/product/ROADMAP.md
+    status: active
+  - id: 1
+    name: Core MVP
+    source: docs/product/ROADMAP.md
+    status: locked
+  - id: 2
+    name: Expansion
+    source: docs/product/ROADMAP.md
+    status: locked
+  - id: 3
+    name: Social & Scale
+    source: docs/product/ROADMAP.md
+    status: locked
+  - id: 4
+    name: Growth
+    source: docs/product/ROADMAP.md
+    status: locked
+  - id: 5
+    name: Platform
+    source: docs/product/ROADMAP.md
+    status: locked
+
+cross_repo:
+  upstream: notbleaux/ZeSporteXte
+  relationship: consumer
+  surface:
+    - npm packages: '@njz/*'
+    - HTTP API: services/api → packages/adapters/api-client
+    - WebSocket: services/vaultbrain → packages/adapters/vaultbrain-client
+    - HTTP API: services/agent-gateway → packages/adapters/agent-gateway-client

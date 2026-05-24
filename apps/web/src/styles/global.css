@@ -1,0 +1,122 @@
+:root {
+  --bg: #0F172A;
+  --bg-elevated: #1E293B;
+  --text: #F8FAFC;
+  --text-muted: #94A3B8;
+  --accent: #14B8A6;
+  --accent-warm: #F97316;
+  --success: #22C55E;
+  --danger: #EF4444;
+  --radius-sharp: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-elevated);
+  padding: 1px 6px;
+  border-radius: var(--radius-sharp);
+}
+
+.rat-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.rat-shell__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--bg-elevated);
+  background: var(--bg);
+}
+
+.rat-shell__brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 1.125rem;
+  color: var(--text);
+}
+
+.rat-shell__nav {
+  display: flex;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.rat-shell__nav-item {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sharp);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.rat-shell__nav-item:hover {
+  color: var(--text);
+  background: var(--bg-elevated);
+  text-decoration: none;
+}
+
+.rat-shell__nav-item--active {
+  color: var(--text);
+  background: var(--bg-elevated);
+}
+
+.rat-shell__main {
+  flex: 1;
+  padding: var(--space-8) var(--space-6);
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rat-page h1 {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+}
+
+.rat-page p { margin: 0 0 var(--space-3); color: var(--text-muted); }
+.rat-page p:last-child { margin-bottom: 0; }
+
+.rat-page__meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--space-3);
+}
+
+.rat-page--stub {
+  border: 1px dashed var(--bg-elevated);
+  padding: var(--space-6);
+}

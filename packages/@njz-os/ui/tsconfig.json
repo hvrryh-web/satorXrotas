@@ -1,0 +1,5 @@
+{
+  "extends": "@njz-os/tsconfig/react.json",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+}

@@ -1,0 +1,35 @@
+name: Bug report
+description: Something is broken in NJZ RAT-OS
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. For security issues, do NOT use this form — see `SECURITY.md`.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One-sentence description
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Numbered, minimal, deterministic
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: macOS 14, Chrome 130, RAT-OS commit abc1234
+    validations:
+      required: false

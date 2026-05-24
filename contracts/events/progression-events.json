@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://njz-rat-os.app/contracts/events/progression-events.json",
+  "title": "ProgressionEvents",
+  "description": "Canonical event taxonomy for NJZ RAT-OS progression. Emitted by modules, consumed by vaultbrain, analytics, and polyworld.",
+  "version": "0.1.0",
+  "definitions": {
+    "ModuleSlug": {
+      "type": "string",
+      "enum": [
+        "focus-hero",
+        "soundscapes",
+        "distraction-blocker",
+        "writing-space",
+        "micro-learning",
+        "brain-training",
+        "polyco-world"
+      ]
+    },
+    "BaseEvent": {
+      "type": "object",
+      "required": ["kind", "userId", "at"],
+      "properties": {
+        "kind": { "type": "string" },
+        "userId": { "type": "string" },
+        "at": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["kind", "sessionId", "module"],
+          "properties": {
+            "kind": { "const": "session.start" },
+            "sessionId": { "type": "string" },
+            "module": { "$ref": "#/definitions/ModuleSlug" }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["kind", "sessionId", "module", "durationMs", "xpAwarded"],
+          "properties": {
+            "kind": { "const": "session.complete" },
+            "sessionId": { "type": "string" },
+            "module": { "$ref": "#/definitions/ModuleSlug" },
+            "durationMs": { "type": "integer", "minimum": 0 },
+            "xpAwarded": { "type": "integer", "minimum": 0 }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["kind", "sessionId", "module"],
+          "properties": {
+            "kind": { "const": "session.abandon" },
+            "sessionId": { "type": "string" },
+            "module": { "$ref": "#/definitions/ModuleSlug" }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["kind", "module", "newCurrent"],
+          "properties": {
+            "kind": { "const": "streak.extend" },
+            "module": { "$ref": "#/definitions/ModuleSlug" },
+            "newCurrent": { "type": "integer", "minimum": 1 }
+          }
+        }
+      ]
+    },
+    {
+      "allOf": [
+        { "$ref": "#/definitions/BaseEvent" },
+        {
+          "type": "object",
+          "required": ["kind", "module"],
+          "properties": {
+            "kind": { "const": "streak.break" },
+            "module": { "$ref": "#/definitions/ModuleSlug" }
+          }
+        }
+      ]
+    }
+  ]
+}

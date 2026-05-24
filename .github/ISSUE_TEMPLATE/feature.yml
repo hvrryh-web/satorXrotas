@@ -1,0 +1,32 @@
+name: Feature request
+description: Suggest a feature for NJZ RAT-OS
+labels: [enhancement]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: What user problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: How would it work?
+    validations:
+      required: true
+  - type: input
+    id: persona
+    attributes:
+      label: Which persona?
+      description: Balanced Achiever / Creative Professional / Curious Learner
+    validations:
+      required: false
+  - type: input
+    id: gate
+    attributes:
+      label: Which phase gate?
+      description: e.g. G2.brain-training
+    validations:
+      required: false

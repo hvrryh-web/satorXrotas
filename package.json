@@ -1,19 +1,47 @@
 {
-  "name": "sator",
+  "name": "njz-rat-os",
   "version": "0.1.0",
-  "description": "SATOR esports simulation platform — monorepo root",
   "private": true,
-  "scripts": {
-    "build": "npm run build --workspaces --if-present",
-    "dev": "echo 'Game: open project.godot in Godot 4 | API (Phase 3): cd api && npm run dev'",
-    "test:firewall": "npm run test --workspace=packages/data-partition-lib",
-    "validate:schema": "npm run validate:schema --workspace=packages/stats-schema",
-    "typecheck": "npm run typecheck --workspaces --if-present"
+  "description": "NJZ RAT-OS — Neural Operating System monorepo (marketing site + webapp)",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
-  "workspaces": [
-    "shared/packages/*",
-    "shared/apps/*"
-  ],
-  "keywords": ["sator", "esports", "tactical-fps", "simulation"],
-  "license": "MIT"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:site": "turbo run dev --filter=@njz-os/site",
+    "dev:web": "turbo run dev --filter=@njz-os/web",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-path .gitignore",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
+    "doc-tier:check": "node tools/doc-tier-check/index.mjs",
+    "adr:new": "node tools/adr-new/index.mjs",
+    "module:new": "node tools/module-new/index.mjs",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^20.14.0",
+    "eslint": "^9.0.0",
+    "husky": "^9.1.0",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.3.0",
+    "turbo": "^2.9.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
 }

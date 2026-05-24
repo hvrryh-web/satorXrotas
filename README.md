@@ -1,185 +1,128 @@
-# Satire-deck-Veritas
+# NJZ RAT-OS
 
-**eSports Analytics Platform** — Cross-game unified statistics for Valorant, CS2, and beyond.
+> **Your Neural Operating System** — a unified wellness-productivity platform.
+> Train. Focus. Create. Learn. Grow.
 
-> *Repository restructure in progress. Formerly `satorXrotas`.*
+NJZ **RAT-OS** is the consumer-facing brand for **NJZ-OS** (Neural Operating System), a cross-platform wellness-productivity OS that integrates Focus Training, Soundscapes, Distraction Blocking, Writing Space, Micro-Learning, Brain Training, and the **PolyCo.World** pixel-art metaverse into one cohesive experience.
+
+This repository is the **monorepo** for the RAT-OS marketing site and webapp. It consumes shared services and packages from [`notbleaux/ZeSporteXte`](https://github.com/notbleaux/ZeSporteXte) (the NJZ platform monorepo) via the `@njz/*` npm scope.
 
 ---
 
-## Repository Structure
+## Repository Identity
 
-```
-Satire-deck-Veritas/
-├── 📁 context/              # Agent context injection
-│   ├── SYSTEM-IDENTITY.md
-│   ├── USER-PROFILE.md
-│   ├── PROJECT-TENET.md
-│   ├── MEMORY-STATE.md
-│   └── CONSTRAINTS.md
-│
-├── 📁 frameworks/           # Methodologies & standards
-│   ├── 1235-REVIEW/         # Review protocol
-│   ├── AGENT-COORDINATION/  # Multi-agent patterns
-│   ├── DESIGN-SYSTEM/       # Visual specifications
-│   └── WIREFRAME-PROTOCOL/  # UI/UX standards
-│
-├── 📁 tools/                # Agent tooling
-│   ├── prompts/             # Ready-to-use prompts
-│   ├── templates/           # Document templates
-│   └── scripts/             # Utility scripts
-│
-├── 📁 roles/                # Agent role definitions
-│   ├── 01-ARCHITECT.md
-│   ├── 02-IMPLEMENTER.md
-│   ├── 03-CRITIC.md
-│   ├── 04-COORDINATOR.md
-│   └── 05-DEPLOYER.md
-│
-├── 📁 active/               # Current development
-│   ├── sprint-current/
-│   ├── wireframes-v3/
-│   └── experiments/
-│
-├── 📁 deliverables/         # Completed outputs
-│   ├── wireframes-v1/
-│   ├── wireframes-v2/
-│   └── releases/
-│
-├── 📁 pre-historic-legacy/  # Archived content
-│   ├── 01-simulation-game/
-│   ├── 02-website/
-│   ├── 03-shared/          # ⚠️ CRITICAL: Working code
-│   ├── 04-tests/
-│   └── 05-legacy-docs/
-│
-├── 📁 .github/              # GitHub workflows
-├── 📁 docs/                 # Reference documentation
-└── 📄 README.md             # This file
-```
+| Field | Value |
+|-------|-------|
+| Marketing brand | **NJZ RAT-OS** |
+| Technical platform | NJZ-OS |
+| Package scopes | `@njz/*` (upstream, ZeSporteXte) · `@njz-os/*` (this repo) |
+| Repo role | RAT-OS site + webapp monorepo |
+| Upstream platform | [`notbleaux/ZeSporteXte`](https://github.com/notbleaux/ZeSporteXte) |
+| Build system | pnpm workspaces + Turborepo |
+| Primary languages | TypeScript, React, Next.js |
+| AI framework | NJZPOF v0.2 (see `.agents/`, `ROOT_AXIOMS/`) |
 
 ---
 
 ## Quick Start
 
-### For Agents
-
-**Session Start Protocol:**
-1. Read `context/SYSTEM-IDENTITY.md` — Who am I?
-2. Read `context/USER-PROFILE.md` — Who am I helping?
-3. Read `context/PROJECT-TENET.md` — What are we building?
-4. Read `context/MEMORY-STATE.md` — Where are we?
-5. Read `context/CONSTRAINTS.md` — What can't I do?
-
-**Then proceed with assigned task.**
-
-### For Developers
-
-**PowerShell (Windows):**
-```powershell
-# Clone repository
-git clone https://github.com/hvrryh-web/satorXrotas.git Satire-deck-Veritas
-Set-Location Satire-deck-Veritas
-
-# Review archive manifest
-Get-Content pre-historic-legacy\ARCHIVE-MANIFEST.md
-
-# Check migration plan
-Get-Content pre-historic-legacy\MIGRATION-PLAN.md
-```
-
-**Bash (Linux/macOS):**
 ```bash
-# Clone repository
-git clone https://github.com/hvrryh-web/satorXrotas.git
-cd satorXrotas
+# Prerequisites
+node --version   # 20.x
+pnpm --version   # 9.x
 
-# Review archive manifest
-cat pre-historic-legacy/ARCHIVE-MANIFEST.md
+# Install
+pnpm install
 
-# Check migration plan
-cat pre-historic-legacy/MIGRATION-PLAN.md
+# Develop
+pnpm dev:site    # Marketing site (Next.js) on :3000
+pnpm dev:web     # Webapp (Vite + React) on :5173
+
+# Quality
+pnpm typecheck
+pnpm lint
+pnpm test
+
+# Build
+pnpm build
+```
+
+See `docs/operations/DEPLOYMENT.md` for production deployment.
+
+---
+
+## Monorepo Layout
+
+```
+apps/
+  site/               # Marketing site (Next.js 15, App Router)
+  web/                # Main webapp (Vite + React 19, 7 modules)
+  desktop-widget/     # Tauri shell (Phase 2)
+  pwa-shell/          # PWA wrapper
+
+packages/
+  @njz-os/
+    core/             # Domain types
+    ui/               # Design system + tokens
+    audio-engine/     # Soundscapes + binaural beats
+    focus-engine/     # Timer + session state machines
+    polyworld/        # PolyCo.World rendering
+    pixel-art/        # Pixel-art helpers
+    progression/      # XP / streaks / rewards
+    analytics/        # Cognitive profile + scoring
+    learning-cards/   # Micro-learning data model
+    writing/          # Editor + manuscript model
+    tsconfig/         # Shared tsconfig
+
+  adapters/           # Typed clients into ZeSporteXte services
+    vaultbrain-client/
+    agent-gateway-client/
+    api-client/       # OpenAPI-generated
+    identity-client/
+
+  config/             # Shared eslint, prettier configs
+
+services/
+  rat-os-api/         # BFF aggregator scaffold
+
+contracts/            # OpenAPI + event schemas (RAT-OS ↔ ZeSporteXte)
+infra/                # Vercel / Render / Docker
+docs/                 # Product / architecture / governance / dev-reports / prototype-systems
+.agents/              # AI orchestration framework (NJZPOF v0.2)
+ROOT_AXIOMS/          # Founding principles, standards, procedures, references
 ```
 
 ---
 
-## Architecture
+## For AI Agents Starting a Session
 
-### TENET System
+1. Read `MASTER_PLAN.md` — current phase + scope.
+2. Read `.agents/AGENT_CONTRACT.md` — what you can and cannot do.
+3. Read `.agents/PHASE_GATES.md` — which phases are unlocked.
+4. Read `.agents/SCHEMA_REGISTRY.md` — canonical types before defining new ones.
+5. Check `.doc-tiers.json` before loading any `.md` file.
 
-**TENET** — Meta-layer: WorldHUBs database  
-**tenet** — Game-specific worlds (Valorant, CS2)  
-**tezet** — Four HUBs per game:
-
-| HUB | Purpose | Color |
-|-----|---------|-------|
-| **ROTAS** | Stats Reference | [#TEA] Teal |
-| **SATOR** | Advanced Analytics | [#TEA] Teal |
-| **OPERA** | Pro eSports Info | [#ORG] Orange |
-| **AREPO** | Community | [#ORG] Orange |
-
-### Design System v3
-
-- **Background:** `#0F172A` (dark slate)
-- **Typography:** Geometric sans + Monospace data
-- **Layout:** 2×2 quadrant grid, zero-scroll
-- **Corners:** 0px radius (sharp = premium)
+Do not load T2 files. They are archived for context efficiency.
 
 ---
 
-## Agent Framework
+## Relationship to ZeSporteXte
 
-**Color-Coded Communication:**
-- [#TEA] `#14B8A6` — Analysis, documentation, ROTAS/SATOR
-- [#ORG] `#F97316` — Implementation, CTAs, OPERA/AREPO
-- [#GRN] `#22C55E` — Success, approval, completion
-- [#RED] `#EF4444` — Error, blockers, CRITIC reviews
+RAT-OS does not duplicate ZeSporteXte. It consumes:
 
-**Roles:**
-1. **ARCHITECT** — System design
-2. **IMPLEMENTER** — Code generation
-3. **CRITIC** — Review & critique
-4. **COORDINATOR** — Multi-agent orchestration
-5. **DEPLOYER** — DevOps & deployment
+- `@njz/ui` — shared design primitives
+- `services/vaultbrain` (HTTP/WS) — persistent state + AI memory
+- `services/agent-gateway` (HTTP) — agent + MCP routing
+- `services/api` (REST, OpenAPI-generated client) — platform data
 
----
-
-## Status
-
-| Component | Status | Location |
-|-----------|--------|----------|
-| Repository Restructure | 🔄 Active | Root |
-| Working Code (TENET) | 📦 Archived | `pre-historic-legacy/03-shared/` |
-| Design System | 🔄 Migrating | `frameworks/DESIGN-SYSTEM/` |
-| Agent Framework | ✅ Ready | `roles/`, `frameworks/` |
-
----
-
-## Migration Notice
-
-**From:** satorXrotas (flat structure)  
-**To:** Satire-deck-Veritas (organized hierarchy)  
-**Status:** Phase 3 of 5 (Documentation)
-
-All existing content preserved in `pre-historic-legacy/`.  
-See `pre-historic-legacy/ARCHIVE-MANIFEST.md` for inventory.  
-See `pre-historic-legacy/MIGRATION-PLAN.md` for timeline.
-
----
-
-## Contributing
-
-**PowerShell Compatibility Required**
-
-All scripts and automation must include PowerShell equivalents.  
-See `RESTRUCTURE-IMPLEMENTATION.md` for command reference.
+See `docs/architecture/INTEGRATION_WITH_ZESPORTEXTE.md` for the full contract surface.
 
 ---
 
 ## License
 
-See `LICENSE` file.
+MIT — see `LICENSE`.
 
 ---
 
-*Repository: hvrryh-web/satorXrotas*  
-*Target Migration: notbleaux/eSports-EXE (production-ready components only)*
+*Repository: `hvrryh-web/satorXrotas` · Upstream platform: `notbleaux/ZeSporteXte`*
