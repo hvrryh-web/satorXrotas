@@ -82,10 +82,14 @@ Decisions logged via ADR-0001 (monorepo + branding), ADR-0002 (consume @njz/* �
 
 - [ ] Human reviews and merges `claude/gracious-mayer-Emj1S` into `main`.
 - [ ] Run `pnpm install && pnpm build` to verify the scaffolding compiles.
-- [ ] Open ADR-0007 (focus engine design) when ready to flip Phase 1 gate `G1.focus-hero`.
-- [ ] Open ADR-0008 (audio engine — extended; ADR-0006 covers v0).
-- [ ] Open ADR-0009 (blocker enforcement on web).
-- [ ] Open ADR-0010 (asset pipeline for pixel-art sprites + audio stems).
+- [x] Open reality-check ADR-0007 (@njz/ui consumption deferred) — Accepted.
+- [x] Open reality-check ADR-0008 (vaultbrain integration shape; supersedes ADR-0003) — Accepted.
+- [ ] Open ADR-0009 (focus engine design) when ready to flip Phase 1 gate `G1.focus-hero`.
+- [ ] Open ADR-0010 (audio engine v0 detail; extends ADR-0006).
+- [ ] Open ADR-0011 (blocker enforcement on web).
+- [ ] Open ADR-0012 (asset pipeline for pixel-art sprites + audio stems).
+- [ ] Open ADR-0013 (auth model — passkeys via Supabase Auth or self-hosted).
+- [ ] Open ADR-0014 (vendor `services/agent-gateway/openapi.json` as `contracts/openapi/agent-gateway.yaml`).
 - [ ] Coordinate with ZeSporteXte owners on `@njz/vaultbrain-events`, `@njz/agent-protocol`, `@njz/auth-types` package shape.
 - [ ] First sprint plan in `.agents/session-workplans/SW-20260525-phase1-bootstrap.md`.
 

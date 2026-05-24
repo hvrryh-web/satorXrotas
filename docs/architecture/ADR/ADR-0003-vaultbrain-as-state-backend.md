@@ -2,10 +2,19 @@
 
 # ADR-0003 — Vaultbrain as Persistent State Backend
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0008
 - **Date:** 2026-05-24
 - **Deciders:** @hvrryh-web
-- **Tags:** state, persistence, integration
+- **Tags:** state, persistence, integration, superseded
+
+> **Superseded note (2026-05-24).** Post-bootstrap audit of upstream
+> `services/vaultbrain` revealed its actual surface (multi-vault networked
+> note system with vault/note/sync/oversight endpoints; placeholder
+> WebSocket) differs from what this ADR assumed (focus sessions, streaks,
+> XP, cognitive profile, real-time fan-out). The intent — *vaultbrain is
+> the persistent state backend* — is retained; the shape, schema delta,
+> and integration mechanics are corrected in **ADR-0008**. Read that ADR
+> for the current decision. This file is preserved for historical context.
 
 ## Context
 
@@ -46,6 +55,8 @@ Local-first behavior layered on top: focus engine and audio engine work fully of
 
 ## Related
 
-- ADR-0002 (Consume @njz/* packages)
+- ADR-0008 — **Supersedes this ADR.** Carries the corrected schema delta, endpoint extension list, and WebSocket fan-out design.
+- ADR-0002 (Consume @njz/* packages) — adapter consumption pattern unchanged.
 - `docs/architecture/DATA_FLOW.md`
-- `packages/adapters/vaultbrain-client/README.md` (TBD)
+- `packages/adapters/vaultbrain-client/README.md`
+- `.agents/active/upstream-coordination.md` — tracks the upstream coordination thread for the ADR-0008 implementation.

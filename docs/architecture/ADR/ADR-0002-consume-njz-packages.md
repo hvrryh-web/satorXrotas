@@ -2,7 +2,7 @@
 
 # ADR-0002 — Consume `@njz/*` Packages From Upstream
 
-- **Status:** Accepted
+- **Status:** Accepted — partially superseded by ADR-0007 (UI sub-decision deferred; non-UI `@njz/*` packages remain in scope)
 - **Date:** 2026-05-24
 - **Deciders:** @hvrryh-web
 - **Tags:** integration, packages, npm
@@ -43,6 +43,7 @@ Locally, developers may use `pnpm` `overrides` to point a `@njz/*` package at a 
 
 ## Related
 
-- ADR-0003 (Vaultbrain as state backend)
+- ADR-0003 (Vaultbrain as state backend) — itself superseded by ADR-0008
+- ADR-0007 — Partially supersedes this ADR for the `@njz/ui` sub-decision: upstream package is empty and consumption is deferred until it publishes
 - `docs/architecture/INTEGRATION_WITH_ZESPORTEXTE.md`
 - `ROOT_AXIOMS/03_PROCEDURES/03-add-an-adapter.md`

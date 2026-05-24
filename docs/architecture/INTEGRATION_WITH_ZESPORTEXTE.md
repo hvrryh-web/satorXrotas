@@ -4,6 +4,16 @@
 
 > RAT-OS and ZeSporteXte are sibling NJZ products. ZeSporteXte is the platform monorepo; RAT-OS consumes a defined subset of its capabilities. This doc is the contract.
 
+> **2026-05-24 amendment.** Two ADRs revise the bootstrap assumptions in this
+> document: **ADR-0007** defers `@njz/ui` consumption until upstream
+> publishes a real package (so the `@njz/ui` row in the Packages table below
+> is "planned" pending that publish), and **ADR-0008** supersedes ADR-0003
+> for the vaultbrain integration shape — vaultbrain's current surface is a
+> multi-vault note system, so ADR-0008 carries the schema + endpoint +
+> WebSocket extensions RAT-OS needs. Read those ADRs for the current
+> decisions; the tables below describe the *intended* steady state once
+> ADR-0008 Option A lands upstream.
+
 ## Repository Map
 
 | Repo | URL | Role | Owner |

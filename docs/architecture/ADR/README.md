@@ -17,13 +17,15 @@ See `docs/governance/ADR_TEMPLATE.md`.
 - `Deprecated` — no longer current; superseded by another ADR (link in header).
 - `Superseded by ADR-NNNN` — replaced; keep file for historical record.
 
-## Index (Bootstrap)
+## Index
 
 | ID | Title | Status |
 |----|-------|--------|
 | 0001 | Monorepo structure & brand naming | Accepted |
-| 0002 | Consume `@njz/*` packages from upstream (no submodule, no fork) | Accepted |
-| 0003 | Vaultbrain as persistent state backend | Accepted |
+| 0002 | Consume `@njz/*` packages from upstream (no submodule, no fork) | Accepted — partially superseded by ADR-0007 |
+| 0003 | Vaultbrain as persistent state backend | Superseded by ADR-0008 |
 | 0004 | apps/site (Next.js) and apps/web (Vite) split | Accepted |
 | 0005 | PolyCo.World renderer — HTML5 Canvas 2D for v0 | Accepted |
 | 0006 | Audio engine — Web Audio API + OscillatorNode pair | Accepted |
+| 0007 | `@njz/ui` consumption deferred until upstream publishes | Accepted |
+| 0008 | Vaultbrain integration shape (supersedes ADR-0003) | Accepted |
