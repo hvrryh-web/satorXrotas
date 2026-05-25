@@ -29,3 +29,9 @@ See `docs/governance/ADR_TEMPLATE.md`.
 | 0006 | Audio engine — Web Audio API + OscillatorNode pair | Accepted |
 | 0007 | `@njz/ui` consumption deferred until upstream publishes | Accepted |
 | 0008 | Vaultbrain integration shape (supersedes ADR-0003) | Accepted |
+| 0009 | Focus Engine state machine (XState v5) | Accepted |
+| 0010 | Audio Engine v0 detail (stems, crossfade, binaural, FFT) | Accepted |
+| 0011 | Distraction Blocker enforcement (web SW + browser extension; native deferred) | Accepted |
+| 0012 | Asset pipeline (Aseprite + FFmpeg → public/; R2 in Phase 2) | Accepted |
+| 0013 | Auth model (passkeys + email via Supabase Auth) | Accepted |
+| 0014 | Vendor agent-gateway `openapi.json` as RAT-OS contract source | Accepted |
