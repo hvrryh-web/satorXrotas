@@ -24,6 +24,12 @@ implementation work pending upstream changes:
 This file is the single source of truth for the cross-repo coordination
 threads. Update it on every upstream interaction.
 
+> **Stage 3 cross-reference (2026-05-24):** the full lane plans for
+> Phase-1 implementation live at
+> `.agents/session-workplans/SW-20260524-stage-3-lanes.md`. Lane F (this
+> coordination work) is the first lane executed; F1 + F2 file the
+> upstream issues this document templates.
+
 ---
 
 ## Thread 1 — `@njz/ui` upstream publish (for ADR-0007)
