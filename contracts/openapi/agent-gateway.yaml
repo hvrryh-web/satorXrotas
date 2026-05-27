@@ -1,0 +1,770 @@
+# VENDORED — DO NOT HAND-EDIT.
+# Source: notbleaux/ZeSporteXte/services/agent-gateway/openapi.json
+# Pinned upstream SHA: 22131186e5b179a73e90bbe98dacc85fb558765f
+# Pinned at: 2026-05-24 by claude-opus-4.7 (Phase C / Lane F Task F3)
+# Refresh via: pnpm contracts:refresh-agent-gateway
+# Decision: ADR-0014 (Accepted) — Vendor agent-gateway openapi.json
+# Consumer codegen wired behind G4.ai-personalization (Phase 4).
+
+components:
+  schemas:
+    BrainIndexRequest:
+      properties:
+        source_id:
+          maxLength: 512
+          minLength: 1
+          title: Source Id
+          type: string
+        source_kind:
+          maxLength: 64
+          minLength: 1
+          title: Source Kind
+          type: string
+        text:
+          maxLength: 64000
+          minLength: 1
+          title: Text
+          type: string
+      required:
+      - source_id
+      - source_kind
+      - text
+      title: BrainIndexRequest
+      type: object
+    CompanionQuipRequest:
+      description: 'Ask the Hermes-MiMo worker for a 1-sentence quip for a companion.
+
+
+        Lineage + bucket together key the per-(lineage, bucket) cache the
+
+        PolyOffice client maintains. Worker decides whether to bid based
+
+        on its daily budget cap (HERMES_QUIP_DAILY_CAP).'
+      properties:
+        bucket:
+          pattern: ^(dormant|hungry|content|thriving)$
+          title: Bucket
+          type: string
+        lineage:
+          maxLength: 32
+          minLength: 1
+          title: Lineage
+          type: string
+      required:
+      - lineage
+      - bucket
+      title: CompanionQuipRequest
+      type: object
+    FocusFollowUpRequest:
+      description: 'Body shape for /focus/complete and /focus/abandon — the caller
+
+        sends back the session_id it got from /focus/start so the events
+
+        can be correlated client-side. The server doesn''t need to validate
+
+        the id (focus is operator behaviour, not a billed task).'
+      properties:
+        session_id:
+          maxLength: 64
+          minLength: 8
+          title: Session Id
+          type: string
+      required:
+      - session_id
+      title: FocusFollowUpRequest
+      type: object
+    FocusStartRequest:
+      description: 'Begin a pomodoro/focus session. Operator IS the fulfiller — the
+
+        gateway only records the start so cross-app surfaces (PolyOffice
+
+        drawer + siteGeisTe AREPO sidebar) can show a consistent count.'
+      properties:
+        label:
+          anyOf:
+          - maxLength: 128
+            type: string
+          - type: 'null'
+          title: Label
+        minutes:
+          maximum: 180.0
+          minimum: 1.0
+          title: Minutes
+          type: integer
+      required:
+      - minutes
+      title: FocusStartRequest
+      type: object
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          title: Detail
+          type: array
+      title: HTTPValidationError
+      type: object
+    TaskBidRequest:
+      properties:
+        message:
+          anyOf:
+          - maxLength: 2048
+            type: string
+          - type: 'null'
+          title: Message
+      title: TaskBidRequest
+      type: object
+    TaskCreateRequest:
+      properties:
+        description:
+          maxLength: 4096
+          minLength: 1
+          title: Description
+          type: string
+        metadata:
+          additionalProperties: true
+          title: Metadata
+          type: object
+      required:
+      - description
+      title: TaskCreateRequest
+      type: object
+    TaskSubmitRequest:
+      properties:
+        complete:
+          description: True → COMPLETED; False → PARTIAL_PENDING_HANDOFF
+          title: Complete
+          type: boolean
+        content:
+          maxLength: 65536
+          minLength: 1
+          title: Content
+          type: string
+      required:
+      - content
+      - complete
+      title: TaskSubmitRequest
+      type: object
+    ValidationError:
+      properties:
+        ctx:
+          title: Context
+          type: object
+        input:
+          title: Input
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          title: Location
+          type: array
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+      type: object
+    VaultPutRequest:
+      description: 'Caller submits an opaque envelope (ciphertext) + signature.
+
+
+        See `services/agent-gateway/vault.py` for the recommended envelope
+
+        format and the `encrypt_with_agent_key` helper.'
+      properties:
+        ciphertext_b64:
+          maxLength: 1500000
+          minLength: 1
+          title: Ciphertext B64
+          type: string
+        key_name:
+          maxLength: 256
+          minLength: 1
+          title: Key Name
+          type: string
+        signature:
+          maxLength: 512
+          minLength: 1
+          title: Signature
+          type: string
+      required:
+      - key_name
+      - ciphertext_b64
+      - signature
+      title: VaultPutRequest
+      type: object
+info:
+  description: 'Zero-Trust agent coordination gateway — ECDSA-signed task lifecycle (/tasks/create, /bid, /submit) backed
+    by either SQLite WAL (memory) or VaultBrain PostgreSQL (vaultbrain) with Supabase mirror + Redis Pub/Sub bus + telemetry
+    counters. Persistence: memory.'
+  title: ZSXT Agent-Coordination Gateway
+  version: 0.12.0-pln-010-p5-activity-stream
+openapi: 3.1.0
+paths:
+  /activity/recent:
+    get:
+      description: 'Return a flat, recency-sorted feed of telemetry events.
+
+
+        Sources from the existing telemetry_counters table — every
+
+        (agent_id, event_kind) row contributes one entry with its
+
+        `updated_at` timestamp. No new schema; we flatten what''s already
+
+        there so PolyOffice + siteGeisTe can render the same feed.
+
+
+        PUBLIC — anonymous read; consumed by the ActivityStream widget.
+
+
+        Note: each row represents the most-recent activity per
+
+        (agent_id, kind); we don''t track individual events historically
+
+        in v1. This matches the existing telemetry shape and is
+
+        sufficient for "what''s been happening" widgets. Per-event
+
+        history is a future polish (would need a new table).
+
+
+        Filter: certain event_kinds are excluded by default (vault_put,
+
+        vault_delete) since their counts can be sensitive in
+
+        operator-shared views. The filter is server-side so clients
+
+        can''t bypass it.'
+      operationId: activity_recent_activity_recent_get
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          title: Limit
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Activity Recent Activity Recent Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Activity Recent
+  /brain/index:
+    post:
+      description: 'Embed `text` and index it for the caller''s agent_id.
+
+
+        Idempotent on (caller_agent_id, source_id, source_kind): subsequent
+
+        calls upsert the embedding + text. Backend selected by env var
+
+        `BRAIN_EMBED_BACKEND` (`hash` default, or `sbert` / `hf`).'
+      operationId: brain_index_brain_index_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrainIndexRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Brain Index Brain Index Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Brain Index
+  /brain/search:
+    get:
+      description: Top-k cosine-similarity search over the caller's indexed vectors.
+      operationId: brain_search_brain_search_get
+      parameters:
+      - in: query
+        name: q
+        required: true
+        schema:
+          title: Q
+          type: string
+      - in: query
+        name: k
+        required: false
+        schema:
+          default: 10
+          title: K
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Brain Search Brain Search Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Brain Search
+  /brain/{source_kind}/{source_id}:
+    delete:
+      description: Delete an indexed vector (owner-only). 404 if not found.
+      operationId: brain_delete_brain__source_kind___source_id__delete
+      parameters:
+      - in: path
+        name: source_kind
+        required: true
+        schema:
+          title: Source Kind
+          type: string
+      - in: path
+        name: source_id
+        required: true
+        schema:
+          title: Source Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Brain Delete Brain  Source Kind   Source Id  Delete
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Brain Delete
+  /companions/quip:
+    post:
+      description: 'Create a quip task on behalf of the (anonymous) PolyOffice UI.
+
+
+        Public endpoint — no signature required. The created task carries
+
+        metadata.kind == "quip" so the worker''s should_bid() filter can
+
+        distinguish quip requests from real agent traffic.
+
+
+        Returns the task_id immediately; the caller polls GET /tasks/{id}
+
+        to find the answer once the worker has submitted it.'
+      operationId: companions_quip_companions_quip_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanionQuipRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Companions Quip Companions Quip Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Companions Quip
+  /focus/abandon:
+    post:
+      description: 'Record a focus_abandoned event (operator stopped early). Kept
+
+        distinct from completed so the data doesn''t lie about productivity.'
+      operationId: focus_abandon_focus_abandon_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FocusFollowUpRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Focus Abandon Focus Abandon Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Focus Abandon
+  /focus/complete:
+    post:
+      description: Record a focus_completed event (timer ran to zero).
+      operationId: focus_complete_focus_complete_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FocusFollowUpRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Focus Complete Focus Complete Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Focus Complete
+  /focus/start:
+    post:
+      description: 'Record a focus_started event. Returns a session_id the client
+
+        uses to correlate the eventual /complete or /abandon call.'
+      operationId: focus_start_focus_start_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FocusStartRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Focus Start Focus Start Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Focus Start
+  /health:
+    get:
+      description: Liveness probe — bypasses auth middleware via PUBLIC_PATHS.
+      operationId: health_health_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Health Health Get
+                type: object
+          description: Successful Response
+      summary: Health
+  /tasks/create:
+    post:
+      description: 'Post a new task to the blackboard.
+
+
+        The middleware has already verified the caller''s signature; `agent_id`
+
+        on `request.state` is trusted.'
+      operationId: create_task_tasks_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Create Task Tasks Create Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Create Task
+  /tasks/{task_id}:
+    get:
+      description: 'Read a task''s current state (state, contributions, claimer, etc).
+
+
+        Used by PolyOffice''s quip polling loop and by any agent that wants
+
+        to observe a task without bidding on it. Auth-required so we still
+
+        know who''s asking; we do not gate visibility per-agent in v1.'
+      operationId: get_task_tasks__task_id__get
+      parameters:
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Get Task Tasks  Task Id  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Task
+  /tasks/{task_id}/bid:
+    post:
+      description: 'Claim an OPEN task (or accept a hand-off from PARTIAL_PENDING_HANDOFF).
+
+
+        First bid wins — Phase 5 will swap this for a multi-bidder auction.'
+      operationId: bid_on_task_tasks__task_id__bid_post
+      parameters:
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskBidRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Bid On Task Tasks  Task Id  Bid Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Bid On Task
+  /tasks/{task_id}/submit:
+    post:
+      description: 'Submit work for a task you currently claim.
+
+
+        `complete=True` → COMPLETED; `complete=False` → PARTIAL_PENDING_HANDOFF
+
+        (the task becomes biddable again so another agent can take it over).'
+      operationId: submit_task_tasks__task_id__submit_post
+      parameters:
+      - in: path
+        name: task_id
+        required: true
+        schema:
+          title: Task Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskSubmitRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Submit Task Tasks  Task Id  Submit Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Submit Task
+  /telemetry/summary:
+    get:
+      description: 'Per-agent + total event counts aggregated from the Phase 5 bus.
+
+
+        Public endpoint (no signature required) — read-only over the local
+
+        `telemetry_counters` table. Returns zeros when the bus is unwired.'
+      operationId: telemetry_summary_telemetry_summary_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Telemetry Summary Telemetry Summary Get
+                type: object
+          description: Successful Response
+      summary: Telemetry Summary
+  /vault/get/{key_name}:
+    get:
+      description: 'Retrieve an encrypted blob (owner-only).
+
+
+        Returns 404 if the (caller_agent_id, key_name) pair has no entry.
+
+        Decryption is the client''s responsibility — see
+
+        `services/agent-gateway/vault.py::decrypt_with_agent_key`.'
+      operationId: vault_get_vault_get__key_name__get
+      parameters:
+      - in: path
+        name: key_name
+        required: true
+        schema:
+          title: Key Name
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Vault Get Vault Get  Key Name  Get
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Vault Get
+  /vault/list:
+    get:
+      description: List the caller's key_names. Does NOT return ciphertexts.
+      operationId: vault_list_vault_list_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Vault List Vault List Get
+                type: object
+          description: Successful Response
+      summary: Vault List
+  /vault/put:
+    post:
+      description: 'Store an encrypted blob keyed by (caller_agent_id, key_name).
+
+
+        The caller must have signed `agent_id:key_name:sha256(ciphertext)` with
+
+        their Phase 1 ECDSA key. The gateway verifies the signature against
+
+        the caller''s registered public_key before accepting the write.'
+      operationId: vault_put_vault_put_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaultPutRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Vault Put Vault Put Post
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Vault Put
+  /vault/{key_name}:
+    delete:
+      description: Delete an entry (owner-only). 404 if no such entry.
+      operationId: vault_delete_vault__key_name__delete
+      parameters:
+      - in: path
+        name: key_name
+        required: true
+        schema:
+          title: Key Name
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                title: Response Vault Delete Vault  Key Name  Delete
+                type: object
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Vault Delete

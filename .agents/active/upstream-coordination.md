@@ -69,7 +69,7 @@ Body:
 
 ### Status
 
-- [ ] Issue filed (link: _TBD_)
+- [x] Issue filed: https://github.com/notbleaux/ZeSporteXte/issues/117 (2026-05-24, Lane F Task F1)
 - [ ] Acknowledged by upstream
 - [ ] Package published
 - [ ] RAT-OS migration ADR opened
@@ -150,7 +150,7 @@ Body:
 
 ### Status
 
-- [ ] Issue filed (link: _TBD_)
+- [x] Issue filed: https://github.com/notbleaux/ZeSporteXte/issues/118 (2026-05-24, Lane F Task F2; 2-week timer to 2026-06-07)
 - [ ] Schema delta reviewed by upstream owners
 - [ ] Endpoint shape reviewed
 - [ ] WS protocol reviewed
