@@ -22,6 +22,7 @@
     "doc-tier:check": "node tools/doc-tier-check/index.mjs",
     "adr:new": "node tools/adr-new/index.mjs",
     "module:new": "node tools/module-new/index.mjs",
+    "contracts:refresh-agent-gateway": "node tools/contracts/refresh-agent-gateway.mjs",
     "prepare": "husky"
   },
   "devDependencies": {

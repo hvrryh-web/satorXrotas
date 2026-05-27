@@ -24,6 +24,12 @@ implementation work pending upstream changes:
 This file is the single source of truth for the cross-repo coordination
 threads. Update it on every upstream interaction.
 
+> **Stage 3 cross-reference (2026-05-24):** the full lane plans for
+> Phase-1 implementation live at
+> `.agents/session-workplans/SW-20260524-stage-3-lanes.md`. Lane F (this
+> coordination work) is the first lane executed; F1 + F2 file the
+> upstream issues this document templates.
+
 ---
 
 ## Thread 1 — `@njz/ui` upstream publish (for ADR-0007)
@@ -63,7 +69,7 @@ Body:
 
 ### Status
 
-- [ ] Issue filed (link: _TBD_)
+- [x] Issue filed: https://github.com/notbleaux/ZeSporteXte/issues/117 (2026-05-24, Lane F Task F1)
 - [ ] Acknowledged by upstream
 - [ ] Package published
 - [ ] RAT-OS migration ADR opened
@@ -144,7 +150,7 @@ Body:
 
 ### Status
 
-- [ ] Issue filed (link: _TBD_)
+- [x] Issue filed: https://github.com/notbleaux/ZeSporteXte/issues/118 (2026-05-24, Lane F Task F2; 2-week timer to 2026-06-07)
 - [ ] Schema delta reviewed by upstream owners
 - [ ] Endpoint shape reviewed
 - [ ] WS protocol reviewed
