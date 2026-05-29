@@ -61,3 +61,7 @@ UI in `apps/web`:
 - PRD §3.5.
 - Imprint reference (PRD §3.5.1 citations).
 - Content licensing decision: TBD ADR.
+
+---
+
+> **Expanded spec:** queued for a future session per the next-stages plan; will appear under `docs/modules/<module>/EXPANDED.md` once the Phase-2 documentation sprint runs.

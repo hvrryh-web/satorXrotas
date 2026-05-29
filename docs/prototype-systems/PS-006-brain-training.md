@@ -67,3 +67,7 @@ UI in `apps/web`:
 - PRD §3.1.
 - Reference research: Lumosity (60+ games), CogniFit (Corsi Span standard), Impulse (quick-workout format).
 - ADR-0007 (focus engine — shared state machine patterns).
+
+---
+
+> **Expanded spec:** queued for a future session per the next-stages plan; will appear under `docs/modules/<module>/EXPANDED.md` once the Phase-2 documentation sprint runs.

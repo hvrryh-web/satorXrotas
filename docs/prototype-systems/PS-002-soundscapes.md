@@ -67,3 +67,7 @@ UI surface in `apps/web`:
 - ADR-0006 (audio engine choice).
 - ADR-0005 (Deep Canvas rendering — depends on polyworld renderer pattern).
 - ADR-0008 (audio engine extended — TBD).
+
+---
+
+> **Implementation-ready expanded spec:** `docs/modules/soundscapes/EXPANDED.md`
