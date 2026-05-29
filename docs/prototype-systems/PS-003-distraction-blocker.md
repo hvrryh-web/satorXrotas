@@ -58,3 +58,7 @@ For OS-level blocking (Phase 3), the native shells (Capacitor or RN) integrate t
 - PRD §3.3.
 - ADR-0009 (blocker enforcement model — TBD).
 - Upstream `notbleaux/ZeSporteXte/apps/browser-extension/` for prior art on extension-based blocking.
+
+---
+
+> **Implementation-ready expanded spec:** `docs/modules/distraction-blocker/EXPANDED.md`

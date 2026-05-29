@@ -72,3 +72,7 @@ See `.agents/SCHEMA_REGISTRY.md`:
 - PRD §3.1, §3.3 (Focus Training + Blocker integration).
 - ADR-0007 (Focus engine design — TBD before Phase 1 unlocks).
 - `@njz-os/focus-engine/README.md`.
+
+---
+
+> **Implementation-ready expanded spec:** `docs/modules/focus-hero/EXPANDED.md`

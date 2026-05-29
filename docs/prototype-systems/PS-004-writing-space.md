@@ -62,3 +62,7 @@ UI in `apps/web`:
 
 - PRD §3.4.
 - ADR-0011 (editor stack — TBD; candidates: Tiptap, Lexical, Slate, ProseMirror direct).
+
+---
+
+> **Expanded spec:** queued for a future session per the next-stages plan; will appear under `docs/modules/<module>/EXPANDED.md` once the Phase-2 documentation sprint runs.

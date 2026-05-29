@@ -66,3 +66,7 @@ UI in `apps/web`:
 - ADR-0005 (renderer choice).
 - ADR-0010 (asset pipeline — TBD).
 - Style references: Tsuki's Odyssey, Stardew Valley aesthetic.
+
+---
+
+> **Implementation-ready expanded spec:** `docs/modules/polyco-world/EXPANDED.md`
