@@ -47,3 +47,6 @@ contracts/openapi/generated/
 
 # Secrets
 .secrets.baseline.local
+
+# Claude Code subagent worktrees (transient; never committed)
+.claude/
