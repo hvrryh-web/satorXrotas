@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/main/docs/configuration.md",
+  "_doc": "PRX-25-PERF-02 — Lighthouse CI configuration. Targets per Phase-1 exit criteria: perf 85 / a11y 85 / PWA 85 / best-practices 90 / SEO 90. Trend stored as workflow artifacts (30-day retention).",
+  "ci": {
+    "collect": {
+      "startServerCommand": "pnpm --filter @njz-os/web preview --host 127.0.0.1 --port 4173",
+      "startServerReadyPattern": "ready in",
+      "startServerReadyTimeout": 30000,
+      "url": [
+        "http://127.0.0.1:4173/",
+        "http://127.0.0.1:4173/focus",
+        "http://127.0.0.1:4173/sound",
+        "http://127.0.0.1:4173/write",
+        "http://127.0.0.1:4173/learn",
+        "http://127.0.0.1:4173/train",
+        "http://127.0.0.1:4173/world"
+      ],
+      "numberOfRuns": 1,
+      "settings": {
+        "preset": "desktop",
+        "skipAudits": ["uses-http2", "redirects-http"]
+      }
+    },
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.85 }],
+        "categories:accessibility": ["warn", { "minScore": 0.85 }],
+        "categories:best-practices": ["warn", { "minScore": 0.9 }],
+        "categories:seo": ["warn", { "minScore": 0.9 }]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./lhci-report"
+    }
+  }
+}
