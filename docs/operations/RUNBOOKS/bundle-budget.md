@@ -110,6 +110,27 @@ Push; CI re-runs the workflow.
 - **Major dependency upgrade** (React 19 → 20, Vite 6 → 7) — measure
   baseline shift, decide whether to absorb or fix.
 
+## Known limitations
+
+- **Site routes use total-chunk-sum attribution.** Next.js 15 ships
+  multiple shared chunks (framework, react, polyfills, app-router
+  shared); the validator currently reports the sum of all chunks under
+  `.next/static/chunks/` as the per-route number. This overstates the
+  actual first-paint download for individual pages (Next.js streams the
+  HTML + critical CSS first; JS chunks are deferred). Follow-up to
+  refine the site attribution: walk `.next/app-build-manifest.json` or
+  `.next/required-server-files.json` to attribute per-route. Tracked
+  internally as a known limitation; budgets adjusted upward
+  (240→280 KB gz) to reflect framework baseline rather than wishful
+  thinking.
+- **Webapp per-route chunks are accurate** — Vite emits per-entry +
+  per-React.lazy chunks; the regex-based attribution in `check.mjs`
+  matches them correctly.
+- **SKIP rows** report zero measurements because the relevant route
+  hasn't shipped its code yet (Phase-1 lanes A/B/C/D and Phase-2 lanes
+  W/L/B′). Budgets remain in place to detect regressions when the lane
+  code lands.
+
 ---
 
 ## Cross-references
