@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ErrorBoundary, ToastProvider } from '@njz-os/ui';
 import { ShellLayout } from './shell/ShellLayout';
 import { HomeRoute } from './routes/HomeRoute';
 import { FocusRoute } from './modules/focus-hero/FocusRoute';
@@ -17,24 +18,34 @@ const queryClient = new QueryClient({
   },
 });
 
+function wrap(moduleSlug: string, moduleLabel: string, element: React.ReactElement) {
+  return (
+    <ErrorBoundary moduleSlug={moduleSlug} moduleLabel={moduleLabel}>
+      {element}
+    </ErrorBoundary>
+  );
+}
+
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ShellLayout />}>
-            <Route index element={<HomeRoute />} />
-            <Route path="focus/*" element={<FocusRoute />} />
-            <Route path="sound/*" element={<SoundRoute />} />
-            <Route path="blocker/*" element={<BlockerRoute />} />
-            <Route path="write/*" element={<WriteRoute />} />
-            <Route path="learn/*" element={<LearnRoute />} />
-            <Route path="train/*" element={<TrainRoute />} />
-            <Route path="world/*" element={<WorldRoute />} />
-            <Route path="*" element={<NotFoundRoute />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <ToastProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<ShellLayout />}>
+              <Route index element={wrap('home', 'Home', <HomeRoute />)} />
+              <Route path="focus/*" element={wrap('focus-hero', 'Focus Hero', <FocusRoute />)} />
+              <Route path="sound/*" element={wrap('soundscapes', 'Soundscapes', <SoundRoute />)} />
+              <Route path="blocker/*" element={wrap('distraction-blocker', 'Distraction Blocker', <BlockerRoute />)} />
+              <Route path="write/*" element={wrap('writing-space', 'Writing Space', <WriteRoute />)} />
+              <Route path="learn/*" element={wrap('micro-learning', 'Micro-Learning', <LearnRoute />)} />
+              <Route path="train/*" element={wrap('brain-training', 'Brain Training', <TrainRoute />)} />
+              <Route path="world/*" element={wrap('polyco-world', 'PolyCo.World', <WorldRoute />)} />
+              <Route path="*" element={<NotFoundRoute />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ToastProvider>
     </QueryClientProvider>
   );
 }
