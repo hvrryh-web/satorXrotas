@@ -22,6 +22,11 @@
     "doc-tier:check": "node tools/doc-tier-check/index.mjs",
     "adr:new": "node tools/adr-new/index.mjs",
     "module:new": "node tools/module-new/index.mjs",
+    "tokens:build": "node tools/tokens-build/index.mjs",
+    "tokens:check": "node tools/tokens-build/index.mjs --check",
+    "tokens:test": "node tools/tokens-build/index.test.mjs",
+    "bundle-budget:check": "node tools/bundle-budget/check.mjs",
+    "bundle-budget:test": "node tools/bundle-budget/check.test.mjs",
     "contracts:refresh-agent-gateway": "node tools/contracts/refresh-agent-gateway.mjs",
     "prepare": "husky"
   },
