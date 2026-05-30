@@ -1,12 +1,21 @@
-import { PhaseStub } from '@/shared/PhaseStub';
+/**
+ * Lane B Task B7 — Soundscapes module entry.
+ *
+ * /sound shows category tiles; selecting one navigates to a per-scape
+ * active player (SoundActive). State stays local to the module; the
+ * audio engine is constructed lazily on first user gesture (per iOS
+ * audio-context policy).
+ */
+
+import { useState } from 'react';
+import { SoundHome } from './SoundHome';
+import { SoundActive } from './SoundActive';
+import type { Soundscape } from '@njz-os/audio-engine';
 
 export function SoundRoute() {
-  return (
-    <PhaseStub
-      module="Soundscapes &amp; Frequencies"
-      gate="G1.soundscapes"
-      phase={1}
-      spec="docs/prototype-systems/PS-002-soundscapes.md"
-    />
-  );
+  const [active, setActive] = useState<Soundscape | null>(null);
+  if (active) {
+    return <SoundActive soundscape={active} onExit={() => setActive(null)} />;
+  }
+  return <SoundHome onSelect={setActive} />;
 }
