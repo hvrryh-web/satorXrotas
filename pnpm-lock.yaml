@@ -277,6 +277,9 @@ importers:
 
   packages/@njz-os/progression:
     dependencies:
+      '@njz-os/adapters-vaultbrain-client':
+        specifier: workspace:*
+        version: link:../../adapters/vaultbrain-client
       '@njz-os/core':
         specifier: workspace:*
         version: link:../core
@@ -284,9 +287,18 @@ importers:
       '@njz-os/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@tanstack/react-query':
+        specifier: ^5.59.0
+        version: 5.100.14(react@19.2.6)
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.15
       eslint:
         specifier: ^9.0.0
         version: 9.39.4
+      react:
+        specifier: ^19.0.0
+        version: 19.2.6
       typescript:
         specifier: ^5.6.0
         version: 5.9.3

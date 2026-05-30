@@ -547,29 +547,35 @@ calendar days.
 
 # Section G.1 — In-flight status (live tracker)
 
-| ID | Status | PR / commit |
-|----|--------|-------------|
-| PRX-25-EPIC-01 (vaultbrain-client) | TODO | — |
-| PRX-25-SPRINT-01 (W editor bench) | TODO | — |
-| PRX-25-SPRINT-02 (L SRS bench) | TODO | — |
-| PRX-25-PERF-01 (bundle budget) | **SHIPPED** | feat/prx-25-foundational-wave |
-| PRX-25-PERF-02 (Lighthouse CI) | TODO | — |
-| PRX-25-PERF-03 (B′ frame budget) | TODO (B′-gated) | — |
-| PRX-25-PATCH-01 (event-bus) | **SHIPPED** | feat/prx-25-foundational-wave |
-| PRX-25-PATCH-02 (progression hook) | TODO (EPIC-01-gated) | — |
-| PRX-25-PATCH-03 (error boundary) | **SHIPPED** | feat/prx-25-foundational-wave |
-| PRX-25-PATCH-04 (telemetry pipeline) | TODO (EPIC-01-gated) | — |
-| PRX-25-PATCH-05 (toasts) | **SHIPPED** | feat/prx-25-foundational-wave |
-| PRX-25-ENH-01 (IDB hot cache) | TODO (EPIC-01-gated) | — |
-| PRX-25-ENH-02 (optimistic UI) | TODO (PATCH-05-dep met) | — |
-| PRX-25-ENH-03 (streaming SSR) | TODO | — |
-| PRX-25-ENH-04 (cohort percentiles) | TODO (B′-gated) | — |
-| PRX-25-ENH-05 (design tokens) | **SHIPPED** | feat/prx-25-foundational-wave |
+| ID | Status | Wave |
+|----|--------|------|
+| PRX-25-EPIC-01 (vaultbrain-client) | **SHIPPED** | consumer wave (PR #26 follow-up) |
+| PRX-25-SPRINT-01 (W editor bench) | TODO | research wave |
+| PRX-25-SPRINT-02 (L SRS bench) | TODO | research wave |
+| PRX-25-PERF-01 (bundle budget) | **SHIPPED** | foundational wave (PR #26) |
+| PRX-25-PERF-02 (Lighthouse CI) | **SHIPPED** | consumer wave |
+| PRX-25-PERF-03 (B′ frame budget) | TODO (B′-gated) | post-B′ |
+| PRX-25-PATCH-01 (event-bus) | **SHIPPED** | foundational wave (PR #26) |
+| PRX-25-PATCH-02 (progression hook) | **SHIPPED** | consumer wave |
+| PRX-25-PATCH-03 (error boundary) | **SHIPPED** | foundational wave (PR #26) |
+| PRX-25-PATCH-04 (telemetry pipeline) | **SHIPPED** | consumer wave |
+| PRX-25-PATCH-05 (toasts) | **SHIPPED** | foundational wave (PR #26) |
+| PRX-25-ENH-01 (IDB hot cache) | TODO | final wave |
+| PRX-25-ENH-02 (optimistic UI) | TODO | final wave |
+| PRX-25-ENH-03 (streaming SSR) | TODO | final wave |
+| PRX-25-ENH-04 (cohort percentiles) | TODO (B′-gated) | post-B′ |
+| PRX-25-ENH-05 (design tokens) | **SHIPPED** | foundational wave (PR #26) |
 
-5 of 16 shipped in the foundational wave (PERF-01, PATCH-01, PATCH-03,
-PATCH-05, ENH-05) — the dependency-free unblockers per §F. Next wave
-covers PERF-02, then PATCH-02 / PATCH-04 / ENH-01 / ENH-02 once
-EPIC-01's surface is at least partially in place.
+**10 of 16 shipped** across two waves. Remaining:
+
+- **Final wave** (parallel-safe, no further EPIC dependencies): ENH-01
+  (IDB cache backed by EPIC-01), ENH-02 (optimistic UI built on
+  EPIC-01 + PATCH-05), ENH-03 (streaming SSR for marketing pages).
+- **Research wave** (offline analysis, no main-branch code): SPRINT-01
+  (editor stack bench → settles ADR-0015), SPRINT-02 (SRS bench →
+  settles SM-2 vs FSRS).
+- **Post-B′** (gated on B′ lane code): PERF-03 (frame budget),
+  ENH-04 (cohort percentiles).
 
 # Section H — How this document is maintained
 
