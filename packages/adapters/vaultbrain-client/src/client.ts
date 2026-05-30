@@ -21,6 +21,13 @@
 import { createHttpClient, VaultbrainNetworkError } from './http';
 import { createInMemoryQueue, uuidV7, type QueueStore } from './queue';
 import {
+  DEFAULT_TTL_MS,
+  cacheKey,
+  createCacheStore,
+  isFresh,
+  type CacheStore,
+} from './cache';
+import {
   cardsListResponseSchema,
   cognitiveProfileSchema,
   completeSessionResponseSchema,
@@ -55,6 +62,8 @@ export interface VaultbrainClientConfig {
   bearerToken: () => string | Promise<string>;
   fetchImpl?: typeof fetch;
   queue?: QueueStore;
+  cache?: CacheStore;
+  cacheEnabled?: boolean;
 }
 
 export interface VaultbrainClient {
@@ -93,6 +102,23 @@ export function createVaultbrainClient(config: VaultbrainClientConfig): Vaultbra
     fetchImpl: config.fetchImpl,
   });
   const queue = config.queue ?? createInMemoryQueue();
+  const cacheEnabled = config.cacheEnabled !== false;
+  const cache: CacheStore | null = cacheEnabled
+    ? (config.cache ?? createCacheStore())
+    : null;
+
+  const cached = async <T>(
+    key: string,
+    ttlMs: number,
+    miss: () => Promise<T>
+  ): Promise<T> => {
+    if (!cache) return miss();
+    const entry = await cache.get<T>(key);
+    if (isFresh(entry)) return entry!.value;
+    const value = await miss();
+    await cache.set(key, value, ttlMs);
+    return value;
+  };
 
   const withQueueOnNetFail = async <T>(
     kind: string,
@@ -117,21 +143,28 @@ export function createVaultbrainClient(config: VaultbrainClientConfig): Vaultbra
 
   return {
     async currentUser(signal) {
-      return http.call({
-        method: 'GET',
-        path: '/users/me',
-        responseSchema: userSchema,
-        signal,
-      });
+      return cached(cacheKey('profile', 'me'), DEFAULT_TTL_MS.profile, () =>
+        http.call({
+          method: 'GET',
+          path: '/users/me',
+          responseSchema: userSchema,
+          signal,
+        })
+      );
     },
 
     async getProgression(userId, signal) {
-      return http.call({
-        method: 'GET',
-        path: `/users/${encodeURIComponent(userId)}/progression`,
-        responseSchema: progressionResponseSchema,
-        signal,
-      });
+      return cached(
+        cacheKey('progression', userId),
+        DEFAULT_TTL_MS.progression,
+        () =>
+          http.call({
+            method: 'GET',
+            path: `/users/${encodeURIComponent(userId)}/progression`,
+            responseSchema: progressionResponseSchema,
+            signal,
+          })
+      );
     },
 
     async startSession(req, signal) {
@@ -209,13 +242,15 @@ export function createVaultbrainClient(config: VaultbrainClientConfig): Vaultbra
     },
 
     async listCards(deckSlug, signal) {
-      const res = await http.call({
-        method: 'GET',
-        path: `/decks/${encodeURIComponent(deckSlug)}/cards`,
-        responseSchema: cardsListResponseSchema,
-        signal,
+      return cached(cacheKey('cards', deckSlug), DEFAULT_TTL_MS.cards, async () => {
+        const res = await http.call({
+          method: 'GET',
+          path: `/decks/${encodeURIComponent(deckSlug)}/cards`,
+          responseSchema: cardsListResponseSchema,
+          signal,
+        });
+        return res.cards;
       });
-      return res.cards;
     },
 
     async recordReview(req, signal) {
