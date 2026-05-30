@@ -78,6 +78,26 @@ Single source of truth for canonical domain types. **Check here before defining 
 | `AgentRequest` | `packages/adapters/agent-gateway-client/src/types.ts` | Mirrors upstream contract |
 | `ApiUser` | `packages/adapters/api-client/src/generated/` | Generated from OpenAPI; do not hand-edit |
 
+## Event Bus (PRX-25-PATCH-01)
+
+| Type | Location | Notes |
+|------|----------|-------|
+| `EventBus<EventMap>` | `@njz-os/core/src/events.ts` | Generic typed pub/sub; synchronous dispatch; per-listener error isolation |
+| `NjzEventMap` | `@njz-os/core/src/events.ts` | Canonical event-name → payload map; subscriber + emitter share types |
+| `defaultEventBus` | `@njz-os/core/src/events.ts` | Shared singleton instance every module consumes |
+
+Registered event names (`NjzEventMap` keys):
+
+- `progression.event` — payload `ProgressionEvent` (from progression)
+- `vaultbrain-client.request` / `.response` / `.error` / `.ws-state-change` — EPIC-01 observability
+- `toast.show` / `toast.dismiss` — PATCH-05 surface
+- `errorBoundary.caught` — PATCH-03 surface
+
+Adding a new event:
+1. Append to `NjzEventMap` in `events.ts`.
+2. Add a row in this section.
+3. Land producer + consumer in the same PR with tests on both sides.
+
 ## Reserved (Do Not Use Until Module Lands)
 
 These are referenced in module specs but not yet implemented. Add the type when you build the module.
