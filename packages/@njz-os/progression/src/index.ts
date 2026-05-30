@@ -1,5 +1,8 @@
 import type { ModuleSlug, ProgressionEvent, StreakState, XpTotals } from '@njz-os/core';
 
+export * from './useProgression';
+
+
 export interface ProgressionState {
   xp: XpTotals;
   streaks: Record<ModuleSlug, StreakState>;
