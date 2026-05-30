@@ -426,3 +426,25 @@ OKR mapping:
 > **See also:** PS-005, PRD §3.5, MARKET_REVIEW.md (Imprint reference),
 > PERSONAS.md (Curious Learner + Primary tier daily-habit), Lane C
 > asset-pipeline pattern (for build-time catalog parallels).
+
+## 12. Enterprise refinement plan
+
+This lane's implementation has an enterprise-grade refinement plan
+documented at `docs/program-management/PR-25-portfolio-uplift.md`. The
+L-lane work items referenced there are:
+
+- **PRX-25-SPRINT-02** — SM-2 vs FSRS-5 comparative analysis (informs
+  ADR-0016 / ADR-0017 sequence).
+- **PRX-25-PERF-02** — Lighthouse CI integration.
+- **PRX-25-PATCH-04** — Unified telemetry pipeline (per-review event batching).
+- **PRX-25-PATCH-05** — Shared toast/notification surface (review feedback).
+- **PRX-25-ENH-01** — IndexedDB hot-cache for vaultbrain reads
+  (cards + review-history fast-path).
+- **PRX-25-ENH-03** — Streaming SSR for marketing pages (the
+  `/modules/micro-learning` landing).
+
+In addition, the lane consumes **PRX-25-EPIC-01** (`vaultbrain-client`)
+for card persistence, review recording, and graph queries, and
+**PRX-25-PATCH-02** (progression hook) for XP-on-review display. Open
+PR-25 before starting Task L1 to confirm the per-card licensing path
+and the ICE-ranked sequence for this lane.

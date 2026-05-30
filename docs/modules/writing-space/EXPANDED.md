@@ -464,3 +464,21 @@ fallback must always work alongside.
 
 > **See also:** PS-004, PRD §3.4, MARKET_REVIEW.md (Gap 5),
 > PERSONAS.md (Creative Professional), `@njz-os/writing/src/{manuscript,export}.ts`.
+
+## 12. Enterprise refinement plan
+
+This lane's implementation has an enterprise-grade refinement plan
+documented at `docs/program-management/PR-25-portfolio-uplift.md`. The
+W-lane work items referenced there are:
+
+- **PRX-25-SPRINT-01** — Editor-stack benchmark (settles ADR-0015).
+- **PRX-25-PERF-01** — Bundle-size budget instrumentation.
+- **PRX-25-PATCH-01** — Standardised event-emitter surface.
+- **PRX-25-PATCH-02** — Shared progression-state hook.
+- **PRX-25-ENH-02** — Optimistic UI updates (manuscript autosave).
+- **PRX-25-ENH-05** — Shared design-token compile step.
+
+In addition, the lane consumes the portfolio-wide **PRX-25-EPIC-01**
+(`vaultbrain-client` production-grade adapter), which becomes the
+manuscript persistence + sync layer. Open PR-25 before starting Task W2
+to confirm the sprint cadence and ICE-ranked sequence for this lane.

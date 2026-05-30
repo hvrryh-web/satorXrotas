@@ -522,3 +522,23 @@ OKR mapping:
 > morning cognitive warm-up; Tertiary competitive scores), Lane C asset
 > pipeline (for content build-time validator pattern), Lane L Micro-
 > Learning (Memory Tomes shared unlock).
+
+## 12. Enterprise refinement plan
+
+This lane's implementation has an enterprise-grade refinement plan
+documented at `docs/program-management/PR-25-portfolio-uplift.md`. The
+B′-lane work items referenced there are:
+
+- **PRX-25-PERF-03** — Animation-frame budget audit (per-game tick
+  budgets, dev overlay, regression test).
+- **PRX-25-PATCH-03** — Cross-lane error boundary (graceful game
+  crash recovery without losing the My Journey daily state).
+- **PRX-25-ENH-04** — Pre-computed cohort percentiles for the
+  Cognitive Profile header band (Phase-2 launch screen).
+
+In addition, the lane consumes **PRX-25-EPIC-01** (`vaultbrain-client`)
+for game-result records + cognitive-profile reads,
+**PRX-25-PATCH-02** (progression hook) for the My-Journey daily streak,
+and **PRX-25-ENH-05** (design-token compile step) for the games'
+shared palette + motion contract. Open PR-25 before starting Task
+B′1 to confirm the per-game baseline cohort sequencing.
