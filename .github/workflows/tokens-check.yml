@@ -1,0 +1,36 @@
+name: Tokens check
+
+# PRX-25-ENH-05 — verify generated token files (src/tokens/generated.{css,ts})
+# are in sync with the source of truth at tokens.json. Fails if a contributor
+# edited tokens.json but forgot to run `pnpm tokens:build`.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tokens-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tokens-check:
+    name: Tokens in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run tokens-build self-test
+        run: node tools/tokens-build/index.test.mjs
+
+      - name: Verify generated files in sync
+        run: node tools/tokens-build/index.mjs --check
