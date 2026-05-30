@@ -11,6 +11,9 @@ import { LearnRoute } from './modules/micro-learning/LearnRoute';
 import { TrainRoute } from './modules/brain-training/TrainRoute';
 import { WorldRoute } from './modules/polyco-world/WorldRoute';
 import { NotFoundRoute } from './routes/NotFoundRoute';
+import { AuthProvider } from './auth/AuthProvider';
+import { SignInRoute } from './auth/SignInRoute';
+import { AccountRoute } from './auth/AccountRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,21 +33,25 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<ShellLayout />}>
-              <Route index element={wrap('home', 'Home', <HomeRoute />)} />
-              <Route path="focus/*" element={wrap('focus-hero', 'Focus Hero', <FocusRoute />)} />
-              <Route path="sound/*" element={wrap('soundscapes', 'Soundscapes', <SoundRoute />)} />
-              <Route path="blocker/*" element={wrap('distraction-blocker', 'Distraction Blocker', <BlockerRoute />)} />
-              <Route path="write/*" element={wrap('writing-space', 'Writing Space', <WriteRoute />)} />
-              <Route path="learn/*" element={wrap('micro-learning', 'Micro-Learning', <LearnRoute />)} />
-              <Route path="train/*" element={wrap('brain-training', 'Brain Training', <TrainRoute />)} />
-              <Route path="world/*" element={wrap('polyco-world', 'PolyCo.World', <WorldRoute />)} />
-              <Route path="*" element={<NotFoundRoute />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<ShellLayout />}>
+                <Route index element={wrap('home', 'Home', <HomeRoute />)} />
+                <Route path="focus/*" element={wrap('focus-hero', 'Focus Hero', <FocusRoute />)} />
+                <Route path="sound/*" element={wrap('soundscapes', 'Soundscapes', <SoundRoute />)} />
+                <Route path="blocker/*" element={wrap('distraction-blocker', 'Distraction Blocker', <BlockerRoute />)} />
+                <Route path="write/*" element={wrap('writing-space', 'Writing Space', <WriteRoute />)} />
+                <Route path="learn/*" element={wrap('micro-learning', 'Micro-Learning', <LearnRoute />)} />
+                <Route path="train/*" element={wrap('brain-training', 'Brain Training', <TrainRoute />)} />
+                <Route path="world/*" element={wrap('polyco-world', 'PolyCo.World', <WorldRoute />)} />
+                <Route path="sign-in" element={wrap('sign-in', 'Sign in', <SignInRoute />)} />
+                <Route path="account" element={wrap('account', 'Account', <AccountRoute />)} />
+                <Route path="*" element={<NotFoundRoute />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </ToastProvider>
     </QueryClientProvider>
   );

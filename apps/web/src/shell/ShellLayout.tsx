@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useAuth } from '../auth/AuthProvider';
 
 const modules = [
   { to: '/focus', label: 'Focus' },
@@ -11,6 +12,7 @@ const modules = [
 ];
 
 export function ShellLayout() {
+  const { session, isLoading } = useAuth();
   return (
     <div className="rat-shell">
       <header className="rat-shell__header">
@@ -30,6 +32,19 @@ export function ShellLayout() {
             </NavLink>
           ))}
         </nav>
+        <div className="rat-shell__auth">
+          {isLoading ? (
+            <span className="rat-shell__nav-item">…</span>
+          ) : session ? (
+            <NavLink to="/account" className="rat-shell__nav-item">
+              {session.user.email}
+            </NavLink>
+          ) : (
+            <NavLink to="/sign-in" className="rat-shell__nav-item">
+              Sign in
+            </NavLink>
+          )}
+        </div>
       </header>
       <main className="rat-shell__main">
         <Outlet />

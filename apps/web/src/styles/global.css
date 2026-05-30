@@ -73,6 +73,11 @@ code {
   flex: 1;
 }
 
+.rat-shell__auth {
+  display: flex;
+  align-items: center;
+}
+
 .rat-shell__nav-item {
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sharp);
