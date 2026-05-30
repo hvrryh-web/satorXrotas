@@ -28,7 +28,8 @@
     "@njz-os/progression": "workspace:*",
     "@njz-os/analytics": "workspace:*",
     "@njz-os/learning-cards": "workspace:*",
-    "@njz-os/writing": "workspace:*"
+    "@njz-os/writing": "workspace:*",
+    "@njz-os/adapters-identity-client": "workspace:*"
   },
   "devDependencies": {
     "@njz-os/tsconfig": "workspace:*",

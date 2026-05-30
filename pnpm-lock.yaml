@@ -78,6 +78,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@njz-os/adapters-identity-client':
+        specifier: workspace:*
+        version: link:../../packages/adapters/identity-client
       '@njz-os/analytics':
         specifier: workspace:*
         version: link:../../packages/@njz-os/analytics
