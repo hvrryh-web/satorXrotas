@@ -11,6 +11,7 @@ export * from './types';
 export * from './schemas';
 export * from './http';
 export * from './queue';
+export * from './cache';
 export * from './client';
 
 import type { VaultbrainConfig, VaultbrainEvent } from './types';

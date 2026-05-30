@@ -1,6 +1,7 @@
 import type { ModuleSlug, ProgressionEvent, StreakState, XpTotals } from '@njz-os/core';
 
 export * from './useProgression';
+export * from './useOptimisticMutation';
 
 
 export interface ProgressionState {

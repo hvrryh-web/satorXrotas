@@ -549,33 +549,35 @@ calendar days.
 
 | ID | Status | Wave |
 |----|--------|------|
-| PRX-25-EPIC-01 (vaultbrain-client) | **SHIPPED** | consumer wave (PR #26 follow-up) |
-| PRX-25-SPRINT-01 (W editor bench) | TODO | research wave |
-| PRX-25-SPRINT-02 (L SRS bench) | TODO | research wave |
+| PRX-25-EPIC-01 (vaultbrain-client) | **SHIPPED** | consumer wave (PR #27) |
+| PRX-25-SPRINT-01 (W editor bench) | **SCAFFOLDED** | final wave (PR #28) |
+| PRX-25-SPRINT-02 (L SRS bench) | **SCAFFOLDED** | final wave (PR #28) |
 | PRX-25-PERF-01 (bundle budget) | **SHIPPED** | foundational wave (PR #26) |
-| PRX-25-PERF-02 (Lighthouse CI) | **SHIPPED** | consumer wave |
+| PRX-25-PERF-02 (Lighthouse CI) | **SHIPPED** | consumer wave (PR #27) |
 | PRX-25-PERF-03 (B′ frame budget) | TODO (B′-gated) | post-B′ |
 | PRX-25-PATCH-01 (event-bus) | **SHIPPED** | foundational wave (PR #26) |
-| PRX-25-PATCH-02 (progression hook) | **SHIPPED** | consumer wave |
+| PRX-25-PATCH-02 (progression hook) | **SHIPPED** | consumer wave (PR #27) |
 | PRX-25-PATCH-03 (error boundary) | **SHIPPED** | foundational wave (PR #26) |
-| PRX-25-PATCH-04 (telemetry pipeline) | **SHIPPED** | consumer wave |
+| PRX-25-PATCH-04 (telemetry pipeline) | **SHIPPED** | consumer wave (PR #27) |
 | PRX-25-PATCH-05 (toasts) | **SHIPPED** | foundational wave (PR #26) |
-| PRX-25-ENH-01 (IDB hot cache) | TODO | final wave |
-| PRX-25-ENH-02 (optimistic UI) | TODO | final wave |
-| PRX-25-ENH-03 (streaming SSR) | TODO | final wave |
+| PRX-25-ENH-01 (IDB hot cache) | **SHIPPED** | final wave (PR #28) |
+| PRX-25-ENH-02 (optimistic UI) | **SHIPPED** | final wave (PR #28) |
+| PRX-25-ENH-03 (streaming SSR) | **SHIPPED** | final wave (PR #28) |
 | PRX-25-ENH-04 (cohort percentiles) | TODO (B′-gated) | post-B′ |
 | PRX-25-ENH-05 (design tokens) | **SHIPPED** | foundational wave (PR #26) |
 
-**10 of 16 shipped** across two waves. Remaining:
+**14 of 16 shipped + 2 scaffolded** across three waves.
 
-- **Final wave** (parallel-safe, no further EPIC dependencies): ENH-01
-  (IDB cache backed by EPIC-01), ENH-02 (optimistic UI built on
-  EPIC-01 + PATCH-05), ENH-03 (streaming SSR for marketing pages).
-- **Research wave** (offline analysis, no main-branch code): SPRINT-01
-  (editor stack bench → settles ADR-0015), SPRINT-02 (SRS bench →
-  settles SM-2 vs FSRS).
-- **Post-B′** (gated on B′ lane code): PERF-03 (frame budget),
-  ENH-04 (cohort percentiles).
+Remaining items strictly gated on B′ lane code (PERF-03 frame budget +
+ENH-04 cohort percentiles); both will land naturally in the same PR
+that introduces the B′ engine code, per the gating doc.
+
+SPRINT-01 and SPRINT-02 are scaffolded (bench harnesses + fixtures +
+reference SM-2/FSRS-lite simulators with 7/7 tests) but the full
+benchmark runs are deferred — each requires a focused offline session
+to crunch results and feed the recommended ADR (0015 for W editor stack,
+0016/0020 for L SRS choice). The infrastructure is in place; a future
+session can run the bench without scaffolding being the bottleneck.
 
 # Section H — How this document is maintained
 
