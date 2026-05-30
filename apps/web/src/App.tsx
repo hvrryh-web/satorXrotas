@@ -14,6 +14,7 @@ import { NotFoundRoute } from './routes/NotFoundRoute';
 import { AuthProvider } from './auth/AuthProvider';
 import { SignInRoute } from './auth/SignInRoute';
 import { AccountRoute } from './auth/AccountRoute';
+import { OnboardingRoute } from './onboarding/OnboardingRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ export function App() {
                 <Route path="world/*" element={wrap('polyco-world', 'PolyCo.World', <WorldRoute />)} />
                 <Route path="sign-in" element={wrap('sign-in', 'Sign in', <SignInRoute />)} />
                 <Route path="account" element={wrap('account', 'Account', <AccountRoute />)} />
+                <Route path="onboarding" element={wrap('onboarding', 'Onboarding', <OnboardingRoute />)} />
                 <Route path="*" element={<NotFoundRoute />} />
               </Route>
             </Routes>
