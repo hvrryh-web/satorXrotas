@@ -173,6 +173,9 @@ importers:
       '@njz-os/core':
         specifier: workspace:*
         version: link:../core
+      zod:
+        specifier: ^3.23.0
+        version: 3.25.76
     devDependencies:
       '@njz-os/tsconfig':
         specifier: workspace:*
