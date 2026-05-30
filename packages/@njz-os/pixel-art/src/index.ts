@@ -17,3 +17,5 @@ export interface SpriteAnimation {
   fps: number;
   loop: boolean;
 }
+
+export * from './loader';
