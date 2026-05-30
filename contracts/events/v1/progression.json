@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://njz-os.app/contracts/events/v1/progression.json",
+  "_doc": "Telemetry event schemas, version 1. Mirrors @njz-os/core ProgressionEvent + pipeline-derived events. CI verifies the TypeScript types stay in sync.",
+  "title": "Progression telemetry events v1",
+  "type": "object",
+  "definitions": {
+    "moduleSlug": {
+      "type": "string",
+      "enum": [
+        "focus-hero",
+        "soundscapes",
+        "distraction-blocker",
+        "writing-space",
+        "micro-learning",
+        "brain-training",
+        "polyco-world"
+      ]
+    },
+    "session.start": {
+      "type": "object",
+      "required": ["module", "sessionId", "at"],
+      "properties": {
+        "module": { "$ref": "#/definitions/moduleSlug" },
+        "sessionId": { "type": "string" },
+        "at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "session.complete": {
+      "type": "object",
+      "required": ["module", "sessionId", "durationMs", "xpAwarded", "at"],
+      "properties": {
+        "module": { "$ref": "#/definitions/moduleSlug" },
+        "sessionId": { "type": "string" },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "xpAwarded": { "type": "integer", "minimum": 0 },
+        "at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "session.abandon": {
+      "type": "object",
+      "required": ["module", "sessionId", "at"],
+      "properties": {
+        "module": { "$ref": "#/definitions/moduleSlug" },
+        "sessionId": { "type": "string" },
+        "at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "streak.extend": {
+      "type": "object",
+      "required": ["module", "newCurrent", "at"],
+      "properties": {
+        "module": { "$ref": "#/definitions/moduleSlug" },
+        "newCurrent": { "type": "integer", "minimum": 0 },
+        "at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "streak.break": {
+      "type": "object",
+      "required": ["module", "at"],
+      "properties": {
+        "module": { "$ref": "#/definitions/moduleSlug" },
+        "at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
