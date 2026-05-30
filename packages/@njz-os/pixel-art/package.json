@@ -14,7 +14,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@njz-os/core": "workspace:*"
+    "@njz-os/core": "workspace:*",
+    "zod": "^3.23.0"
   },
   "devDependencies": {
     "@njz-os/tsconfig": "workspace:*",
