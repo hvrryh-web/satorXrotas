@@ -1,6 +1,13 @@
-import type { SessionId, UserId } from '@njz-os/core';
+/**
+ * Lane A — FocusSession persistence payload (mirrors vaultbrain row).
+ * The SessionMode type lives in ./modes.ts; this file re-exports it for
+ * back-compat with Phase-0 consumers and adds the persisted-shape type.
+ */
 
-export type SessionMode = 'pomodoro_25_5' | 'deep_work_50_10' | 'sprint_15_3' | 'flow_90_20';
+import type { SessionId, UserId } from '@njz-os/core';
+import type { SessionMode } from './modes';
+
+export type { SessionMode } from './modes';
 
 export interface FocusSession {
   id: SessionId;
