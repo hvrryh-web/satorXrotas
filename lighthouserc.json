@@ -4,7 +4,7 @@
   "ci": {
     "collect": {
       "startServerCommand": "pnpm --filter @njz-os/web preview --host 127.0.0.1 --port 4173",
-      "startServerReadyPattern": "ready in",
+      "startServerReadyPattern": "Local:",
       "startServerReadyTimeout": 30000,
       "url": [
         "http://127.0.0.1:4173/",
