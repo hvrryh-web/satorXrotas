@@ -64,4 +64,4 @@ UI in `apps/web`:
 
 ---
 
-> **Expanded spec:** queued for a future session per the next-stages plan; will appear under `docs/modules/<module>/EXPANDED.md` once the Phase-2 documentation sprint runs.
+> **Implementation-ready expanded spec:** `docs/modules/micro-learning/EXPANDED.md`
