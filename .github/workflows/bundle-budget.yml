@@ -1,0 +1,80 @@
+name: Bundle budget
+
+# PRX-25-PERF-01 — per-route bundle-size budget instrumentation.
+#
+# Runs on every PR + push to main. Builds apps/web (and apps/site when it
+# emits production artefacts), then validates the discovered chunks against
+# tools/bundle-budget/budgets.json. Fails the run on hard-limit breach;
+# warns on soft-limit (≥ 80% of hard).
+#
+# Runbook: docs/operations/RUNBOOKS/bundle-budget.md.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: bundle-budget-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bundle-budget:
+    name: Validate route budgets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+
+      - name: Build apps
+        run: pnpm build
+
+      - name: Verify bundle budget checker self-test
+        run: node tools/bundle-budget/check.test.mjs
+
+      - name: Rebuild (post self-test cleanup)
+        run: pnpm --filter @njz-os/web build
+
+      - name: Validate route budgets
+        id: budgets
+        run: |
+          set +e
+          node tools/bundle-budget/check.mjs | tee bundle-budget-report.txt
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-budget-report
+          path: bundle-budget-report.txt
+          retention-days: 30
+
+      - name: Fail on budget breach
+        if: steps.budgets.outputs.exit_code != '0'
+        run: |
+          echo "::error::Bundle budget breach — see tools/bundle-budget/budgets.json + runbook."
+          exit 1
