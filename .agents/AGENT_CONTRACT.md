@@ -59,6 +59,28 @@ CI enforces these via `eslint-plugin-boundaries`.
 - Writing a service in `services/` that duplicates one in ZeSporteXte. (Use an adapter.)
 - Adding TODO comments without a tracking issue. (Don't.)
 - Bypassing pre-commit with `--no-verify`. (Don't.)
+- Claiming "DONE" without an evidence anchor. (Every closed task references PR # + SHA + tests, per `docs/governance/VERIFICATION_MATRIX_PROTOCOL.md`.)
+- Inventing a task ID outside the `<LANE>-<PHASE>-<NN>` convention. (Per `docs/governance/TASK_FORMAT_CONVENTION.md`.)
+- Treating an "out of scope" item as forgettable. (Every out-of-scope item gets a row in `.agents/RISK_REGISTER.md`.)
+
+## Governance Surface (Phase 1)
+
+Every agent reads these on first invocation of a session:
+
+1. `MASTER_PLAN.md` — current phase + scope.
+2. This file (`AGENT_CONTRACT.md`) — behavioural contract.
+3. `.agents/PHASE_GATES.md` — which gates are open / unlock-pending.
+4. `.agents/SCHEMA_REGISTRY.md` — canonical types.
+5. `docs/governance/AI_AGENT_ONBOARDING.md` — 3-minute fast-start (added 2026-05-30).
+6. `docs/governance/TASK_FORMAT_CONVENTION.md` — task IDs + status + evidence shape.
+7. The latest `.agents/handoff/session-*.md` — pickup pointer.
+
+Reference when needed:
+
+- `docs/governance/PERFORMANCE_DEFINITIONS.md` — concrete budgets + test floors.
+- `docs/governance/VERIFICATION_MATRIX_PROTOCOL.md` — how DONE-claims map to evidence.
+- `docs/governance/LANE_CLOSURE_MANIFEST_TEMPLATE.md` — per-lane closure shape.
+- `.agents/RISK_REGISTER.md` — active deferred / out-of-scope rows.
 
 ## End of Session
 

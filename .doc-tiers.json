@@ -18,6 +18,7 @@
     "CONTRIBUTING.md",
     ".agents/SCHEMA_REGISTRY.md",
     ".agents/SKILL_MAP.md",
+    ".agents/RISK_REGISTER.md",
     ".agents/COLLABORATION_RUNBOOK.md",
     ".agents/DECISION_LOG.md",
     ".agents/PROJECT_STATUS_OVERVIEW.md",
