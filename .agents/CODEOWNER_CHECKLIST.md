@@ -16,11 +16,18 @@ What CODEOWNERS check before approving a PR. Live document; updates require an A
 - [ ] No commented-out code.
 - [ ] No backwards-compat shims unless explicitly noted as bridging an in-flight migration.
 
-## Phase 0 Checks (current phase)
+## Phase 1 Checks (current phase as of 2026-05-30)
 
 - [ ] If touching `.agents/`, `.doc-tiers.json`, or `ROOT_AXIOMS/` → assigned to Coordinator role.
 - [ ] If adding a new package → ADR exists for its scope + listed in `pnpm-workspace.yaml`.
 - [ ] If editing PRD/OKRs → version header bumped, change reflected in `docs/dev-reports/`.
+- [ ] If touching a lane (A/B/C/D/E) → lane closure manifest at `docs/program-management/LANE_<X>_MANIFEST.md` refreshed in the same PR (or row added on first touch).
+- [ ] If introducing a new task → ID follows `<LANE>-<PHASE>-<NN>` per `docs/governance/TASK_FORMAT_CONVENTION.md`.
+- [ ] If claiming `SHIPPED` on a task → evidence record present per `docs/governance/VERIFICATION_MATRIX_PROTOCOL.md` §2.
+- [ ] If introducing an "out of scope" follow-up → row appended to `.agents/RISK_REGISTER.md`.
+- [ ] If consuming a PR-25 uplift item → cited explicitly in the PR body and in the lane closure manifest.
+- [ ] If a gate's unlock criteria are met → CODEOWNER opens a follow-up PR to flip `.agents/PHASE_GATES.md` (NOT in the implementation PR).
+- [ ] If touching CI/budgets/runbooks → cross-checked against `docs/governance/PERFORMANCE_DEFINITIONS.md`.
 
 ## Architecture PRs
 
